@@ -1,0 +1,159 @@
+﻿@model PagedList.IPagedList<GVNClone.SanPham>
+
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "SearchProduct";
+    Layout = "~/Views/Layout/_LayoutPage.cshtml";
+}
+
+<div class="grid wide">
+    <div class="product">
+        @if (String.IsNullOrEmpty(ViewBag.keyword))
+        {
+            <h1 class="product-heading">Tìm kiếm</h1>
+            <p class="result-all">Kết quả tìm kiếm cho <strong>"**"</strong></p>
+        }
+        else
+        {
+            <h1 class="product-heading">Tất cả sản phẩm</h1>
+        }
+        <div class="product__Wrap-Sort-By">
+            <div class="row no-gutters" style="width:100%">
+                <div class="c-12 l-9 m-6">
+                    <div class="price-range-block">
+
+                        <h2>Lọc theo giá</h2>
+                        <div class="is-divider"></div>
+
+                        <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
+
+                        <div class="price_slider_amount">
+                            <button class="price-range-search" id="js-price-range-submit">Lọc</button>
+                            <div class="price_label">
+                                <span></span>
+                                <span class="from" id="min_price"></span>đ —
+                                <span class="to" id="max_price"></span>đ
+                            </div>
+                        </div>
+                        <input type="number" hidden id="min_price_input" name="min_price"
+                               class="price-range-field" />
+                        <input type="number" hidden id="max_price_input" name="max_price"
+                               class="price-range-field" />
+                    </div>
+                </div>
+                @if (GVNClone.Models.GlobalVariables.ID_TypeProduct == 0)
+                {
+                    <div class="c-12 l-3 m-6">
+                        <div class="dropdownlist-sort-all">
+                            <span>Sắp xếp theo: </span>
+                            <span>
+                                <select id="dropdownlist">
+                                    <option value="price-ascending">Giá: Tăng dần</option>
+                                    <option value="price-descending">Giá: Giảm dần</option>
+                                    <option value="title-ascending">Tên: A-Z</option>
+                                    <option value="title-descending">Tên: Z-A</option>
+                                    <option value="best-selling">Bán chạy nhất</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row sort-by-result">
+            @foreach (var item in Model)
+            {
+                <div class="col l-2-4 m-4 c-6">
+                    <div class="product__Item">
+                        <div class="product__Item__OverlayEffect">
+                            <a href="@Url.RouteUrl("ProductDetail", new { @id = item.MaSP, @name = item.TenSP.Replace(" ", "-") })" class="product__Item__Image">
+                                <img class="product-img" src="@Url.Content("/Images/" + item.Pic1)" />
+                            </a>
+                            <div class="product__Item__Detail">
+                                <a href="@Url.RouteUrl("ProductDetail", new { @id = item.MaSP, @name = item.TenSP.Replace(" ", "-") })">Click để xem chi tiết</a>
+                                <a href="@Url.RouteUrl("ProductDetail", new { @id = item.MaSP, @name = item.TenSP.Replace(" ", "-") })" class="add-to-cart">Đặt hàng</a>
+                            </div>
+                        </div>
+                        <div class="product__Item__Name">
+                            <h2>@item.TenSP</h2>
+                        </div>
+                        <div class="product__Item__Info">
+                            @if (item.MaGiamGia != null && item.GiamGia.NgayBatDau < DateTime.Now && item.GiamGia.NgayKetThuc > DateTime.Now)
+                            {
+                                <del>@String.Format("{0:0,0}", item.GiaNiemYet) đ</del><br />
+                                <span class="product__Item__Sale">@String.Format("{0:0,0}", item.GiamGia.GiaKhuyenMai) đ</span>
+                            }
+                            else
+                            {
+                                <br />
+                                <span class="product__Item__Sale">@String.Format("{0:0,0}", item.GiaNiemYet) đ</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="pagelist">
+            @Html.PagedListPager(Model, page => Url.Action("DisplayAllProduct",new { page = page}))
+        </div>
+    </div>
+</div>
+
+@section jsFooter{
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $("#slider-range").slider({
+                    range: true,
+                    orientation: "horizontal",
+                    min: @GVNClone.Models.GlobalVariables.min_price_range_slider,
+                    max: @GVNClone.Models.GlobalVariables.max_price_range_slider,
+                    values: [@GVNClone.Models.GlobalVariables.min_price_range_slider, @GVNClone.Models.GlobalVariables.max_price_range_slider],
+                    step: 1,
+
+                    slide: function (event, ui) {
+                        if (ui.values[0] == ui.values[1]) {
+                            return false;
+                        }
+                        $("#min_price").text(ui.values[0].toLocaleString());
+                        $("#max_price").text(ui.values[1].toLocaleString());
+                        $("#min_price_input").val(ui.values[0]);
+                        $("#max_price_input").val(ui.values[1]);
+                    }
+                });
+                $("#min_price").text($("#slider-range").slider("values", 0).toLocaleString());
+                $("#max_price").text($("#slider-range").slider("values", 1).toLocaleString() );
+                $("#min_price_input").val($("#slider-range").slider("values", 0));
+                $("#max_price_input").val($("#slider-range").slider("values", 1));
+            });
+
+        });
+
+        $("#js-price-range-submit").on("click", function () {
+            var min_price = $("#min_price_input").val();
+            var max_price = $("#max_price_input").val();
+            @GVNClone.Models.GlobalVariables.ID_TypeProduct == 0 ? $("#dropdownlist")[0].selectedIndex = 0 : "";
+            $.ajax({
+                async: false,
+                type: 'POST',
+                url: '/Product/PartialFilterPrice',
+                data: { min_price: min_price, max_price: max_price },
+                success: function (response) {
+                    if ($.trim(response) != "") {
+                        $(".sort-by-result").html(response);
+                        Toast("Thông báo", "Lọc sản phẩm thành công", "success", 3000);
+                    } else {
+                        $(".sort-by-result").html(response);
+                        Toast("Thông báo", "Không có sản phẩm nào phù hợp", "error", 3000);
+                    }
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+        })
+
+    </script>
+}

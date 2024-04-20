@@ -1,0 +1,31 @@
+﻿@model PagedList.IPagedList<GVNClone.TinTuc>
+
+@using PagedList.Mvc;
+
+<div class="pch-page-list-news">
+    <div class="pch-block-title-wrap">
+        <h4 class="pch-block-title">Danh sách bài viết</h4>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="pch-page-item-news">
+            <div class="pch-page-item-img">
+                <a href="@Url.RouteUrl("ViewDetail",new { @id = item.MaTin })"><img src="@item.HinhAnh" alt="@item.TieuDeTin"></a>
+            </div>
+            <div class="pch-page-item-info">
+                <h3 class="pch-page-item-info-name">
+                    <a href="@Url.RouteUrl("ViewDetail",new { @id = item.MaTin })">
+                        @item.TieuDeTin
+                    </a>
+                </h3>
+                <p class="pch-page-item-date-update">@Html.FormatValue(item.NgayDang, "{0:dd/MM/yyyy}")</p>
+                <p class="pch-page-item-excerpt">
+                    @Html.Raw(item.DoanTrich)
+                </p>
+            </div>
+        </div>
+    }
+</div>
+<div class="pagelist">
+    @Html.PagedListPager(Model, page => Url.Action("ListTechNews", new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "pch-page-list-news-inner" }))
+</div>

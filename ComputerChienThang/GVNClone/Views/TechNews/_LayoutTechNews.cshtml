@@ -1,0 +1,244 @@
+﻿
+@{
+    Layout = null;
+}
+
+@{
+    IEnumerable<LoaiTinTuc> lstCategories = ViewBag.Categories as IEnumerable<LoaiTinTuc>;
+    IEnumerable<TinTuc> lstFeature1 = ViewBag.ListFeature1 as IEnumerable<TinTuc>;
+    IEnumerable<TinTuc> lstFeature2 = ViewBag.ListFeature2 as IEnumerable<TinTuc>;
+    IEnumerable<TinTuc> lstTechNews = ViewBag.ListTechNews as IEnumerable<TinTuc>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarkLeo - Chuyên trang tin tức công nghệ và game</title>
+    <link rel="short icon" href="~/MarkLeo.ico" />
+    <link href="~/fonts/FontAwesome-5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/css/technews_grid.css" rel="stylesheet" />
+    <link href="~/Content/css/technews.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page-news">
+        <header class="header">
+            <div class="header__social-media hide-on-mobile">
+                <div class="grid wide pos-relative">
+                    <ul class="header__social-media-list">
+                        <li class="header__social-media-item" id="js-btn-search">
+                            <a href="javascript:;" class="header__social-media-link">
+                                <i class="fas fa-search header__social-media-icon"></i>
+                            </a>
+                        </li>
+                        <li class="header__social-media-item">
+                            <a href="https://www.facebook.com/gearvnhcm" target="_blank" class="header__social-media-link">
+                                <i class="fab fa-facebook-f header__social-media-icon"></i>
+                            </a>
+                        </li>
+                        <li class="header__social-media-item">
+                            <a href="https://www.youtube.com/channel/UCJGTQ6bAfqsBnRdnU-LX5Vw" target="_blank"
+                               class="header__social-media-link">
+                                <i class="fab fa-youtube header__social-media-icon"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="header-form-search">
+                        @using (Html.BeginForm("SearchAction", "TechNews", FormMethod.Post, new { @class = "form-search" }))
+                        {
+                            <input type="text" name="keyword" class="form-input-search" autocomplete="off">
+                            <button type="submit" class="btn-search">Tìm kiếm</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="header__navbar" id="js-header-navbar">
+                <div class="grid wide header__navbar-sub">
+                    <div class="header__mobile-toggle display-on-mobile">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <div class="header__logo">
+                        <a href="/pages/tin-cong-nghe" class="header__logo-link">
+                            <img src="/Images/logo360.png" alt="" class="header__logo-image">
+                        </a>
+                    </div>
+                    <ul class="header__navbar-list hide-on-mobile">
+                        <li class="header__navbar-item">
+                            <a href="/pages/tin-cong-nghe" class="header__navbar-item-link">Trang chủ</a>
+                        </li>
+                        @foreach (var item in lstCategories)
+                        {
+                            <li class="header__navbar-item">
+                                <a href="@Url.RouteUrl("ListCategory",new { @category = item.TenLoaiTin })" class="header__navbar-item-link">@item.TenLoaiTin</a>
+                            </li>
+                        }
+                        <li class="header__navbar-item">
+                            <a href="/" class="header__navbar-item-link">Mua hàng</a>
+                        </li>
+                    </ul>
+                    <div class="header__mobile-search-icon display-on-mobile" id="js-btn-search">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="page-container">
+            <div class="grid wide">
+                @RenderBody()
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="grid wide">
+                <div class="footer-main">
+                    <div class="footer-column">
+                        <h3 class="footer-heading">BÀI VIẾT TIÊU BIỂU</h3>
+                        <div class="footer-list">
+                            @foreach (var item in lstFeature1)
+                            {
+                                <a href="@Url.RouteUrl("ViewDetail",new { @id = item.MaTin })" class="footer-item-link">
+                                    <img src="@item.HinhAnh" alt="" class="footer-item-image">
+                                    <div class="footer-item-detail">
+                                        <p class="footer-item-title">@item.TieuDeTin</p>
+                                        <span class="footer-item-date-update">@Html.FormatValue(item.NgayDang, "{0:dd/MM/yyyy}")</span>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3 class="footer-heading">BÀI VIẾT PHỔ BIẾN</h3>
+                        <div class="footer-list">
+                            @foreach (var item in lstFeature2)
+                            {
+                                <a href="@Url.RouteUrl("ViewDetail",new { @id = item.MaTin })" class="footer-item-link">
+                                    <img src="@item.HinhAnh" alt="" class="footer-item-image">
+                                    <div class="footer-item-detail">
+                                        <p class="footer-item-title">@item.TieuDeTin</p>
+                                        <span class="footer-item-date-update">@Html.FormatValue(item.NgayDang, "{0:dd/MM/yyyy}")</span>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3 class="footer-heading">MỤC XEM NHIỀU</h3>
+                        <ul class="footer-navigate-list">
+                            @foreach (var item in ViewBag.ListView)
+                            {
+                                <li class="footer-navigate-item">
+                                    <a href="@Url.RouteUrl("ListCategory",new { @category = item.Category })" class="footer-navigate-item-link">
+                                        <span class="footer-navigate-item-gallery">@item.Category</span>
+                                        <span class="footer-navigate-item-views">@item.View</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <hr class="line-end">
+                <div class="footer-contact">
+                    <div class="footer-logo">
+                        <img src="/Images/logo360.png" alt="" class="footer-logo-image">
+                    </div>
+                    <div class="footer-contact-about">
+                        <h3 class="footer-contact-heading">VỀ CHÚNG TÔI</h3>
+                        <p class="footer-contact-text">MARKLEO360 - MARKLEO NEWS</p>
+                        <p class="footer-contact-text">
+                            Liên hệ chúng tôi: <a href="mailto:hai34739@gmail.com" class="footer-contact-email">hai34739@gmail.com</a>
+                        </p>
+                    </div>
+                    <div class="footer-contact-follow">
+                        <h3 class="footer-contact-heading">THEO DÕI CHÚNG TÔI</h3>
+                        <div class="footer-contact-social-media">
+                            <div class="footer-contact-icon">
+                                <a href="https://www.facebook.com/gearvnhcm" target="_blank" class="footer-contact-icon-link">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </div>
+                            <div class="footer-contact-icon">
+                                <a href="https://www.youtube.com/channel/UCJGTQ6bAfqsBnRdnU-LX5Vw" target="_blank"
+                                   class="footer-contact-icon-link">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <a href="javascript:;" class="cd-top">Back To Top</a>
+    </div>
+    <div class="header__navbar-mobile">
+        <div class="header__navbar-mobile-content">
+            <div class="header__navbar-mobile-top">
+                <div class="header__navbar-mobile-social">
+                    <a href="https://www.facebook.com/gearvnhcm" target="_blank" class="header__social-media-mobile-link">
+                        <i class="fab fa-facebook-f header__social-media-icon"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCJGTQ6bAfqsBnRdnU-LX5Vw" target="_blank"
+                       class="header__social-media-mobile-link">
+                        <i class="fab fa-youtube header__social-media-icon"></i>
+                    </a>
+                </div>
+                <div class="header__navbar-mobile-close">
+                    &times;
+                </div>
+            </div>
+            <div class="header__navbar-mobile-body">
+                <ul class="nav-mobile">
+                    <li class="nav-mobile-item">
+                        <a href="/pages/tin-cong-nghe" class="nav-mobile-item-link">Trang chủ</a>
+                    </li>
+                    @foreach (var item in lstCategories)
+                    {
+                        <li class="nav-mobile-item">
+                            <a href="@Url.RouteUrl("ListCategory",new { @category = item.TenLoaiTin })" class="nav-mobile-item-link">@item.TenLoaiTin</a>
+                        </li>
+                    }
+                    <li class="nav-mobile-item">
+                        <a href="/" class="nav-mobile-item-link">Mua hàng</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header__navbar-mobile-search">
+        <div class="header__navbar-mobile-content">
+            <div class="header__navbar-mobile-top">
+                <div class="header__navbar-mobile-social">
+                    <a href="https://www.facebook.com/gearvnhcm" target="_blank" class="header__social-media-mobile-link">
+                        <i class="fab fa-facebook-f header__social-media-icon"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCJGTQ6bAfqsBnRdnU-LX5Vw" target="_blank"
+                       class="header__social-media-mobile-link">
+                        <i class="fab fa-youtube header__social-media-icon"></i>
+                    </a>
+                </div>
+                <div class="header__navbar-mobile-close header__navbar-mobile-search-close">
+                    &times;
+                </div>
+            </div>
+            <div class="header__navbar-mobile-body">
+                @using (Html.BeginForm("SearchAction", "TechNews", FormMethod.Post, new { @class = "form-search-mobile" }))
+                {
+                    <h3 class="form-search-title">Tìm kiếm</h3>
+                    <input type="text" name="keyword" class="form-input-search-mobile" autocomplete="off">
+                    <div class="line-animate">
+                        <div class="line-slideToLeft"></div>
+                        <div class="line-slideToRight"></div>
+                    </div>
+                    <button type="submit" class="btn-search-mobile">Tìm kiếm</button>
+                }
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/js/jquery-3.5.1.min.js"></script>
+    <script src="~/Content/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Content/js/backtotop.js"></script>
+    <script src="~/Content/js/technews.js"></script>
+</body>
+</html>

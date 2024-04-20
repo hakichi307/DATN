@@ -1,0 +1,100 @@
+﻿@model GVNClone.MauEmail
+
+
+<div class="box-e">
+    <div class="box-e__header">
+        <h3 class="box-e__heading">Thông tin chi tiết</h3>
+        <i class="fa fa-times box-e__icon--close" aria-hidden="true" onclick="closeModal();"></i>
+    </div>
+    <div class="box-e__body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="box-e__left">
+                    <div class="form-group form-group-box-e__left">
+                        <label for="typeEmail" class="label-e__title">Mẫu gửi mail</label>
+                        @Html.TextBoxFor(n => n.LoaiMauEmail.TenMau, new { disabled = true, id = "typeEmail", Name = "TenMau" })
+                    </div>
+                    <div class="form-group form-group-box-e__left">
+                        <label for="SubjectEmail" class="label-e__title">Subject</label>
+                        @Html.TextAreaFor(n => n.SubjectEmail, new { id = "SubjectEmail" })
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info mr-3 btn-save-config" data-id="@Model.MaMauEmail">Lưu</button>
+                        <button class="btn btn-secondary">Huỷ</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="box-e__right">
+                    <div class="box-e__right--keycode">
+                        <p class="label-e__title">Keycode</p>
+                        <div class="box-e__keycode-list">
+                            <div class="box-e__keycode-item">
+                                <span class="box-e__keycode-key">{{ORDERID}}</span>
+                                <span class="box-e__keycode-desc">Mã đơn hàng</span>
+                            </div>
+                            <div class="box-e__keycode-item">
+                                <span class="box-e__keycode-key">{{CUSTOMER}}</span>
+                                <span class="box-e__keycode-desc">Tên khách hàng</span>
+                            </div>
+                            <div class="box-e__keycode-item">
+                                <span class="box-e__keycode-key">{{ADDRESS}}</span>
+                                <span class="box-e__keycode-desc">Địa chỉ</span>
+                            </div>
+                            <div class="box-e__keycode-item">
+                                <span class="box-e__keycode-key">{{ORDERS}}</span>
+                                <span class="box-e__keycode-desc">Các sản phẩm</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-e__right--content">
+                        <p class="label-e__title">Nội dung</p>
+                        @Html.TextAreaFor(n => n.ContentEmail)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#ContentEmail").summernote({
+        minHeight: 500
+    });
+
+    var btnSave = $(".btn-save-config");
+    btnSave.click(function () {
+        var contentEmail = $("#ContentEmail").val();
+        var subjectEmail = $("#SubjectEmail").val();
+        var id = $(this).data("id");
+        $.ajax({
+            type: 'POST',
+            url: '/EmailConfig/EditEmail',
+            data: {
+                id: id,
+                contentEmail: contentEmail,
+                subjectEmail: subjectEmail,
+            },
+            success: function (res) {
+                if (res.statusCode == 200) {
+                    Swal.fire({
+                        text: res.message,
+                        icon: 'success'
+                    }).then(function () {
+                        window.location.reload();
+                    })
+                } else {
+                    Swal.fire({
+                        text: res.message,
+                        icon: 'error'
+                    })
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.status);
+                console.log(errorThrown);
+            }
+        })
+    })
+</script>
+
+

@@ -1,0 +1,115 @@
+﻿<div class="nav-wrapper">
+    <div class="fix-header-container">
+        <div class="advertise hide-on-mobile-tablet">
+            <img src="~/Images/253.jpg" />
+        </div>
+        <header>
+            <div class="header__content">
+                <div class="grid wide">
+                    <div class="header__Navbar">
+                        @Html.Action("PartialMegaMenuMobile", "Home")
+                        <div class="header__Navbar__Logo">
+                            <a class="hide-on-mobile" href="/"><img src="~/Images/Logo.png" width="195" height="65" /></a>
+                            <a class="logo-mobile display-on-mobile" href="/"><img src="~/Images/icon_Logo.png" width="50" height="30" /></a>
+                        </div>
+                        <div class="header__Navbar__Right pt-2">
+                            <div class="header__Navbar__Option align-items-center">
+                                <div class="header__Navbar__Option__Search">
+                                    @using (Html.BeginRouteForm("Search", FormMethod.Post))
+                                    {
+                                        <input id="txtSearch" type="text" placeholder="Nhập tên sản phẩm cần tìm..." name="keyword" />
+                                        <button type="submit" id="btnSearch"><i class="fa fa-search"></i></button>
+                                    }
+                                </div>
+                                <div class="header__Navbar__Option__Items">
+                                    <div class="header__Navbar__Option__Register__Icon header__Navbar__Option__Item hide-on-mobile-tablet">
+                                        @if (Session["Account"] == null)
+                                        {
+                                            <a href="@Url.RouteUrl("VerifyEmail", new { @type = 4 })">
+                                                <img src="~/Images/dangky.png" />
+                                                Đăng ký
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/thong-tin-ca-nhan/@int.Parse(@Session["IdUser"].ToString())">
+                                                <img src="~/Images/dangky.png" />
+                                                @Session["UserName"]
+                                            </a>
+                                            }
+                                    </div>
+                                    <div class="header__Navbar__Option__Login__Icon header__Navbar__Option__Item hide-on-mobile-tablet">
+                                        @if (Session["Account"] != null)
+                                        {
+                                            <a href="@Url.Action("SignOut", "Auth")"><img src="~/Images/dangxuat.png" />Đăng xuất</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/dang-nhap"><img src="~/Images/dangnhap.png" />Đăng nhập</a>
+                                        }
+                                    </div>
+                                    <div class="header__Navbar__Option__Discount__Icon header__Navbar__Option__Item hide-on-mobile-tablet">
+                                        <a href="/chuong-trinh-khuyen-mai"><img src="~/Images/khuyenmai.png" />Khuyến mãi</a>
+                                    </div>
+                                    <div class="header__Navbar__Option__Cart__Icon header__Navbar__Option__Item" id="cart">
+                                        @Html.Action("CartPartial", "Cart")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="header__Navbar__Infomation hide-on-mobile-tablet">
+                                <div class="header__Navbar__Infomation__NameCompany header__Navbar__Infomation__Item">
+                                    <a href="/show-room">HỆ THỐNG SHOWROOM TẠI TP. HỒ CHÍ MINH - HÀ NỘI</a>
+                                </div>
+                                <div class="header__Navbar__Infomation__Switchboard header__Navbar__Infomation__Item hide-on-mobile-tablet">
+                                    <a href="/pages/tong-dai" target="_blank"><img src="~/Images/hotcall.png" class="mr-2" />Tổng đài</a>
+                                </div>
+                                <div class="header__Navbar__Infomation__Video header__Navbar__Infomation__Item hide-on-mobile-tablet">
+                                    <a href="https://www.youtube.com/channel/UCdxRpD_T4-HzPsely-Fcezw/videos" target="_blank"><img src="~/Images/youtubeicon.png" class="mr-2" />Video</a>
+                                </div>
+                                <div class="header__Navbar__Infomation__News header__Navbar__Infomation__Item hide-on-mobile-tablet">
+                                    <a href="/pages/tin-cong-nghe" target="_blank"><img src="~/Images/gNewsFavIco.png" class="mr-2" />Tin công nghệ</a>
+                                </div>
+                                <div class="header__Navbar__Infomation__CareerJob header__Navbar__Infomation__Item hide-on-mobile-tablet">
+                                    <a href="#" target="_blank"><img src="~/Images/tuyendung.png" class="mr-2" />Tuyển dụng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid wide hide-on-mobile-tablet">
+                <div class="categories-and-Policy">
+                    <div class="categories-and-Policy-list">
+                        <div class="categories">
+                            <i class="fa fa-bars" style="margin-right:6px;"></i>
+                            Danh mục sản phẩm
+                            @Html.Action("PartialMegaMenu", "Home")
+                        </div>
+                        <a class="categories-and-Policy__item" href="/pages/tong-hop-khuyen-mai">
+                            <img src="~/Images/icon_menu_2.png" />
+                            Tổng hợp khuyến mãi
+                        </a>
+                        <a href="" class="categories-and-Policy__item">
+                            <img src="~/Images/icon_menu_6.png" />
+                            Hướng dẫn thanh toán
+                        </a>
+                        <a class="categories-and-Policy__item" href="/pages/huong-dan-tra-gop">
+                            <img src="~/Images/icon_menu_6.png" />
+                            Hướng dẫn trả góp
+                        </a>
+                        <a class="categories-and-Policy__item" href="/pages/chinh-sach-bao-hanh">
+                            <img src="~/Images/icon_menu_4.png" />
+                            Chính sách bảo hành
+                        </a>
+                        <a href="" class="categories-and-Policy__item">
+                            <img src="~/Images/icon_menu_3.png" />
+                            Chính sách vận chuyển
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="overlay-mega-menu"></div>
+        </header>
+    </div>
+</div>

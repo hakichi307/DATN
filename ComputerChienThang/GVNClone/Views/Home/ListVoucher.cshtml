@@ -1,0 +1,150 @@
+﻿@model IEnumerable<GVNClone.SuKienKhuyenMai>
+
+@{
+    ViewBag.Title = "ListVoucher";
+    Layout = "~/Views/Layout/_LayoutPage.cshtml";
+}
+
+<div class="grid wide">
+    <h3 class="text-center" style="padding-top:30px;">Mã khuyến mãi</h3>
+    <div class="cps-voucher-wrapper">
+        <div class="cps-vouchers-block">
+            @foreach (var item in Model)
+            {
+                <div class="cps-voucher-row">
+                    <div class="cps-vouchers-wrap">
+                        <div class="cps-vouchers-left">
+                            <div class="cps-vouchers-image">
+                                <img src="/Images/icon_Logo.png" alt="">
+                            </div>
+                            <div class="cps-vouchers-text">MARKLEO</div>
+                            <div class="cps-vouchers-border-left">
+                                <div class="cps-border-left"></div>
+                            </div>
+                        </div>
+                        <div class="cps-vouchers-right">
+                            <div class="cps-vouchers-title">
+                                @if (item.PhamViApDung == "Người mới")
+                                {
+                                    <div class="cps-vouchers-title-text">
+                                        <span class="cps-for-new-user">
+                                            Người mới
+                                            <span class="cps-for-new-user-tooltip-text">
+                                                Áp dụng cho khách hàng mới mua hàng lần đầu
+                                            </span>
+                                        </span>
+
+                                        @item.TenKM
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="cps-vouchers-title-text">@item.TenKM</div>
+                                }
+                            </div>
+                            <div class="cps-vouchers-note">
+                                <div class="cps-vouchers-progress">
+                                    <div style="height: 100%; background: linear-gradient(270deg,#1190cb85 0%, #1190cb 100%)"></div>
+                                </div>
+                                <div class="cps-vouchers-duration">
+                                    <span class="cps-vouchers-percent-used"></span>
+                                    -
+                                    <span class="cps-daysLeft"></span>
+                                    <div class="cps-voucher-detail">
+                                        <div class="cps-vouchers-tooltip">
+                                            <a href="javascript:;">
+                                                Chi tiết
+                                                <span class="cps-vouchers-tooltiptext">
+                                                    Mã @item.MaKM giảm @String.Format("{0:0,0}", item.GiaTriKM)đ cho đơn hàng có giá trị từ @String.Format("{0:0,0}", item.GiaTriDonHang)đ. Hạn sử dụng: @item.NgayBatDau đến @item.NgayKetThuc. Số lượng có hạn. Áp dụng cho 1 số người dùng nhất định.
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <a href="@Url.Action("ListProductVoucher","Home", new { @id = item.MaKM.Trim() })" class="cps-vouchers-list-product-link">
+                                        SP áp dụng
+                                        <span class="cps-vouchers-tooltiptext">
+                                            Danh sách sản phẩm có thể sử dụng
+                                            mã
+                                        </span>
+                                    </a>
+                                    <a href="javascript:;" class="cps-btn-get-voucher" data-id="@item.MaKM.Trim()">Copy mã</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="cps-voucher-banner hide-on-mobile">
+            <img src="~/Images/bot-banner.png" />
+        </div>
+    </div>
+</div>
+
+@section jsFooter{
+    <script>
+        $(".cps-btn-get-voucher").click(function () {
+            $(this).text('Đã copy');
+            navigator.clipboard.writeText($(this).attr("data-id"));
+        })
+
+        window.addEventListener("load", getDataTimeRemainingVoucher);
+
+
+
+        function getDataTimeRemainingVoucher() {
+
+            let cpsVouchersPercentUsed = document.querySelectorAll(".cps-vouchers-percent-used");
+            let cpsDaysLeft = document.querySelectorAll(".cps-daysLeft");
+            let cpsVouchersProgress = document.querySelectorAll(".cps-vouchers-progress > div");
+
+            $.ajax({
+                type: 'GET',
+                url: '/Home/GetDataTimeRemainingVoucher',
+                dataType: 'json',
+                success: function (response) {
+                    for (let i = 0; i < response.data.length; i++) {
+                        var remainingPercent = Math.floor(response.data[i].remainQuantityCanUse / response.data[i].totalQuantityCanUse * 100);
+                        cpsVouchersPercentUsed[i].innerText = "Còn lại " + remainingPercent + "%";
+                        cpsVouchersProgress[i].style.width = remainingPercent + "%";
+                        handleTimeRemaining(response.data[i].endYear, response.data[i].endMonth - 1, response.data[i].endDay, response.data[i].endHour, response.data[i].endMin, cpsDaysLeft[i]);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            })
+        }
+
+
+        function handleTimeRemaining(endYear, endMonth, endDay, endHour, endMinute, selector) {
+
+            let addZeroes = num => num >= 10 ? num : `0${num}`;
+            let endDate = new Date(endYear, addZeroes(endMonth), addZeroes(endDay), addZeroes(endHour), addZeroes(endMinute));
+            let endTime = endDate.getTime();
+
+            let todayDate = new Date();
+            let todayTime = todayDate.getTime();
+            let remainingTime = endTime - todayTime;
+            let oneMin = 60 * 1000;
+            let oneHour = 60 * oneMin;
+            let oneDay = 24 * oneHour;
+
+            let daysLeft = Math.floor(remainingTime / oneDay);
+            let hoursLeft = Math.floor((remainingTime % oneDay) / oneHour);
+            let minsLeft = Math.floor((remainingTime % oneHour) / oneMin);
+
+            if (daysLeft !== 0) {
+                selector.innerText = "Hết hạn sau " + daysLeft + " ngày";
+            }
+            else if (daysLeft === 0 && hoursLeft !== 0) {
+                selector.innerText = "Hết hạn sau " + hoursLeft + " tiếng nữa";
+            }
+            else if (hoursLeft === 0 && minsLeft !== 0 && daysLeft === 0) {
+                selector.innerText = "Hết hạn sau " + minsLeft + " phút nữa";
+            }
+        }
+
+    </script>
+}

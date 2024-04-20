@@ -1,0 +1,436 @@
+﻿@model GVNClone.SanPham
+
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Layout/_LayoutPage.cshtml";
+}
+
+@{
+    IEnumerable<QuaTang> listQt = ViewBag.QuaTang as IEnumerable<QuaTang>;
+
+    IEnumerable<DanhGia> listRating = ViewBag.Rating as IEnumerable<DanhGia>;
+}
+
+<div class="grid wide">
+    <section class="product__Info">
+        <div class="row">
+            <div class="col l-6 m-6 c-12 product__Info__thumbnail">
+                <div class="fotorama" data-width="100%" data-max-width="100%" data-autoplay="true" data-nav="thumbs" data-transition="slide" data-clicktransition="crossfade" data-loop="true">
+                    @if (!String.IsNullOrEmpty(Model.Pic1))
+                    {
+                        <img src="@Url.Content("/Images/" + Model.Pic1)" />
+                    }
+                    @if (!String.IsNullOrEmpty(Model.Pic2))
+                    {
+                        <img src="@Url.Content("/Images/" + Model.Pic2)" />
+                    }
+                    @if (!String.IsNullOrEmpty(Model.Pic3))
+                    {
+                        <img src="@Url.Content("/Images/" + Model.Pic3)" />
+                    }
+                    @if (!String.IsNullOrEmpty(Model.Pic4))
+                    {
+                        <img src="@Url.Content("/Images/" + Model.Pic4)" />
+                    }
+                </div>
+            </div>
+
+            <div class="col l-6 m-6 c-12">
+                <div class="product__Info__Detail">
+                    <h3 class="product-name">@Model.TenSP</h3>
+                    <p><span class="product-info-label"><strong>Xuất xứ:</strong> Chính hãng</span></p>
+                    @if (!String.IsNullOrEmpty(Model.BaoHanh))
+                    {
+                        <p><span class="product-info-label"><strong>Bảo hành:</strong> @Model.BaoHanh</span></p>
+                    }
+                    <p>
+                        <span class="product-info-label">
+                            <strong>Tình trạng:</strong> @if (Model.TinhTrang == "Mới")
+                            {<span>Mới</span>} 100%
+                        </span>
+                    </p>
+                    @if (Model.MaGiamGia != null && listQt == null)
+                    {
+                        <p><u class="kn-text">Khuyến mãi: (chọn một trong các gói sau)</u></p>
+                        <p style="font-size:18px;">Nhận ngay bộ quà tặng (Áp dụng khi mua với giá <span style="color:red; background-color:yellow">@String.Format("{0:0,0}", Model.GiaNiemYet)</span>)</p>
+                    }
+                    <div class="product__Info__Gift">
+                        @foreach (var item in listQt)
+                        {
+                            <p>
+                                <span class="product-info-label">
+                                    <strong style="margin-right:12px">🎁</strong><strong style="color:black">@item.TenQT</strong> @if (item.DonGia != 0)
+                                    {<span>trị giá <b>@String.Format("{0:0,0}", item.DonGia)</b></span>}
+                                </span>
+                            </p>
+                        }
+                    </div>
+                    @if (Model.LoaiSanPham.TenLoaiSP.Substring(0, 2).Equals("PC"))
+                    {
+                        if (!String.IsNullOrEmpty(Model.Pic1) || !String.IsNullOrEmpty(Model.Pic2) || !String.IsNullOrEmpty(Model.Pic3) || !String.IsNullOrEmpty(Model.Pic4))
+                        {
+                            <div>
+                                <p><span style="font-size:20px; color:#f00; font-weight:bold">Hỗ trợ trả góp MPOS (Thẻ tín dụng), HDSAISON.</span></p>
+                                <i>(Hình ảnh PC chỉ mang tính chất minh họa).</i>
+                            </div>
+                        }
+                    }
+                    <div class="product__Info__SaleOff">
+
+                        @if (Model.MaGiamGia != null && Model.GiamGia.NgayBatDau < DateTime.Now && Model.GiamGia.NgayKetThuc > DateTime.Now)
+                        {
+                            <span class="product__Info__SaleOff__price-text">Giá cũ:</span>
+                            <span class="product__Info__SaleOff__product-price"><del>@String.Format("{0:0,0}", Model.GiaNiemYet) ₫</del></span><br />
+                            <span class="product__Info__SaleOff__price-text">Giá KM:</span>
+                            <span class="product__Info__SaleOff__product-price-sale">@String.Format("{0:0,0}", Model.GiamGia.GiaKhuyenMai) ₫</span>
+                        }
+                        else
+                        {
+                            <span class="product__Info__SaleOff__price-text">Giá:</span>
+                            <span class="product__Info__SaleOff__product-price-sale">@String.Format("{0:0,0}", Model.GiaNiemYet) ₫</span><br />
+                        }
+                        <div class="product__Info__SaleOff__Add-To-Cart">
+                            @if (Model.SoLuongTon == 0)
+                            {
+                                <button type="button" class="btnOutOfStock">Hết hàng</button>
+                            }
+                            else
+                            {
+                                <button class="btn-add-to-cart" data-id="@Model.MaSP">Đặt hàng</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Action("Revelant", "Product", new { @category = Model.MaLoaiSP, @id = Model.MaSP })
+
+        <div class="tabset">
+            <input type="radio" name="tabset" id="tab-desc" aria-controls="desc" checked />
+            <label class="tab-title" for="tab-desc">Mô tả sản phẩm</label>
+            <input type="radio" name="tabset" id="tab-feature" aria-controls="feature" />
+            <label class="tab-title" for="tab-feature">Đặc điểm nổi bật</label>
+            <input type="radio" name="tabset" id="tab-warranty" aria-controls="warranty" />
+            <label class="tab-title" for="tab-warranty">Thông tin bảo hành</label>
+            <div class="tab-panels">
+                <section id="desc" class="tab-panel">
+                    <div class="technical__Specifications">
+                        @Html.Raw(Model.ThongSoKyThuat)
+                    </div>
+                    <div class="description__Content">
+                        @Html.Raw(Model.MoTa)
+                        <div class="star-rat-calc-wrap">
+                            <div class="star-rat-calc__heading">
+                                <h3 class="star-rat-calc__text">Đánh giá của khách hàng</h3>
+                            </div>
+                            <div class="star-rat-calc-container">
+                                <div class="star-rat-calc__average">
+                                    <h1 class="star-rat-calc__number">@Session["NumberStar"]</h1>
+                                    <div>
+                                        <div class="star-rat-calc-wrap_star">
+                                            <i class="fas fa-star star-rate-item"></i>
+                                            <i class="fas fa-star star-rate-item"></i>
+                                            <i class="fas fa-star star-rate-item"></i>
+                                            <i class="fas fa-star star-rate-item"></i>
+                                            <i class="fas fa-star star-rate-item"></i>
+                                        </div>
+                                        <p class="star-rat-calc__label text-center">@Session["CountRating"] đánh giá</p>
+                                    </div>
+                                </div>
+                                <div class="star-rat-calc__star-rate-wrap">
+                                    <div class="star-rate-list">
+                                        <div class="star-rat-calc__progress-wrap">
+                                            <div class="star-rat-calc__prog-item"></div>
+                                        </div>
+                                        <div class="flex-align-center flex-process-star">
+                                            <div class="star-rat-calc__star-wrap">
+                                                <span class="star-rate">
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                </span>
+                                            </div>
+                                            <div class="star-rat-calc__num-wrap">
+                                                <span class="star-rate-percent"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="star-rate-list">
+                                        <div class="star-rat-calc__progress-wrap">
+                                            <div class="star-rat-calc__prog-item"></div>
+                                        </div>
+                                        <div class="flex-align-center flex-process-star">
+                                            <div class="star-rat-calc__star-wrap">
+                                                <span class="star-rate">
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="far fa-star star-rate-item"></i>
+                                                </span>
+                                            </div>
+                                            <div class="star-rat-calc__num-wrap">
+                                                <span class="star-rate-percent"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="star-rate-list">
+                                        <div class="star-rat-calc__progress-wrap">
+                                            <div class="star-rat-calc__prog-item"></div>
+                                        </div>
+                                        <div class="flex-align-center flex-process-star">
+                                            <div class="star-rat-calc__star-wrap">
+                                                <span class="star-rate">
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="far fa-star star-rate-item"></i>
+                                                    <i class="far fa-star star-rate-item"></i>
+                                                </span>
+                                            </div>
+                                            <div class="star-rat-calc__num-wrap">
+                                                <span class="star-rate-percent"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="star-rate-list">
+                                        <div class="star-rat-calc__progress-wrap">
+                                            <div class="star-rat-calc__prog-item"></div>
+                                        </div>
+                                        <div class="flex-align-center flex-process-star">
+                                            <div class="star-rat-calc__star-wrap">
+                                                <span class="star-rate">
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="far fa-star star-rate-item"></i>
+                                                    <i class="far fa-star star-rate-item"></i>
+                                                    <i class="far fa-star star-rate-item"></i>
+                                                </span>
+                                            </div>
+                                            <div class="star-rat-calc__num-wrap">
+                                                <span class="star-rate-percent"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="star-rate-list">
+                                        <div class="star-rat-calc__progress-wrap">
+                                            <div class="star-rat-calc__prog-item"></div>
+                                        </div>
+                                        <div class="flex-align-center flex-process-star">
+                                            <div class="star-rat-calc__star-wrap">
+                                                <span class="star-rate">
+                                                    <i class="fas fa-star star-rate-item"></i>
+                                                    <i class="far fa-star star-rate-item"></i>
+                                                    <i class="far fa-star star-rate-item"></i>
+                                                    <i class="far fa-star star-rate-item"></i>
+                                                    <i class="far fa-star star-rate-item"></i>
+                                                </span>
+                                            </div>
+                                            <div class="star-rat-calc__num-wrap">
+                                                <span class="star-rate-percent"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @if (ViewBag.isLogin)
+                        {
+                            <div class="rating__product">
+                                <h3>Đánh giá</h3>
+                                <div class="rating__product-star">
+                                    <span class="rating__product-label">Chọn đánh giá của bạn</span>
+                                    <div class="star-rating-wrap" onmouseout="RatingSelected();">
+                                        <span onmouseout="RatingOut(1);" onmouseover="RatingOver(1);" onclick="RatingClick(1);" id="star1" class="far fa-star"></span>
+                                        <span onmouseout="RatingOut(2);" onmouseover="RatingOver(2);" onclick="RatingClick(2);" id="star2" class="far fa-star"></span>
+                                        <span onmouseout="RatingOut(3);" onmouseover="RatingOver(3);" onclick="RatingClick(3);" id="star3" class="far fa-star"></span>
+                                        <span onmouseout="RatingOut(4);" onmouseover="RatingOver(4);" onclick="RatingClick(4);" id="star4" class="far fa-star"></span>
+                                        <span onmouseout="RatingOut(5);" onmouseover="RatingOver(5);" onclick="RatingClick(5);" id="star5" class="far fa-star"></span>
+                                    </div>
+                                </div>
+                                <div class="rating__type-content">
+                                    <textarea class="text-rating" name="contentRating" id="js-content-rating" cols="30" rows="10"
+                                              placeholder="Nhập đánh giá về sản phẩm"></textarea>
+                                    <button class="btn-rating js-btn-rating" data-id="@Model.MaSP">Gửi đánh giá</button>
+                                    <input type="hidden" id="lblRating" value="0" />
+                                </div>
+                            </div>
+                        }
+
+                        @if (listRating.Count() != 0)
+                        {
+                            <h3 class="rating__heading-title">Nhận xét của khách hàng</h3>
+                        }
+                        <div id="js-rating-wrap">
+                            @if (listRating.Count() != 0)
+                            {
+                                foreach (var item in listRating)
+                                {
+                                    <div class="rating">
+                                        <div class="rating__container">
+                                            <div class="rating-avatar">
+                                                <img src="@Url.Content("/Images/" + item.ThanhVien.Avatar)" alt="" class="rating-avatar__img">
+                                            </div>
+                                            <div class="rating-content">
+                                                <p class="rating-name-user">@item.ThanhVien.TaiKhoan</p>
+                                                <div class="star-rated-wrap">
+                                                    @for (int i = 0; i < item.Rating; i++)
+                                                    {
+                                                        <i class="fas fa-star star-rated-solid"></i>
+                                                    }
+                                                    @for (int i = int.Parse(item.Rating.ToString()); i < 5; i++)
+                                                    {
+                                                        <i class="far fa-star"></i>
+                                                    }
+                                                </div>
+                                                <p class="rating-text">
+                                                    @item.NoiDungBL
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="rating-footer">
+                                            <div class="ratingOn">@item.CommentedOn</div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </section>
+                <section id="feature" class="tab-panel">Đang cập nhật</section>
+                <section id="warranty" class="tab-panel">Đang cập nhật</section>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section jsFooter{
+    <script src="~/Content/js/moment.min.js"></script>
+    <script src="~/Content/js/vi.min.js"></script>
+    <script>
+
+    window.addEventListener('load', getDataProg);
+
+    var id = @Model.MaSP;
+
+    function getDataProg() {
+        $.ajax({
+            type: 'GET',
+            url: '/Product/GetDataProgressStarRating',
+            data: { id: id },
+            dataType: 'json',
+            success: function (response) {
+                if (response.data.length === 0) {
+                    $(".star-rat-calc__prog-item").each(function () {
+                        $(this).css("width", 0);
+                    })
+                    $(".star-rate-percent").each(function () {
+                        $(this).html(0 + "%");
+                    })
+                } else {
+                    var i = 0, j = 0;
+                    $(".star-rat-calc__prog-item").each(function () {
+                        $(this).css("width", Math.round(response.data[i]) + "%");
+                        i++;
+                    })
+                    $(".star-rate-percent").each(function () {
+                        $(this).html(Math.round(response.data[j]) + "%");
+                        j++;
+                    })
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
+
+
+    $(".ratingOn").each(function () {
+        var momentFormat = moment($(this).html()).fromNow();
+        $(this).html(momentFormat);
+    })
+
+    function RatingOver(rating) {
+        for (var i = 1; i <= rating; i++) {
+            $("#star" + i).attr("class", "fas fa-star star-rating-solid");
+        }
+    }
+
+    function RatingOut(rating) {
+        for (var i = 1; i <= rating; i++) {
+            $("#star" + i).attr("class", "far fa-star");
+        }
+    }
+
+    function RatingClick(rating) {
+        $("#lblRating").val(rating);
+        for (var i = 1; i <= rating; i++) {
+            $("#star" + i).attr("class", "fas fa-star star-rating-solid");
+        }
+        for (var i = rating + 1; i <= 5; i++) {
+            $("#star" + i).attr("class", "far fa-star");
+        }
+    }
+
+    function RatingSelected() {
+        var rating = $("#lblRating").val();
+        for (var i = 1; i <= rating; i++) {
+            $("#star" + i).attr("class", "fas fa-star star-rating-solid");
+        }
+    }
+
+    function RatingReset() {
+        for (var i = 1; i <= 5; i++) {
+            $("#star" + i).attr("class", "far fa-star");
+        }
+    }
+
+
+    $(".js-btn-rating").click(function () {
+        var rating = $("#lblRating");
+        if (rating.val() === "0") {
+            Swal.fire({
+                title: 'Oops!',
+                text: 'Vui lòng nhập số sao cần đánh giá',
+                icon: 'error'
+            })
+            return false;
+        } else {
+            var contentRating = $("#js-content-rating");
+            $.ajax({
+                type: 'POST',
+                url: '/Product/Rating',
+                data: { id_product: id, content: contentRating.val(), starRating: rating.val() },
+                success: function (response) {
+                    if (response.status === 301) {
+                        window.location.href = '/dang-nhap';
+                    }
+                    else if (response.status === 200) {
+                        window.location.reload();
+                    }
+                    else {
+                        $("#js-rating-wrap").prepend(response);
+                        var newRating = $(".rating").first().find(".ratingOn");
+                        var momentFormat = moment(newRating.html()).fromNow();
+                        newRating.html(momentFormat);
+                        rating.val(0);
+                        contentRating.val('');
+                        RatingReset();
+                        window.location.reload();
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.status);
+                    console.log(errorThrown );
+                }
+            })
+        }
+    })
+    </script>
+}
+
+
+

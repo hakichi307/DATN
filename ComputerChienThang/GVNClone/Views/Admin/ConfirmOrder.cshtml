@@ -1,0 +1,146 @@
+﻿@model IEnumerable<GVNClone.ChiTietDonDatHang>
+
+@{
+    ViewBag.Title = "DetailOrder";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<div class="page-content fade-in-up">
+    <div class="ibox">
+        <div class="ibox-head">
+            <div class="ibox-title">Detail</div>
+        </div>
+        <div class="ibox-body">
+            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Ghi chú</th>
+                        <th>Địa chỉ</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@item.MaChiTietDDH</td>
+                            <td>@item.TenSP</td>
+                            <td>@item.SoLuong</td>
+                            <td>@String.Format("{0:0,0}", item.DonGia)</td>
+                            <td>
+                                @if (item.DonDatHang.GhiChu == "")
+                                {
+                                    <span>Nothing</span>
+                                }
+                                else
+                                {
+                                    <span>@item.DonDatHang.GhiChu</span>
+                                }
+                            </td>
+                            <td>@item.DonDatHang.DiaChi</td>
+                            @if (item.DonDatHang.DaHuy == true)
+                            {
+                                <td><a href="@Url.Action("ListOfOrder","Admin")" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Back" style="cursor:pointer">Back</a></td>
+                            }
+                            else
+                            {
+                                if (item.DonDatHang.TinhTrangGiaoHang == false)
+                                {
+                                    <td width="200" class="d-flex justify-content-around">
+                                        <button type="submit" class="btn btn-info btn-confirm" data-id="@item.MaDDH" data-toggle="tooltip" data-placement="top" title="Confirm" style="cursor:pointer">Duyệt</button>
+                                        @using (Html.BeginForm("Expire", "Admin", new { @id = item.MaDDH }))
+                                        {
+                                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Expire" style="cursor:pointer">Hết hạn</button>
+                                        }
+                                        <button class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Back" style="cursor:pointer" onclick="window.history.go(-1)">Back</button>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <button class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Back" style="cursor:pointer" onclick="window.history.go(-1)">Back</button>
+                                        <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Print" style="cursor:pointer" id="btnPrint">Print</button>
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ibox d-none">
+        <div class="ibox-head">
+            <div class="ibox-title">Send Email</div>
+        </div>
+        <div class="ibox-body">
+            <textarea id="summernote" name="message">
+                <div style="background-color: #e3e3e3;padding: 20px 0px 10px 0px;color: #484a4c;box-sizing: border-box;">
+                    <div style="margin: 0 auto;width: 100%;max-width: 660px;background-color: #fff;font-size: 14px;box-sizing: border-box;">
+                        <div style="border-bottom: 5px solid #7ec72f;padding: 20px;box-sizing: border-box;">
+                            <img border="0" style="width: 100%;max-width: 240px;box-sizing: border-box;vertical-align: middle;border-style: none;page-break-inside: avoid;" alt="logo markleo" src="https://live.staticflickr.com/65535/51171959346_6c501e4742_n.jpg" />
+                        </div>
+                        <div style="padding: 20px;box-sizing: border-box;">
+                            <div style="text-align: center;font-size: 18px;font-weight: bold;margin-bottom: 15px;box-sizing: border-box;">Đơn hàng của bạn đã được chúng tôi ghi nhận</div>
+                            <b style="font-style: italic;box-sizing: border-box;font-weight: bolder;">{{NameCustomer}} thân mến</b>
+                            <p style="box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;">
+                                Cảm ơn bạn đã quan tâm tin tưởng sản phẩm chúng tôi
+                            </p>
+                            <p style="line-height: 22px;box-sizing: border-box;margin-top: 0;margin-bottom: 1rem;orphans: 3;widows: 3;">
+                                <h4 style="box-sizing: border-box;margin-top: 0;margin-bottom: .5rem;font-family: inherit;font-weight: 500;line-height: 1.2;color: inherit;font-size: 1.5rem;">Danh sách các sản phẩm bạn đã đặt</h4>
+                                <table class="table table-striped table-hover table-bordered" style="box-sizing: border-box;border-collapse: collapse!important;width: 100%;max-width: 100%;margin-bottom: 1rem;background-color: transparent;border: 1px solid #dee2e6;">
+                                    <thead class="thead-dark" style="box-sizing: border-box;display: table-header-group;">
+                                        <tr style="box-sizing: border-box;page-break-inside: avoid;">
+                                            <th style="box-sizing: border-box;text-align: inherit;padding: .75rem;vertical-align: bottom;border-top: 1px solid #dee2e6;border-bottom: 2px solid #dee2e6;border-bottom-width: 2px;background-color: #fff!important;border-color: #32383e;border: 1px solid #ddd!important;">ID Product</th>
+                                            <th style="box-sizing: border-box;text-align: inherit;padding: .75rem;vertical-align: bottom;border-top: 1px solid #dee2e6;border-bottom: 2px solid #dee2e6;border-bottom-width: 2px;background-color: #fff!important;border-color: #32383e;border: 1px solid #ddd!important;">Name of product</th>
+                                            <th style="box-sizing: border-box;text-align: inherit;padding: .75rem;vertical-align: bottom;border-top: 1px solid #dee2e6;border-bottom: 2px solid #dee2e6;border-bottom-width: 2px;background-color: #fff!important;border-color: #32383e;border: 1px solid #ddd!important;">Quantity</th>
+                                            <th style="box-sizing: border-box;text-align: inherit;padding: .75rem;vertical-align: bottom;border-top: 1px solid #dee2e6;border-bottom: 2px solid #dee2e6;border-bottom-width: 2px;background-color: #fff!important;border-color: #32383e;border: 1px solid #ddd!important;">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="box-sizing: border-box;">
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr style="box-sizing: border-box;page-break-inside: avoid;">
+                                                <td style="box-sizing: border-box;padding: .75rem;vertical-align: top;border-top: 1px solid #dee2e6;background-color: #fff!important;border: 1px solid #ddd!important;">@item.MaSP</td>
+                                                <td style="box-sizing: border-box;padding: .75rem;vertical-align: top;border-top: 1px solid #dee2e6;background-color: #fff!important;border: 1px solid #ddd!important;">@item.SanPham.TenSP</td>
+                                                <td style="box-sizing: border-box;padding: .75rem;vertical-align: top;border-top: 1px solid #dee2e6;background-color: #fff!important;border: 1px solid #ddd!important;">@item.SoLuong</td>
+                                                <td style="box-sizing: border-box;padding: .75rem;vertical-align: top;border-top: 1px solid #dee2e6;background-color: #fff!important;border: 1px solid #ddd!important;">@String.Format("{0:0,0}", item.DonGia)</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot style="box-sizing: border-box;">
+                                        <tr class="text-right" style="box-sizing: border-box;page-break-inside: avoid;text-align: right!important;">
+                                            <td colspan="4" class="font-15" style="box-sizing: border-box;padding: .75rem;vertical-align: top;border-top: 1px solid #dee2e6;background-color: #fff!important;border: 1px solid #ddd!important;">Total: <span class="text-danger" style="box-sizing: border-box;color: #dc3545!important;">@String.Format("{0:0,0}", ViewBag.TotalPayment) VNĐ</span></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            <p>Đơn hàng của bạn sẽ được giao về địa chỉ: <b>{{Address}}</b></p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </textarea>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#btnPrint").click(function () {
+        var content = "<table border='1'>" + $("#example-table").html() + "</table>";
+        printOrder(content);
+    })
+    function printOrder(content) {
+        var printWindow = window.open('', '', 'height=400', 'width=800');
+        printWindow.document.write('<html><head><title>Thông tin đơn hàng</title>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(content);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>

@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "VerifyEmail";
+    Layout = "~/Views/Layout/_LayoutPage.cshtml";
+}
+
+<div class="grid wide">
+    <div class="layout-page-signUp">
+        <h3 class="text-center signUp-heading">Tạo tài khoản</h3>
+        <div class="steps">
+            <div class="steps__step1--number">1</div>
+            <div class="steps__step1--label">Nhập Email của bạn</div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                </div>
+                @Html.TextBox("email", "", new { @class = "form-control", @placeholder = "Nhập email của bạn", type = "email", autocomplete = "off" })
+            </div>
+            <span class="errorMessageAuth"></span>
+        </div>
+        <div class="form-group form-group-footer form-group-auth-btn">
+            <button type="submit" class="btn-auth" id="js-btn-auth-nextstep">Tiếp theo</button>
+        </div>
+    </div>
+</div>
+@section jsFooter{
+    <script src="~/Content/js/handleVerifyEmail.js"></script>
+    }
+

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<GVNClone.Models.TechNewsViewModel.Technews>
+
+<div class="pch-block-title-wrap">
+    <h4 class="pch-block-title">Bài viết tiêu biểu</h4>
+</div>
+<div class="row row-page-list-feature">
+    @foreach (var item in Model)
+    {
+        <div class="col c-12 m-6 l-6">
+            <div class="pch-block-box-wrap">
+                <div class="pch-block-box-inner">
+                    <a href="@Url.RouteUrl("ViewDetail",new { @id = item.ID })" class="pch-block-gallery">
+                        <div class="pch-block-box-overlay"></div>
+                        <img style="height:293px" src="@item.Image" alt="@item.Title">
+                        <div class="pch-block__content">
+                            <h1 class="pch-block__title">
+                                @item.Title
+                            </h1>
+                            <span class="pch-block__date-update">@Html.FormatValue(item.DateUpdate, "{0:dd/MM/yyyy}")</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

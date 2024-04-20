@@ -1,0 +1,118 @@
+﻿@model IEnumerable<GVNClone.TinTuc>
+
+@{
+    ViewBag.Title = "ViewAll";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<div class="ibox">
+    <div class="ibox-head">
+        <div class="ibox-title">Quản lý tin công nghệ</div>
+    </div>
+    <div class="ibox-body">
+        <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tiêu đề tin</th>
+                    <th>Hình ảnh</th>
+                    <th>Ngày đăng</th>
+                    <th>Lượt xem</th>
+                    <th>Danh mục</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>STT</th>
+                    <th>Tiêu đề tin</th>
+                    <th>Hình ảnh</th>
+                    <th>Ngày đăng</th>
+                    <th>Lượt xem</th>
+                    <th>Danh mục</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaTin</td>
+                        <td style="width:250px">@item.TieuDeTin</td>
+                        <td><img src="@item.HinhAnh" width="60" /></td>
+                        <td>@Html.FormatValue(item.NgayDang, "{0:dd/MM/yyyy}")</td>
+                        <td>@item.LuotXem</td>
+                        <td>@item.DanhMucTin.TenDM</td>
+                        <td>
+                            <a href="@Url.Action("DetailTechNew","CRUDTechNews",new { @id = item.MaTin })" class="btn btn-success mr-4 btn-view-detail-technews" data-toggle="tooltip" data-placement="top" title="View">
+                                Xem chi tiết
+                            </a>
+                            <button class="btn btn-danger btn-delete-tech-new" data-toggle="tooltip" data-placement="top" data-id="@item.MaTin" title="Delete">
+                                Xoá
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section jsFooter{
+    <script>
+        $(".btn-delete-tech-new").click(function () {
+            var getID = $(this).data("id");
+            Swal.fire({
+                title: 'Question',
+                text: "Bạn có chắc chắn muốn xoá tin này không?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirm'
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/CRUDTechNews/DeteleTechNew',
+                        data: { id: getID },
+                        success: function (res) {
+                            if (res.statusCode === 404) {
+                                Swal.fire({
+                                    text: "Đã có lỗi!",
+                                    icon: 'error',
+                                })
+                                console.log(res.message);
+                            }
+                            else {
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: 'success',
+                                }).then(function () {
+                                    window.location.reload();
+                                });
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(jqXHR.responseText);
+                            console.log(errorThrown);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    @if (TempData["ConfigTechNewsSuccess"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                Swal.fire({
+                    text: '@Html.Raw(TempData["ConfigTechNewsSuccess"].ToString())',
+                    icon: 'success'
+                }).then(function (result) {
+                    location.reload();
+                })
+            })
+        </script>
+    }
+}

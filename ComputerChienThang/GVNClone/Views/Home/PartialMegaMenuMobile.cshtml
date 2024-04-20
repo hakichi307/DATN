@@ -1,0 +1,136 @@
+﻿@model IEnumerable<GVNClone.SanPham>
+
+
+<label for="nav__input-mobile" class="nav-mobile-bars-icon display-on-mobile-tablet">
+    <i class="fas fa-bars"></i>
+</label>
+
+
+<input type="checkbox" hidden id="nav__input-mobile" class="nav-mobile-control" />
+
+
+<label for="nav__input-mobile" class="overlay-effect-mobile-mega-menu"></label>
+
+
+<div class="nav-category-mobile">
+    <div class="nav-category-mobile__header">
+        <h3 class="name-shop">MarkLeo</h3>
+        <label for="nav__input-mobile"><i class="fas fa-times nav-category-mobile__close-btn"></i></label>
+    </div>
+    @if (Session["Account"] == null)
+    {
+        <div class="nav-mobile-login">
+            <div class="nav-mobile-login__register">
+                <a class="nav-mobile-login__register-link" href="/dang-ky">
+                    <i class="fas fa-user nav-mobile-login__register-icon"></i>
+                    <span class="nav-mobile-login__register-text">Đăng ký</span>
+                </a>
+            </div>
+            <div class="nav-mobile-login__login">
+                <a class="nav-mobile-login__login-link" href="/dang-nhap">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="nav-mobile-login__login-text">Đăng nhập</span>
+                </a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="nav-mobile-info-user">
+            <div class="nav-mobile-img-wrap">
+                <img src="~/Images/user.jpg" width="56" height="56" />
+            </div>
+            <div class="nav-mobile-info-account">
+                @{ 
+                    ThanhVien kh = (ThanhVien)Session["Account"];
+                }
+                <a href="/thong-tin-ca-nhan/@kh.MaTV">
+                    <span>@kh.HoTen</span>
+                    <span>Thông tin tài khoản</span>
+                </a>
+            </div>
+        </div>
+    }
+    <h3 class="categories-heading">Danh mục</h3>
+    <ul class="nav-categories-mobile-container">
+        @foreach (var item in Model.GroupBy(n => n.LoaiSanPham))
+            {
+            <li class="nav-cat-mobile-item">
+                <div class="categories-item">
+                    <div class="categories-item__left">
+                        <img width="20" height="19" src="@Url.Content("/Images/" + item.Key.Icon)" />
+                        @item.Key.TenLoaiSP
+                    </div>
+                    <div class="categories-item__right">
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                </div>
+                <ul class="sub-nav-mobile-list">
+                    @foreach (var sp in item.GroupBy(n => n.DanhMuc))
+                    {
+                        <li class="sub-nav-mobile-item">
+                            <div class="sub-nav-item-type">
+                                <span>@sp.Key.TenDM</span>
+                                <i class="fas fa-caret-right"></i>
+                            </div>
+                            <ul class="sub-nav-mobile-list-2">
+                                @foreach (var nsx in sp.GroupBy(n => n.LoaiDanhMuc))
+                                {
+                                    <li class="sub-nav-mobile-item-2">
+                                        <a href="@Url.Action("ProductFilter", "Product", new { @maLoaiDM = nsx.Key.MaLoaiDM, @IDDM = sp.Key.IDDM })" class="sub-cat-item-filter">@nsx.Key.TenLoaiDM</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+    <h3 class="nav-mobile-info-heading">Thông tin</h3>
+    <ul class="nav-mobile-information-contact">
+        <li class="nav-mobile-information-contact__item">
+            <a class="nav-mobile-information-contact__item-link" href="tel:18006975">
+                <img class="nav-mobile-information-contact__item-icon" src="~/Images/phone-solid.png" />
+                <span class="nav-mobile-information-contact__item-text nav-mobile-information-contact__item-text--tel">18006975</span>
+            </a>
+        </li>
+        <li class="nav-mobile-information-contact__item">
+            <a class="nav-mobile-information-contact__item-link" href="/pages/tong-hop-khuyen-mai">
+                <img class="nav-mobile-information-contact__item-icon" src="~/Images/icon_menu_2.png" />
+                <span class="nav-mobile-information-contact__item-text">Tổng hợp khuyến mãi</span>
+            </a>
+        </li>
+        <li class="nav-mobile-information-contact__item">
+            <a class="nav-mobile-information-contact__item-link" href="@Url.Action("PromotionView","HardCode")">
+                <img class="nav-mobile-information-contact__item-icon" src="~/Images/icon_menu_3.png" />
+                <span class="nav-mobile-information-contact__item-text">Chính sách vận chuyển</span>
+            </a>
+        </li>
+        <li class="nav-mobile-information-contact__item">
+            <a class="nav-mobile-information-contact__item-link" href="/pages/chinh-sach-bao-hanh">
+                <img class="nav-mobile-information-contact__item-icon" src="~/Images/icon_menu_4.png" />
+                <span class="nav-mobile-information-contact__item-text">Chính sách bảo hành</span>
+            </a>
+        </li>
+        <li class="nav-mobile-information-contact__item">
+            <a class="nav-mobile-information-contact__item-link" href="/pages/huong-dan-tra-gop">
+                <img class="nav-mobile-information-contact__item-icon" src="~/Images/icon_menu_6.png" />
+                <span class="nav-mobile-information-contact__item-text">Chính sách trả góp</span>
+            </a>
+        </li>
+        <li class="nav-mobile-information-contact__item">
+            <a class="nav-mobile-information-contact__item-link" href="">
+                <img class="nav-mobile-information-contact__item-icon" src="~/Images/icon_menu_6.png" />
+                <span class="nav-mobile-information-contact__item-text">Hướng dẫn thanh toán</span>
+            </a>
+        </li>
+        <li class="nav-mobile-information-contact__item">
+            <a class="nav-mobile-information-contact__item-link" href="/cart">
+                <img class="nav-mobile-information-contact__item-icon" src="~/Images/cart.png" />
+                <span class="nav-mobile-information-contact__item-text">Giỏ hàng của bạn</span>
+            </a>
+        </li>
+    </ul>
+</div>
+

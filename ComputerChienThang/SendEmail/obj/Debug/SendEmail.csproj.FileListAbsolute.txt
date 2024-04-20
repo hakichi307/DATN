@@ -1,0 +1,5 @@
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\SendEmail\bin\Debug\SendEmail.dll
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\SendEmail\bin\Debug\SendEmail.pdb
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\SendEmail\obj\Debug\SendEmail.dll
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\SendEmail\obj\Debug\SendEmail.pdb
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\SendEmail\obj\Debug\SendEmail.csprojResolveAssemblyReference.cache

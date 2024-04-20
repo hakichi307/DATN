@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "SendMail";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+
+<!-- START PAGE CONTENT-->
+<div class="page-heading">
+    <h1 class="page-title">Compose mail</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html"><i class="la la-home font-20"></i></a>
+        </li>
+        <li class="breadcrumb-item">Compose mail</li>
+    </ol>
+</div>
+@using (Html.BeginForm("SendMail", "Admin", FormMethod.Post))
+{
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <a class="btn btn-info btn-block" href="mail_compose.html">
+                    <i class="fa fa-edit"></i>
+                    Compose
+                </a><br>
+                <h6 class="m-t-10 m-b-10">FOLDERS</h6>
+                <ul class="list-group list-group-divider inbox-list">
+                    <li class="list-group-item">
+                        <a href="javascript:;">
+                            <i class="fa fa-inbox"></i> Inbox (6)
+                            <span class="badge badge-warning badge-square pull-right">17</span>
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="javascript:;"><i class="fa fa-envelope-o"></i> Sent</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="javascript:;">
+                            <i class="fa fa-star-o"></i> Important
+                            <span class="badge badge-success badge-square pull-right">2</span>
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="javascript:;"><i class="fa fa-file-text-o"></i> Drafts</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="javascript:;"><i class="fa fa-trash-o"></i> Trash</a>
+                    </li>
+                </ul>
+                <h6 class="m-t-10 m-b-10">LABELS</h6>
+                <ul class="list-group list-group-divider inbox-list">
+                    <li class="list-group-item">
+                        <a href="javascript:;"><i class="fa fa-circle-o font-13 text-success"></i> Support</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="javascript:;"><i class="fa fa-circle-o font-13 text-warning"></i> Business</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="javascript:;"><i class="fa fa-circle-o font-13 text-info"></i> Work</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="javascript:;"><i class="fa fa-circle-o font-13 text-danger"></i> System</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="javascript:;"><i class="fa fa-circle-o font-13 text-muted"></i> Social</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="ibox" id="mailbox-container">
+                    <div class="mailbox-header d-flex justify-content-between">
+                        <h5 class="inbox-title">Compose mail</h5>
+                        <div class="inbox-toolbar m-l-20">
+                            <button class="btn btn-default btn-sm" data-action="reply" data-toggle="tooltip"
+                                    data-original-title="Reply">
+                                <i class="fa fa-reply"></i>
+                            </button>
+                            <button class="btn btn-default btn-sm" data-action="delete" data-toggle="tooltip"
+                                    data-original-title="Delete">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mailbox-body">
+                        <form class="form-horizontal" action="javascript:void(0)" method="POST"
+                              if="compose_form">
+                            <div class="form-group row">
+                                <label class="col-sm-2 control-label">To:</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="to" value="example@gmail.com">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 control-label">Subject:</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="subject">
+                                </div>
+                            </div>
+                            <textarea id="summernote" name="messageSharecode">
+                                <div style="background-color:#e3e3e3;padding:20px 0px 10px 0px;color:#484a4c">
+                                    <div class="adM">
+                                    </div><div style="margin:0 auto;width:100%;max-width:660px;background-color:#fff;font-size:14px">
+                                        <div class="adM">
+                                        </div><div style="border-bottom:5px solid #7ec72f;padding:20px">
+                                            <div class="adM">
+                                            </div><img border="0" style="width:100%;max-width:240px" alt="logo sharecode" src="https://ci3.googleusercontent.com/proxy/DaYCO5KhA6_4THkL1EgXs3xuhpTqgrKC0Xhm-9ScKGZyRB9yuxOYS8gHR7B-SpovQCDGSt5hgywu5WHQe45aLlR78Ss=s0-d-e1-ft#https://sharecode.vn/assets/images/logo-email.png" class="CToWUd">
+                                        </div><div style="padding:20px">
+                                            <div style="text-align:center;font-size:18px;font-weight:bold;margin-bottom:15px">GIAO DỊCH BÁN CODE 28208 THÀNH CÔNG</div>
+                                            <b style="font-style:italic">Nguyễn Sam thân mến</b>
+                                            <p>
+                                                Người dùng <b><a href="mailto:seven608tv@gmail.com" target="_blank">dungtran282@gmail.com</a></b> vừa trả phí cho source code mã 28208 của bạn và bạn đã có thêm <b>14 XU</b> cộng vào tài khoản.
+                                            </p>
+                                            <p style="line-height:22px">
+                                                <b>- Code đã bán: </b><a href="https://sharecode.vn/source-code/do-an-quan-ly-thong-tin-tuyen-dung-nhan-vien-ung-dung-mongodb-vao-do-an-28208.htm" style="color:#ff8401" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://sharecode.vn/source-code/web-ban-dong-ho-aspnet-c-webform-full-nghiep-vu-sql-database-27690.htm&amp;source=gmail&amp;ust=1620191758190000&amp;usg=AFQjCNFWSE3bzmxDsfas10NGnBvXRyiOuQ">Đồ án Quản lý thông tin tuyển dụng nhân viên, ứng dụng MongoDB vào đồ án</a><br>
+                                                <b>- Phí tải: </b>20 XU<br>
+                                                <b>- Thực nhận: </b>14 XU  <em style="color:#ff8401">(Tạm giữ đến 24/6/2021 7:21)</em><br>
+                                                <b>- Tài khoản hiện có: </b>112 XU<br>
+                                                <b>- Thời gian: </b>7:21 - 22/06/2021
+                                            </p>
+                                            <p>Để kiểm tra tài khoản (hoặc) rút tiền vui lòng truy cập website <a href="https://sharecode.vn" style="color:#ff8401" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://sharecode.vn&amp;source=gmail&amp;ust=1620191758190000&amp;usg=AFQjCNG1InvQBqMDu_3T9uLlvLqTA1TMGg">sharecode.vn</a>. Bạn cũng có thể xem thêm <a href="https://sharecode.vn/cau-hoi/ty-le-chia-se-doanh-thu-cho-nguoi-ban--5.htm" style="color:#ff8401" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://sharecode.vn/cau-hoi/ty-le-chia-se-doanh-thu-cho-nguoi-ban--5.htm&amp;source=gmail&amp;ust=1620191758190000&amp;usg=AFQjCNEO5cGewztCWeYJPwHU7EJTeD7jxg">Tỉ lệ chia sẻ doanh thu</a> và các chính sách khác của Sharecode.vn.</p>
+                                            <p style="clear:both;padding-top:20px;text-align:center">
+                                                Để những code này có lượt truy cập, cũng như tạo ra doanh thu tốt hơn bạn hãy <br>
+                                                <span style="padding:10px 20px;background:#ff8401;line-height:50px;color:white;border-radius:5px">CHIA SẺ NGAY</span> <br>
+                                                <br>
+                                                source code cho bạn bè, lên facebook, hoặc các diễn đàn...
+                                                <br>
+                                                Nếu bạn có source code hay hãy tiếp tục upload ngay để nhận thưởng và kiếm tiền cho mình<br>
+                                                <a href="https://sharecode.vn/thanh-vien-upload.htm" style="padding:10px 20px;background:#7ec72f;line-height:50px;color:white;border-radius:5px" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://sharecode.vn/thanh-vien-upload.htm&amp;source=gmail&amp;ust=1620191758190000&amp;usg=AFQjCNE7YHUqf62KUHZ-iiDM1xfxfRB7IA">UPLOAD NGAY</a><br>
+                                            </p>
+
+                                        </div><div style="background-color:#e3e3e3;padding:0px 20px 20px 20px;overflow:hidden;line-height:22px">
+                                            <div class="m_-4243753633105579689col-50">
+                                                <br>
+                                                <b style="color:#7ec72f">THƯ VIỆN CHIA SẺ SOURCE CODE</b><br>
+                                                <b>Hotline:</b> 0981.282.756<br>
+                                                <b>Website:</b> <a href="https://sharecode.vn" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://sharecode.vn&amp;source=gmail&amp;ust=1620191758190000&amp;usg=AFQjCNG1InvQBqMDu_3T9uLlvLqTA1TMGg">https://sharecode.vn</a>
+                                            </div>
+                                            <div class="m_-4243753633105579689col-50">
+                                                <br>
+                                                <b>CỘNG ĐỒNG <a href="http://SHARECODE.VN" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://SHARECODE.VN&amp;source=gmail&amp;ust=1620191758190000&amp;usg=AFQjCNFZGt1yplhuc69zRRHHZpTWdC3XjA">SHARECODE.VN</a></b><br>
+                                                <a href="https://sharecode.vn" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://sharecode.vn&amp;source=gmail&amp;ust=1620191758190000&amp;usg=AFQjCNG1InvQBqMDu_3T9uLlvLqTA1TMGg">
+                                                    <img style="margin-right:5px;width:22%;max-width:71px" src="https://ci5.googleusercontent.com/proxy/4pSEOB_NoqIwJAGNFQQpdE0j6DIShnkqWuQi77aJd0UaiBeVcm-xocrOvVtx9pPV-DzlxytA-fjhB32HjYTw9y_fubQLxCrZ=s0-d-e1-ft#https://sharecode.vn/assets/images/sharecode-code.png" class="CToWUd">
+                                                </a>
+                                                <a href="https://me.sharecode.vn/dang-ky/hosting" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://me.sharecode.vn/dang-ky/hosting&amp;source=gmail&amp;ust=1620191758190000&amp;usg=AFQjCNH7NT48lL2KAlkjBfF0yDeJ8cC4Iw">
+                                                    <img style="margin-right:5px;width:22%;max-width:71px" src="https://ci3.googleusercontent.com/proxy/xGbOUsTX16EXBpUL8Yamli_UJHojgLNO3dTQZLENzUBtd_1CufHZF7YHJLIDdIYQrqKrxBCd8dWzFrCSUybbZGDiYTa2-tI6vSQ=s0-d-e1-ft#https://sharecode.vn/assets/images/sharecode-clould.png" class="CToWUd">
+                                                </a><div class="yj6qo"></div><div class="adL">
+                                                </div>
+                                            </div><div class="adL">
+                                            </div>
+                                        </div><div class="adL">
+
+                                        </div>
+                                    </div><div class="adL">
+                                    </div>
+                                </div>
+
+                            </textarea>
+                            <button class="btn btn-info m-t-20" type="submit" style="cursor:pointer">Gửi</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
