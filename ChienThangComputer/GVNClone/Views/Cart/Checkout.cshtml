@@ -1,0 +1,227 @@
+﻿@model IEnumerable<GVNClone.Models.Cart>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Checkout</title>
+    @*<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />*@
+    <link rel="short icon" href="~/ChienThang.ico" />
+    <link href="~/fonts/FontAwesome-5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+    <link href="~/Content/css/grid.css" rel="stylesheet" />
+    <link href="~/Content/css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page-wrap-checkout">
+        <div class="grid wide">
+            <div class="wrap-content-checkout">
+                <div class="row flex-column-reverse">
+                    <div class="col l-7 m-12 c-12">
+                        <div class="main">
+                            <h3 class="logo-title hide-on-mobile-tablet">CHIENTHANGCOMPUTER.COM</h3>
+                            <ul class="breadcrumb hide-on-mobile-tablet">
+                                <li class="breadcrumb__item">@Html.ActionLink("Giỏ hàng", "GoToCart", "Cart")</li>
+                                <li class="breadcrumb__item breadcrumb__item--arrow-right"><i class="fas fa-chevron-right"></i></li>
+                                <li class="breadcrumb__item breadcrumb__item--current">Thông tin giao hàng</li>
+                                <li class="breadcrumb__item breadcrumb__item--arrow-right"><i class="fas fa-chevron-right"></i></li>
+                                <li class="breadcrumb__item breadcrumb__item--method-payment">Phương thức thanh toán</li>
+                            </ul>
+                            <div class="main-content">
+                                <h4>Thông tin giao hàng</h4>
+                                @if (Session["Account"] == null)
+                                {
+                                    <p class="already-login-or-not">Bạn đã có tài khoản? @Html.ActionLink("Đăng nhập", "SignIn", "Auth")</p>
+                                    using (Html.BeginForm())
+                                    {
+                                        <div class="fieldset">
+                                            <div class="field fieldset-input-wrapper">
+                                                <label class="field-label" for="checkout-full-name" id="full-name-label">Họ và tên</label>
+                                                @Html.TextBox("HoTen", "", new { @class = "field-input", @placeholder = "Họ và tên", autocomplete = "off", required = "required" })
+                                            </div>
+                                            <div class="custom-row-fieldset-input">
+                                                <div class="field fieldset-input-wrapper">
+                                                    <div class="fieldset-email">
+                                                        <label class="field-label" for="checkout-email">Email</label>
+                                                        @Html.TextBox("Email", "", new { @class = "field-input", @placeholder = "Email", autocomplete = "off", required = "required", type = "email", pattern = "[^@]+@[^@]+\\.[a-zA-Z]{2,6}" })
+                                                    </div>
+                                                </div>
+                                                <div class="field fieldset-input-wrapper">
+                                                    <div class="fieldset-phone-number">
+                                                        <label class="field-label" for="checkout-phone-number">Số điện thoại</label>
+                                                        @Html.TextBox("SoDienThoai", "", new { @class = "field-input", @placeholder = "Số điện thoại", autocomplete = "off", required = "required" })
+                                                        <span class="MessageError_PhoneNumber"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field fieldset-input-wrapper">
+                                                <label class="field-label" for="checkout-address">Địa chỉ</label>
+                                                @Html.TextBox("DiaChi", "", new { @class = "field-input", @placeholder = "Địa chỉ", autocomplete = "off", required = "required" })
+                                            </div>
+                                            <div class="field fieldset-country-wrapper">
+                                                <select id="calc_shipping_provinces" name="calc_shipping_provinces" required="">
+                                                    <option value="">Tỉnh / Thành phố</option>
+                                                </select>
+                                                <select id="calc_shipping_district" name="calc_shipping_district" required="">
+                                                    <option value="">Quận / Huyện</option>
+                                                </select>
+                                                @Html.TextBox("TinhThanh", "", new { @class = "billing_address_1", type = "hidden" })
+                                                @Html.TextBox("QuanHuyen", "", new { @class = "billing_address_2", type = "hidden" })
+                                            </div>
+                                            <div class="fieldset-footer">
+                                                <div class="fieldset-footer__back-to-cart">
+                                                    <a class="back-to-cart" href="@Url.Action("GoToCart","Cart")"><span><i class="fas fa-chevron-left"></i></span> Giỏ hàng</a>
+                                                </div>
+                                                <div class="fieldset-footer__next-step">
+                                                    <button class="btn-checkout">Tiếp tục đến phương thức thanh toán</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm())
+                                    {
+                                        ThanhVien member = Session["Account"] as ThanhVien;
+                                        <div class="info-user-checkout">
+                                            <div class="info-user-checkout-img-wrap">
+                                                <img src="~/Images/info-unknown.png" />
+                                            </div>
+                                            <div class="info-user-checkout-text">
+                                                <p class="info-user-checkout-contact-wrap">
+                                                    <span class="info-user-checkout-name">@member.HoTen</span>
+                                                    <span class="info-user-checkout-email">(@member.Email)</span>
+                                                </p>
+                                                <a href="@Url.Action("SignOut","Auth")">Đăng xuất</a>
+                                            </div>
+                                        </div>
+                                        <div class="fieldset">
+                                            <div class="field fieldset-input-wrapper">
+                                                <label class="field-label" for="checkout-full-name" id="full-name-label">Họ và tên</label>
+                                                @Html.TextBox("HoTen", "", new { @class = "field-input", @placeholder = "Họ và tên", autocomplete = "off", @Value = member.HoTen, required = "required" })
+                                            </div>
+                                            <div class="custom-row-fieldset-input">
+                                                <div class="field fieldset-input-wrapper">
+                                                    <div class="fieldset-email">
+                                                        <label class="field-label" for="checkout-email">Email</label>
+                                                        @Html.TextBox("Email", "", new { @class = "field-input", @placeholder = "Email", autocomplete = "off", @Value = member.Email, required = "required", type = "email", pattern = "[^@]+@[^@]+\\.[a-zA-Z]{2,6}" })
+                                                    </div>
+                                                </div>
+                                                <div class="field fieldset-input-wrapper">
+                                                    <div class="fieldset-phone-number">
+                                                        <label class="field-label" for="checkout-phone-number">Số điện thoại</label>
+                                                        @Html.TextBox("SoDienThoai", "", new { @class = "field-input", @placeholder = "Số điện thoại", autocomplete = "off", @Value = member.SoDienThoai, required = "required" })
+                                                        <span class="MessageError_PhoneNumber"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field fieldset-input-wrapper">
+                                                <label class="field-label" for="checkout-address">Địa chỉ</label>
+                                                @Html.TextBox("DiaChi", "", new { @class = "field-input", @placeholder = "Địa chỉ", autocomplete = "off", @Value = member.DiaChi, required = "required" })
+                                            </div>
+                                            <div class="field fieldset-country-wrapper">
+                                                <select id="calc_shipping_provinces" name="calc_shipping_provinces" required="">
+                                                    <option value="">Tỉnh / Thành phố</option>
+                                                </select>
+                                                <select id="calc_shipping_district" name="calc_shipping_district" required="">
+                                                    <option value="">Quận / Huyện</option>
+                                                </select>
+                                                @Html.TextBox("TinhThanh", "", new { @class = "billing_address_1", type = "hidden" })
+                                                @Html.TextBox("QuanHuyen", "", new { @class = "billing_address_2", type = "hidden" })
+                                            </div>
+                                            <div class="fieldset-footer">
+                                                <div class="fieldset-footer__back-to-cart">
+                                                    <a class="back-to-cart" href="@Url.Action("GoToCart","Cart")"><span><i class="fas fa-chevron-left"></i></span> Giỏ hàng</a>
+                                                </div>
+                                                <div class="fieldset-footer__next-step">
+                                                    <button class="btn-checkout">Tiếp tục đến phương thức thanh toán</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l-5 m-12 c-12">
+                        <div class="sidebar">
+                            <h3 class="logo-title-mobile">CHIENTHANGCOMPUTER.COM</h3>
+                            <div class="main-content-sidebar">
+                                <div class="info-cart-wrap-mobile">
+                                    <div class="vis-hid-cart-list" id="js-handle-cart-list">
+                                        <i class="fas fa-shopping-cart icon-cart-mobile"></i>
+                                        <span class="info-cart-text"><span class="info-cart-text--animate">Hiển thị</span> thông tin đơn hàng</span>
+                                        <i class="fas fa-chevron-down icon-cart-mobile"></i>
+                                    </div>
+                                    <div class="info-cart-total-price">
+                                        <span class="info-cart-total-price__text">@String.Format("{0:0,0}", ViewBag.Total_Amount)₫</span>
+                                    </div>
+                                </div>
+                                <div class="item-cart hide-on-mobile-tablet">
+                                    <table class="table">
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr class="item-cart-wrap">
+                                                    <td class="item-cart-img-wrap"><img class="item-image-cart" src="@Url.Content("/Images/" + item.product_Image)" width="60" height="60" /><span class="product-thumbnail-quantity">@item.product_Quantity</span></td>
+                                                    <td><p class="item-name-product">@item.product_Name</p></td>
+                                                    <td class="item-price-product-wrap"><p class="item-price-product">@String.Format("{0:0,0}", item.product_Price)₫</p></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="discount-code">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr class="flex-justify-between-align-center">
+                                                <td class="px-0 w-70">
+                                                    <input id="txtDiscountCode" type="text" placeholder="Mã giảm giá" />
+                                                </td>
+                                                <td class="px-0">
+                                                    <button id="btnUseDiscountCode" class="change-color-handle">Sử dụng</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding:0"><span id="js-error-disc-code"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="total-price-table hide-on-mobile-tablet">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="customize-td-tbl">Tạm tính</td>
+                                                <td class="text-right customize-td-tbl js-total-payment">@String.Format("{0:0,0}", ViewBag.Total_Amount)₫</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size:15px;color:#717171;" class="px-0">Phí vận chuyển</td>
+                                                <td class="text-right px-0">---</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>Tổng cộng</td>
+                                                <td class="text-right payment-price"><span>VNĐ</span><span class="js-total-payment">@String.Format("{0:0,0}", ViewBag.Total_Amount)₫</span></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/js/jquery-3.5.1.min.js"></script>
+    <script src="~/Content/js/jquery-ui.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/js/districts.min.js"></script>
+    <script src="~/Content/js/checkout.js"></script>
+</body>
+</html>

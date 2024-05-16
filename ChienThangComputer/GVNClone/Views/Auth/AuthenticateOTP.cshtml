@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "MarkLeo";
+    Layout = "~/Views/Layout/_LayoutPage.cshtml";
+}
+
+<div class="grid wide">
+    <div class="layout-page-signUp">
+        <h3 class="text-center signUp-heading">Tạo tài khoản</h3>
+        <div class="steps">
+            <div class="steps__step1--number">2</div>
+            <div class="steps__step1--label">Xác thực OTP</div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-code"></i></span>
+                </div>
+                @Html.TextBox("OTP", "", new { @class = "form-control", @placeholder = "Mã OTP", autocomplete = "off", maxlength = "6" })
+            </div>
+            <span class="errorMessageAuth"></span>
+        </div>
+        <div class="form-group form-group-footer form-group-auth-btn">
+            <button type="submit" class="btn-auth" id="js-btn-auth-otp">Xác thực</button>
+        </div>
+    </div>
+</div>
+
+@section jsFooter{
+    <script>
+
+        var btnAuthenticateOTP = $("#js-btn-auth-otp");
+        var errortext = $(".errorMessageAuth");
+
+        var delay = 2000;
+        var res = {
+            loader: $("<div>", {
+                class: 'loader',
+            })
+        };
+
+        $("#OTP").on("keydown", function (e) {
+            if (e.which == 13) {
+                var otp = $(this).val();
+                validOTP(otp, errortext, e);
+            }
+        })
+
+        btnAuthenticateOTP.on("click", function (e) {
+            var otp = $("#OTP").val();
+            validOTP(otp, errortext, e);
+        })
+
+
+        function validOTP(otp, messageError, eventClick) {
+            if (otp == "") {
+                messageError.text('Vui lòng nhập mã OTP');
+                eventClick.preventDefault();
+            } else {
+                btnAuthenticateOTP.text('');
+                messageError.text('');
+                btnAuthenticateOTP.append(res.loader);
+                btnAuthenticateOTP.css("cursor", "default");
+                btnAuthenticateOTP.attr("disabled", true);
+                verifyOTP(otp);
+            }
+        }
+
+
+
+        function verifyOTP(otp) {
+            $.ajax({
+                type: 'POST',
+                url: '/Auth/AuthenticateOTP',
+                data: { OTP: otp },
+                success: function (response) {
+                    if (response.isValid === true) {
+                        window.location.href = "/dang-ky";
+                    }
+                    if (response.isValid === false) {
+                        $(".loader").remove();
+                        btnAuthenticateOTP.text("Xác thực");
+                        btnAuthenticateOTP.css("cursor", "pointer");
+                        errortext.text("Sai mã OTP");
+                        btnAuthenticateOTP.attr("disabled", false);
+                    }
+                },
+                error: function (error) {
+                    console.log(error.status);
+                }
+            })
+        }
+
+    </script>
+}
+

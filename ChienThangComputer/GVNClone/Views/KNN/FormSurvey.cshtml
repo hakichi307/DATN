@@ -1,0 +1,59 @@
+﻿@model IEnumerable<GVNClone.LoaiSanPham>
+
+@{
+    ViewBag.Title = "FormSurvey";
+    Layout = "~/Views/Layout/_LayoutPage.cshtml";
+}
+
+<link href="~/Content/AdminLayout/assets/vendors/chosen_v1.8.7/chosen.min.css" rel="stylesheet" />
+
+<div class="grid wide">
+    <div class="fs-knn-wrap">
+        <div class="fs-knn-thumb">
+            <img src="/Images/bot-survey.png" alt="">
+        </div>
+        <div class="fs-knn-form-field">
+            <h3 class="fs-knn-heading">Khảo sát</h3>
+            @using (Html.BeginForm("RunAlgorithm","KNN", FormMethod.Post,new { @class = "fs-knn-form" }))
+            {
+                <div class="form-group form-group-note">
+                    <img class="fs-knn-note-img" src="/Images/tuvanbot.png" alt="">
+                    <p class="fs-knn-exl">
+                        * Bạn vui lòng điền thông tin dưới đây để được tư vấn tốt nhất!
+                    </p>
+                </div>
+                <div class="form-group form-group-knn">
+                    <label for="" class="fs-knn-label">Tuổi</label>
+                    <input type="text" class="fs-knn-input form-control" name="age">
+                </div>
+                <div class="form-group form-group-knn">
+                    <label for="" class="fs-knn-label">Mức tài chính</label>
+                    <input type="text" class="fs-knn-input form-control" name="curRevenue">
+                </div>
+                <div class="form-group form-group-knn">
+                    <label for="" class="fs-knn-label">Sở thích</label>
+                    <select name="MaLoaiSP" id="js-fs-knn-select" class="fs-knn-select">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.MaLoaiSP">
+                                @item.TenLoaiSP
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group form-group-knn form-group-btn-knn">
+                    <button class="fs-btn" type="submit">Tư vấn</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section jsFooter{
+    <script src="~/Content/AdminLayout/assets/vendors/chosen_v1.8.7/chosen.jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#js-fs-knn-select").chosen();
+        })
+    </script>
+    }

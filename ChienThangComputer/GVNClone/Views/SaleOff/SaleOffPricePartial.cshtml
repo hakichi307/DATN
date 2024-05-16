@@ -1,0 +1,225 @@
+﻿@model GVNClone.SanPham
+
+
+@{
+    IEnumerable<GiamGia> objSalePrice = ViewBag.LstVoucherSalePrice as IEnumerable<GiamGia>;
+}
+
+<div class="box-e">
+    <div class="box-e__header">
+        <h3 class="box-e__heading">Thông tin chi tiết</h3>
+        <i class="fa fa-times box-e__icon--close" aria-hidden="true" onclick="closeModal();"></i>
+    </div>
+    <div class="box-e__body">
+        <p class="label-pic">Hình ảnh</p>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="pic-list">
+                    @if (!String.IsNullOrEmpty(Model.Pic1))
+                    {
+                        <div class="pic-item">
+                            <img src="@Url.Content("/Images/" + Model.Pic1)" alt="Hình 1" class="img-fluid">
+                        </div>
+                    }
+                    <div class="pic-sub-list">
+                        @if (!String.IsNullOrEmpty(Model.Pic1))
+                        {
+                            <div class="pic-sub-item">
+                                <img src="@Url.Content("/Images/" + Model.Pic1)" alt="Hình 1" class="img-fluid">
+                            </div>
+                        }
+                        @if (!String.IsNullOrEmpty(Model.Pic2))
+                        {
+                            <div class="pic-sub-item">
+                                <img src="@Url.Content("/Images/" + Model.Pic2)" alt="Hình 2" class="img-fluid">
+                            </div>
+                        }
+                        @if (!String.IsNullOrEmpty(Model.Pic3))
+                        {
+                            <div class="pic-sub-item">
+                                <img src="@Url.Content("/Images/" + Model.Pic3)" alt="Hình 3" class="img-fluid">
+                            </div>
+                        }
+                        @if (!String.IsNullOrEmpty(Model.Pic4))
+                        {
+                            <div class="pic-sub-item">
+                                <img src="@Url.Content("/Images/" + Model.Pic4)" alt="Hình 4" class="img-fluid">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="attr-product">
+                    <div class="textfield-wrapper">
+                        <span class="attr-label">Mã sản phẩm:</span>
+                        <span class="attr-item">@Model.MaSP</span>
+                    </div>
+                    <div class="textfield-wrapper">
+                        <span class="attr-label">Tên sản phẩm:</span>
+                        <span class="attr-item">@Model.TenSP</span>
+                    </div>
+                    <div class="textfield-wrapper">
+                        <span class="attr-label">Giá niêm yết:</span>
+                        <span class="attr-item">@String.Format("{0:0,0}", Model.GiaNiemYet) VNĐ</span>
+                    </div>
+                    @if (Model.MaGiamGia != null && Model.GiamGia.NgayBatDau < DateTime.Now && Model.GiamGia.NgayKetThuc > DateTime.Now)
+                    {
+                        <div class="textfield-wrapper">
+                            <span class="attr-label">Giá khuyến mãi:</span>
+                            <span class="attr-item">@String.Format("{0:0,0}", Model.GiamGia.GiaKhuyenMai) VNĐ</span>
+                        </div>
+                    }
+                    <div class="textfield-wrapper">
+                        <span class="attr-label">Số lượng tồn:</span>
+                        <span class="attr-item">@Model.SoLuongTon</span>
+                    </div>
+                    <div class="textfield-wrapper">
+                        <span class="attr-label">Số lượt mua:</span>
+                        <span class="attr-item">@Model.SoLanMua</span>
+                    </div>
+                    <div class="textfield-wrapper">
+                        <span class="attr-label">Tình trạng:</span>
+                        <span class="attr-item">@Model.TinhTrang</span>
+                    </div>
+                    <div class="textfield-wrapper">
+                        <span class="attr-label">Bảo hành:</span>
+                        <span class="attr-item">@Model.BaoHanh</span>
+                    </div>
+                </div>
+                <div class="attr-product">
+                    <div class="textfield-wrapper">
+                        <h1 class="attr-heading">Giảm giá</h1>
+                    </div>
+                    <div class="textfield-wrapper">
+                        <span class="attr-label">Giá gốc:</span>
+                        <span class="attr-item">@String.Format("{0:0,0}", Model.GiaNiemYet) VNĐ</span>
+                    </div>
+                    <div class="textfield-wrapper">
+                        <span class="attr-label">Chọn giá khuyến mãi</span>
+                        <select class="js-dd-select2-price-sale w-50">
+                            @foreach (var item in objSalePrice.OrderBy(n => n.GiaKhuyenMai))
+                            {
+                                <option value="@item.MaGiamGia">
+                                    @String.Format("{0:0,0}", item.GiaKhuyenMai) VNĐ
+                                </option>
+                            }
+                        </select>
+                    </div>
+                    <div class="textfield-wrapper textfield-btn">
+                        <button class="btn-sale" data-id="@Model.MaSP" id="js-btn-sale"><span class="btn-sale-text">Giảm giá</span></button>
+                    </div>
+                </div>
+                @if (Model.MaGiamGia != null)
+                {
+                    <div class="attr-product">
+                        <div class="textfield-wrapper">
+                            <h1 class="attr-heading">Gỡ mã khuyến mãi</h1>
+                        </div>
+                        <div class="textfield-wrapper textfield-btn">
+                            <button class="btn-del-sale-price" data-id="@Model.MaSP" id="js-btn-delete"><span class="btn-del-sale-text">Gỡ</span></button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/AdminLayout/assets/vendors/select2/dist/js/select2.min.js"></script>
+<script src="~/Content/js/sweetalert2@10.js"></script>
+<script>
+    $(document).ready(function () {
+        var btnSalePrice = $("#js-btn-sale");
+        var btnSalePriceText = $(".btn-sale-text");
+        var btnDeletePriceText = $(".btn-del-sale-text");
+        var btnDelete = $("#js-btn-delete");
+        var loaderAjax = {
+            loader: $("<div>", {
+                class: 'loader'
+            })
+        };
+        var isCallingAjax = false;
+        $(".js-dd-select2-price-sale").select2();
+        btnSalePrice.off("click").on("click", function () {
+            if (isCallingAjax) return;
+            isCallingAjax = true;
+            var eleOption = $(".js-dd-select2-price-sale").find('option:selected');
+            var optVal = eleOption.attr("value");
+            var id = $(this).data("id");
+            $.ajax({
+                type: 'POST',
+                url: '/SaleOff/HandleSalePrice',
+                data: { id_product: id, id_sale_price: parseInt(optVal) },
+                beforeSend: function () {
+                    btnSalePriceText.text('');
+                    btnSalePriceText.append(loaderAjax.loader);
+                },
+                success: function (res) {
+                    setTimeout(() => {
+                        if (res.statusCode === 200) {
+                            Swal.fire({
+                                text: res.message,
+                                icon: 'success'
+                            }).then(function () {
+                                window.location.reload();
+                            })
+                        } else {
+                            Swal.fire({
+                                text: res.message,
+                                icon: 'error'
+                            })
+                            loaderAjax.loader.remove();
+                            btnSalePriceText.text('Giảm giá');
+                            console.log(res.message);
+                        }
+                        isCallingAjax = false;
+                    }, 1000);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.responseText);
+                    console.log(errorThrown);
+                }
+            })
+        })
+
+        btnDelete.off("click").on("click", function () {
+            var getID = $(this).data("id");
+            if (isCallingAjax) return;
+            isCallingAjax = true;
+            $.ajax({
+                type: 'POST',
+                url: '/SaleOff/DeleteSalePrice',
+                data: { id: getID},
+                beforeSend: function () {
+                    btnDeletePriceText.text('');
+                    btnDeletePriceText.append(loaderAjax.loader);
+                },
+                success: function (res) {
+                    setTimeout(() => {
+                        if (res.statusCode === 200) {
+                            Swal.fire({
+                                text: res.message,
+                                icon: 'success'
+                            }).then(function () {
+                                window.location.reload();
+                            })
+                        } else {
+                            Swal.fire({
+                                text: res.message,
+                                icon: 'error'
+                            })
+                            loaderAjax.loader.remove();
+                            btnDeletePriceText.text('Gỡ');
+                            console.log(res.message);
+                        }
+                        isCallingAjax = false;
+                    }, 1000);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.responseText);
+                    console.log(errorThrown);
+                }
+            })
+        })
+    })
+</script>

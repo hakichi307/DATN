@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\GVNClone",
+    "\\GVNClone\\Views",
+    "\\GVNClone\\Views\\Admin",
+    "\\GVNClone\\Views\\Cart",
+    "\\GVNClone\\Views\\Home",
+    "\\GVNClone\\Views\\Inventory",
+    "\\GVNClone\\Views\\KNN",
+    "\\SendEmail",
+    "\\SendEmail\\Properties"
+  ],
+  "SelectedNode": "\\GVNClone\\Views\\Admin\\DetailOrder.cshtml",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,22 @@
+﻿<footer>
+    <div class="hit-counter">
+        <p>Đang online: @ApplicationInstance.Application["visitors_online"]</p>
+        <p>Hôm nay: @ApplicationInstance.Application["HomNay"]</p>
+        @if (ApplicationInstance.Application["HomQua"].ToString() != "")
+        {
+            <p>Hôm qua: @ApplicationInstance.Application["HomQua"]</p>
+        }
+        <p>Tuần này: @ApplicationInstance.Application["TuanNay"]</p>
+        @if (ApplicationInstance.Application["TuanTruoc"].ToString() != "")
+        {
+            <p>Tuần trước: @ApplicationInstance.Application["TuanTruoc"]</p>
+        }
+        <p>Tháng này: @ApplicationInstance.Application["ThangNay"]</p>
+        @if (ApplicationInstance.Application["ThangTruoc"].ToString() != "")
+        {
+            <p>Tháng trước: @ApplicationInstance.Application["ThangTruoc"]</p>
+        }
+        <p>Tất cả: @ApplicationInstance.Application["TatCa"]</p>
+    </div>
+    <div class="to-top" style="display: block;"><i class="fa fa-angle-double-up"></i></div>
+</footer>
