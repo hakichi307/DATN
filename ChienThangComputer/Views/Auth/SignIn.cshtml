@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "SignIn";
+    Layout = "~/Views/Layout/_LayoutPage.cshtml";
+}
+
+<div class="container">
+
+</div>
+<div class="grid wide">
+    <div class="layout-page-signIn">
+        <h2 class="text-center signIn-heading">Đăng nhập</h2>
+        <span class="signIn-text-message-fail" id="js-signIn-text-message-fail"></span>
+        @using (Ajax.BeginForm("SignIn", "Auth", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "js-signIn-text-message-fail" }))
+        {
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                    </div>
+                    @Html.TextBox("Email", "", new { @class = "form-control", @placeholder = "Email", required = "required" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                    </div>
+                    @Html.Password("MatKhau", "", new { @class = "form-control", @placeholder = "Mật khẩu", required = "required" })
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn-signIn">Đăng nhập</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function checkPreviousPage() {
+        var currentPage = window.parent.location.href;
+        var previousPage = document.referrer;
+        var pathNamePrevious = previousPage.substring(previousPage.lastIndexOf('/'));
+        if (previousPage != currentPage && pathNamePrevious != '/dang-ky') {
+            window.location = document.referrer;
+        } else {
+            window.location.href = '/';
+        }
+    }
+</script>
+

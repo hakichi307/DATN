@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width" />
+    <title>Chiến Thắng</title>
+    <link rel="short icon" href="~/ChienThang.ico" />
+    @Styles.Render("~/bundles/cssClient")
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0" nonce="KvQfrcG3"></script>
+    <div id="app">
+
+        <!---------------------Navigation ------------------------>
+        @RenderPage("ClientSide/_Navigation.cshtml")
+
+        <!---------------------Content ------------------------>
+        <div class="content" id="renderContent">
+            @RenderBody()
+        </div>
+
+        <!---------------------Footer ------------------------>
+        @RenderPage("ClientSide/_Footer.cshtml")
+
+
+        <section class="hotline-phone-wrap">
+            <div class="hotline-phone-ring">
+                <div class="hotline-phone-ring-circle"></div>
+                <div class="hotline-phone-ring-circle-fill"></div>
+                <div class="hotline-phone-ring-circle-img-wrap">
+                    <a href="tel:1800 9988" class="phone-call">
+                        <img class="phone-call-img" src="~/Images/icon-phone-ring.png" alt="phone-img" />
+                    </a>
+                </div>
+            </div>
+        </section>
+        <a href="javascript:;" class="cd-top">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+            <polygon fill="#FFFFFF" points="8,2.8 16,10.7 13.6,13.1 8.1,7.6 2.5,13.2 0,10.7 " />
+            </svg>
+        </a>
+        <div id="toast"></div>
+        <div id="add-to-cart" style="opacity:0; display:none">
+            <span></span>
+            <p>Sản phẩm đã được thêm vào giỏ hàng</p>
+        </div>
+        <a class="need-help" href="/tu-van-mua-hang">Bạn cần tư vấn?</a>
+    </div>
+    @if (TempData["msg"] != null)
+    {
+        <script>
+            OutOfStock('@Html.Raw(TempData["msg"])');
+            function OutOfStock(message) {
+                Swal.fire({
+                    title: 'Thông báo',
+                    html: message + ' <br /> Xin quý khách thông cảm 😓',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+            }
+        </script>
+    }
+    @RenderPage("ClientSide/_fvpp.cshtml")
+    @Scripts.Render("~/bundles/jsClient")
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

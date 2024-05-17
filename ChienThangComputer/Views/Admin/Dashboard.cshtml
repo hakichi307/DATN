@@ -1,0 +1,309 @@
+﻿@model IEnumerable<ChienThangComputer.ChiTietDonDatHang>
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="flexbox mb-4">
+                    <div>
+                        <h3 class="mb-0">Thống kê doanh thu</h3>
+                    </div>
+                    <div>
+                        <div class="input-group date">
+                            <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                            <input class="form-control" id="yearRevenue">
+                        </div>
+                    </div>
+                </div>
+                <div id="bar-chart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="mb-4">
+                    <div class="input-group date">
+                        <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                        <input class="form-control" id="startDate">
+                    </div>
+                </div>
+                <div id="pie-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="flexbox mb-4">
+                    <div>
+                        <h3 class="mb-0">Thống kê lượng đơn hàng</h3>
+                    </div>
+                    <div>
+                        <div class="input-group date">
+                            <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                            <input class="form-control" id="yearTotalOrder">
+                        </div>
+                    </div>
+                </div>
+                <div id="line-chart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-head">
+                <div class="ibox-title">Top sản phẩm</div>
+            </div>
+            <div class="ibox-body">
+                <div id="pie-chart-top-product"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ibox">
+    <div class="ibox-head">
+        <div class="ibox-title">Danh sách sản phẩm</div>
+    </div>
+    <div class="ibox-body">
+        <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá niêm yết</th>
+                    <th>Giá khuyến mãi</th>
+                    <th>Số lần mua</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá niêm yết</th>
+                    <th>Giá khuyến mãi</th>
+                    <th>Số lần mua</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in ViewBag.ShowAllProduct)
+                {
+                    <tr>
+                        <td>@item.MaSP</td>
+                        <td><img src="@Url.Content("/Images/" +item.Pic1)" width="60" /></td>
+                        <td>@item.TenSP</td>
+                        <td>@String.Format("{0:0,0}", item.GiaNiemYet)</td>
+                        <td>@String.Format("{0:0,0}", (item.MaGiamGia != null && item.GiamGia.NgayBatDau < DateTime.Now && DateTime.Now < item.GiamGia.NgayKetThuc ? item.GiamGia.GiaKhuyenMai : 0))</td>
+                        <td>@item.SoLanMua</td>
+                        <td>
+                            <a href="@Url.Action("EditProduct", "Admin", new { @IdProduct = item.MaSP})" class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil font-14" style="cursor:pointer"></i></a>
+                            <button class="btn btn-default btn-xs btn-delete" data-toggle="tooltip" data-placement="top" data-id="@item.MaSP" title="Delete"><i class="fa fa-trash font-14" style="cursor:pointer"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="ibox">
+            <div class="ibox-head">
+                <div class="ibox-title">Latest Orders</div>
+                <div class="ibox-tools">
+                    <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item">option 1</a>
+                        <a class="dropdown-item">option 2</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-body">
+                @if (ViewBag.NothingToShow == 0)
+                {
+                    <div class="text-center">
+                        <img src="~/Images/disappointed.png" height="310" />
+                    </div>
+                }
+                else
+                {
+                    <table class="table table-striped table-bordered table-hover" id="lastes-order">
+                        <thead>
+                            <tr>
+                                <th>Mã DDH</th>
+                                <th>Ngày đặt</th>
+                                <th>Ghi chú</th>
+                                <th>Trạng thái</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.ListOrder)
+                            {
+                                <tr>
+                                    <td>@item.MaDDH</td>
+                                    <td>@Html.FormatValue(item.NgayDat, "{0:HH:mm dd/MM/yyyy}")</td>
+                                    <td>@item.GhiChu</td>
+                                    <td>
+                                        @if (item.ChoXacNhan == true && item.ChoLayHang == false && item.DangGiao == false && item.DaGiao == false && item.DaHuy == false)
+                                        {
+                                            <span class="badge badge-default">Chờ xác nhận</span>
+                                        }
+                                        else if (item.ChoXacNhan == false && item.ChoLayHang == true && item.DangGiao == false && item.DaGiao == false && item.DaHuy == false)
+                                        {
+                                            <span class="badge badge-default">Chờ lấy hàng</span>
+                                        }
+                                        else if (item.ChoXacNhan == false && item.ChoLayHang == false && item.DangGiao == true && item.DaGiao == false && item.DaHuy == false)
+                                        {
+                                            <span class="badge badge-success">Đang giao</span>
+                                        }
+                                        else if (item.ChoXacNhan == false && item.ChoLayHang == false && item.DangGiao == false && item.DaGiao == true && item.DaHuy == false)
+                                        {
+                                            <span class="badge badge-success">Hoàn thành</span>
+                                        }
+                                        else if (item.ChoXacNhan == false && item.ChoLayHang == false && item.DangGiao == false && item.DaGiao == false && item.DaHuy == true)
+                                        {
+                                            <span class="badge badge-warning">Đã huỷ</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <button data-id="@item.MaDDH" class="btn btn-success btn-view-order" data-toggle="tooltip" data-placement="top" title="View">Chi tiết</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-head">
+                <div class="ibox-title">Top sản phẩm bán chạy nhất</div>
+            </div>
+            <div class="ibox-body">
+                <ul class="media-list media-list-divider m-0">
+                    @foreach (var item in ViewBag.Best_Sellers)
+                    {
+
+                        <li class="media">
+                            <a class="media-img" href="javascript:;">
+                                <img src="@Url.Content("/Images/"+ item.Pic1)" width="50" />
+                            </a>
+                            <div class="media-body">
+                                <div class="media-heading">
+                                    <a href="javascript:;">@item.TenSP</a>
+                                    <span class="font-16 float-right">@item.SoLanMua</span>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="ibox-footer text-center">
+                <a href="@Url.Action("AllProducts","Admin")">View All Products</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section jsFooter{
+    <script src="~/Content/AdminLayout/assets/vendors/Highcharts.js/highcharts.js"></script>
+    <script src="~/Content/AdminLayout/assets/vendors/Highcharts.js/series-label.js"></script>
+    <script src="~/Content/AdminLayout/assets/vendors/Highcharts.js/exporting.js"></script>
+    <script src="~/Content/AdminLayout/assets/vendors/Highcharts.js/export-data.js"></script>
+    <script src="~/Content/AdminLayout/assets/vendors/Highcharts.js/accessibility.js"></script>
+    <script src="~/Content/AdminLayout/assets/js/HighCharts_controller.js"></script>
+    <script>
+        var btnDetail = $(".btn-view-order");
+        var statusText = $(".status-text");
+        btnDetail.click(function () {
+            $('#tbl-detail-order').DataTable();
+
+            var id = $(this).data("id");
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/DetailOrder',
+                data: { id: id },
+                beforeSend: function () {
+                    $("#loading-full-screen-get-data-from-ajax, #loading-wrap-config").css({
+                        opacity: '1',
+                        visibility: 'visible'
+                    });
+                    $(".md-content").empty();
+                },
+                success: function (res) {
+                    setTimeout(() => {
+                        closeModal();
+                        if (res.statusCode === 404) {
+                            window.location.href = res.redirectUrl;
+                            console.log(res.message);
+                        } else {
+                            $(".md-content").html(res);
+                            if ($(".md-content").find(".inp-status").val() === "Chờ xác nhận") {
+                                $(".md-content").find("#btn-switch-status-order").text("Lấy hàng");
+                            }
+                            if ($(".md-content").find(".inp-status").val() === "Chờ lấy hàng") {
+                                $(".md-content").find("#btn-switch-status-order").text("Xác nhận giao hàng");
+                            }
+                            if ($(".md-content").find(".inp-status").val() === "Đang giao") {
+                                $(".md-content").find("#btn-switch-status-order").text("Hoàn thành đơn hàng");
+                            }
+                            if ($(".md-content").find(".inp-status").val() === "Hoàn thành" || $(".md-content").find(".inp-status").val() === "Đã huỷ") {
+                                $(".md-content").find("#btn-switch-status-order").remove();
+                                $(".md-content").find("#btn-cancel-order").remove();
+                            }
+                        }
+                        openModal();
+                    }, 700);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            })
+        })
+
+        $(".md-overlay").click(function () {
+            closeModal();
+        })
+
+        $(".md-content").click(function (e) {
+            e.stopPropagation();
+        })
+
+        function openModal() {
+            $('.md-content').addClass("md-show");
+            $('.md-overlay').addClass("md-show");
+        }
+
+        function closeModal() {
+            $("#loading-full-screen-get-data-from-ajax, #loading-wrap-config").css({
+                opacity: '0',
+                visibility: 'hidden'
+            })
+            $('.md-content').removeClass("md-show");
+            $('.md-overlay').removeClass("md-show");
+        }
+
+        $(document).keydown(function (e) {
+            if (e.which === 27) {
+                closeModal();
+            }
+        })
+    </script>
+}
+
+

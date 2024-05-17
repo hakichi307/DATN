@@ -1,0 +1,192 @@
+﻿@model ChienThangComputer.SanPham
+
+@{
+    ViewBag.Title = "EditProduct";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+@{
+    List<string> listMonth = new List<string>();
+    for (int i = 1; i < 37; i++)
+    {
+        listMonth.Add(i + " tháng");
+    }
+}
+
+<link href="~/Content/AdminLayout/assets/vendors/chosen_v1.8.7/chosen.min.css" rel="stylesheet" />
+@{
+    // Lấy thời gian hiện tại
+    var currentDate = DateTime.Now;
+
+    // Định dạng theo "yyyy-MM-dd HH:mm:ss.fff"
+    var formattedDate = currentDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
+}
+<div class="ibox">
+    <div class="ibox-head">
+        <div class="ibox-title">Sửa thông tin sản phẩm</div>
+        <div class="ibox-tools">
+            <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+        </div>
+    </div>
+    @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "form-sample-1", @class = "form-horizontal" }))
+    {
+        <div class="ibox-body">
+            @Html.HiddenFor(model => model.MaSP)
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tên sản phẩm</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.TenSP, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Giá niêm yết</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.GiaNiemYet, new { @class = "form-control" })
+                </div>
+            </div>
+            @*<div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Giá khuyến mãi</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(model => model.GiaKhuyenMai, new { @class = "form-control" })
+                    </div>
+                </div>*@
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Thông số kỹ thuật</label>
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(model => model.ThongSoKyThuat, new { @class = "form-control", @id = "tech_spec-product" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Mô tả</label>
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(model => model.MoTa, new { @class = "form-control", @id = "detail-product" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Bảo hành</label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(model => model.BaoHanh, ((List<string>)listMonth).Select(m => new SelectListItem { Text = m, Value = m }), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tên NCC</label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(model => model.MaNCC, null, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Loại danh mục</label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(model => model.MaLoaiDM, null, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Loại sản phẩm</label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(model => model.MaLoaiSP, null, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tên danh mục</label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(model => model.IDDM, null, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Phân lớp khách hàng</label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(model => model.MaPL, null, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Số lượng tồn</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.SoLuongTon, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Số lần mua</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.SoLanMua, new { @class = "form-control", disabled = "disabled", Style = "cursor:no-drop;" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Cũ hay mới</label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(model => model.TinhTrang, new List<SelectListItem> { new SelectListItem { Text = "Mới", Value = "Mới", Selected = true }, new SelectListItem { Text = "Cũ", Value = "Cũ" } }, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Hình 1</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Pic1, new { @class = "form-control", type = "file", Name = "fUpload" })
+                    <label class="help-block error">@TempData["UploadFail"]</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Hình 2</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Pic2, new { @class = "form-control", type = "file", Name = "fUpload" })
+                    <label class="help-block error">@TempData["UploadFail"]</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Hình 3</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Pic3, new { @class = "form-control", type = "file", Name = "fUpload" })
+                    <label class="help-block error">@TempData["UploadFail"]</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Hình 4</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Pic4, new { @class = "form-control", type = "file", Name = "fUpload" })
+                    <label class="help-block error">@TempData["UploadFail"]</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10 ml-sm-auto">
+                    <button class="btn btn-info px-4 btnSubmit" type="submit" style="cursor:pointer">Xác nhận</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Ngày Cập nhật</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@formattedDate" readonly />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section jsFooter{
+    <script src="~/Content/AdminLayout/assets/vendors/chosen_v1.8.7/chosen.jquery.min.js"></script>
+    <script>
+        $("#MaLoaiDM").chosen();
+        $("#MaNCC").chosen();
+        $("#MaLoaiSP").chosen();
+        $("#IDDM").chosen();
+        $("input[type='file']").change(function (e) {
+            var val = $(this).val();
+            switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()) {
+                case 'gif': case 'jpg': case 'png': case 'jpeg':
+                    break;
+                default:
+
+                    Swal.fire({
+                        text: e.target.files[0].name + ' không phải là hình ảnh. Vui lòng thử lại!',
+                        icon: 'error'
+                    })
+                    $(this).val('');
+                    break;
+            }
+        })
+        CKEDITOR.replace('tech_spec-product', {
+            customConfig: "/Content/AdminLayout/assets/js/libs/ckeditor/config.js"
+        });
+        CKEDITOR.replace('detail-product', {
+            customConfig: "/Content/AdminLayout/assets/js/libs/ckeditor/config.js",
+        });
+    </script>
+}
+

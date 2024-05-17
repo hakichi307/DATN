@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ChienThangComputer.SanPham>
+
+<div class="grid wide">
+    <div class="featured-new-product">
+        <div class="featured-new-product-heading">
+            <div class="new-product-title">
+                <span>Top PC Bán Chạy</span>
+                <a href="@Url.Action("View_All_PC_BestSelling","Home")" class="view-all-new-product-pc-feature">Xem tất cả <i class="fa fa-chevron-right ml-1"></i></a>
+            </div>
+
+        </div>
+        <div class="flickity-no-gutter flickity-PC flickity-main-carousel">
+            @foreach (var item in Model)
+            {
+                if (item.LoaiSanPham.TenLoaiSP.Substring(0, 2).Contains("PC") && item.SoLanMua > 10)
+                {
+                    <a href="@Url.RouteUrl("ProductDetail", new { @id = item.MaSP, @name = item.TenSP.Replace(" ", "-") })" class="item-pc-featured col-20-percent product ct-pd distance-p-mobile-tablet">
+                        <div class="product__Item">
+                            <div class="product__Item__OverlayEffect">
+                                <img class="product-img" src="@Url.Content("/Images/" + item.Pic1)" />
+                            </div>
+                            <div class="product__Item__Name">
+                                <h3 style="font-size:18px; color:#333; text-align:center; margin-top:.5rem">@item.TenSP</h3>
+                            </div>
+                            <div class="product__Item__Info">
+                                @if (item.MaGiamGia != null && item.GiamGia.NgayBatDau < DateTime.Now && item.GiamGia.NgayKetThuc > DateTime.Now)
+                                {
+                                    <del>@String.Format("{0:0,0}", item.GiaNiemYet) đ</del><br />
+                                    <span class="product__Item__Sale">@String.Format("{0:0,0}", item.GiamGia.GiaKhuyenMai) đ</span>
+                                }
+                                else
+                                {
+                                    <br />
+                                    <span class="product__Item__Sale">@String.Format("{0:0,0}", item.GiaNiemYet) đ</span>
+                                }
+                            </div>
+                        </div>
+
+                    </a>
+                }
+            }
+        </div>
+    </div>
+</div>

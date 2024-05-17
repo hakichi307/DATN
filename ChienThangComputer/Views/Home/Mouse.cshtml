@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<ChienThangComputer.SanPham>
+
+@using PagedList.Mvc;
+
+<div class="grid wide">
+    <div id="page-featured-product-5">
+        <div class="featured-product-5 product">
+            <div class="new-product-title">
+                <span class="new-product-monitor-title">CHUỘT DARE U GIÁ RẺ</span>
+            </div>
+            <div class="row">
+                @foreach (var item in Model)
+            {
+                    <div class="col l-2-4 m-6 c-6">
+                        <div class="product__Item">
+                            <div class="product__Item__OverlayEffect">
+                                <a href="@Url.RouteUrl("ProductDetail", new { @id = item.MaSP, @name = item.TenSP.Replace(" ", "-") })" class="product__Item__Image">
+                                    <img class="product-img" src="@Url.Content("/Images/" + item.Pic1)" />
+                                </a>
+                                <div class="product__Item__Detail">
+                                    <a href="@Url.RouteUrl("ProductDetail", new { @id = item.MaSP, @name = item.TenSP.Replace(" ", "-") })">Click để xem chi tiết</a>
+                                    <a href="@Url.RouteUrl("ProductDetail", new { @id = item.MaSP, @name = item.TenSP.Replace(" ", "-") })" class="add-to-cart">Đặt hàng</a>
+                                </div>
+                            </div>
+                            <div class="product__Item__Name">
+                                <h2>@item.TenSP</h2>
+                            </div>
+                            <div class="product__Item__Info">
+                                @if (item.MaGiamGia != null && item.GiamGia.NgayBatDau < DateTime.Now && item.GiamGia.NgayKetThuc > DateTime.Now)
+                                {
+                                    <del>@String.Format("{0:0,0}", item.GiaNiemYet) đ</del><br />
+                                    <span class="product__Item__Sale">@String.Format("{0:0,0}", item.GiamGia.GiaKhuyenMai) đ</span>
+                                }
+                                else
+                                {
+                                    <br />
+                                    <span class="product__Item__Sale">@String.Format("{0:0,0}", item.GiaNiemYet) đ</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="pagelist">
+                @Html.PagedListPager(Model, page => Url.Action("Mouse", new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "page-featured-product-5" }))
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,84 @@
+﻿
+@using (Html.BeginForm("PayPost","Debt",FormMethod.Post,new { @id = "form-payment"}))
+{
+    <input hidden name="MaPN" id="txtIDIrv" />
+    <h3 class="text-center mb-4">Thanh toán</h3>
+    <p>Số tiền nợ: <span class="text-danger font-weight-bold" id="moneydebt"></span></p>
+    <div class="mb-3">
+        <input type="radio" value="opt_1" class="radioPayment" id="payLitleRadio" name="payment" />
+        <div class="virtual-radio"></div>
+        <label for="payLitleRadio" class="label-radio-payment">Trả góp</label>
+        <div class="payment-detail payment-detail-pay-litle">
+            <input id="payLitleValue" type="text" class="form-control" placeholder="Số tiền trả trước" autocomplete="off" name="SoTienDaTra" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <input type="radio" value="opt_2" class="radioPayment" id="payAllRadio" name="payment" />
+        <div class="virtual-radio"></div>
+        <label for="payAllRadio" class="label-radio-payment">
+            Thanh toán tất cả
+        </label>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-success" id="btn-submit">Thanh toán</button>
+    </div>
+}
+<script>
+    var radioList = $(".radioPayment");
+    var btnSubmit = $("#btn-submit");
+    var paymentDetailPayLitle = $(".payment-detail-pay-litle");
+    var payLitleValue = $("#payLitleValue");
+    var moneydebt = $("#moneydebt");
+    paymentDetailPayLitle.slideUp();
+    btnSubmit.click(function () {
+        if (!checkPayment()) {
+            return false;
+        }
+    })
+    radioList.change(function () {
+        if (this.value == "opt_1") {
+            paymentDetailPayLitle.slideDown();
+        } else {
+            paymentDetailPayLitle.slideUp();
+        }
+    })
+    var valueCompare;
+    var checkPayment = () => {
+        let flag = true;
+        if (!$("input[name='payment']:checked").val()) {
+            Swal.fire({
+                text: 'Vui lòng chọn phương thức thanh toán!',
+                icon: 'error'
+            })
+            flag = false;
+        }
+        else {
+            if ($("#payLitleRadio").is(':checked')) {
+                console.log(valueCompare);
+                if (payLitleValue.val().trim() === "") {
+                    Swal.fire({
+                        text: 'Vui lòng nhập giá tiền cần trả trước!',
+                        icon: 'error'
+                    })
+                    flag = false;
+                } else if (isNaN(payLitleValue.val().trim())) {
+                    Swal.fire({
+                        text: 'Giá tiền trả trước không hợp lệ!',
+                        icon: 'error'
+                    })
+                    flag = false;
+                }
+                else if (parseFloat(payLitleValue.val().trim()) > valueCompare) {
+                    Swal.fire({
+                        text: 'Hiện tại bạn nợ ' + moneydebt.text() + " !",
+                        icon: 'error'
+                    })
+                    flag = false;
+                } else {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+</script>

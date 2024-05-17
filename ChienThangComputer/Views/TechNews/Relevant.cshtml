@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ChienThangComputer.TinTuc>
+
+<div class="relevant-article">
+    <div class="relevant-tab">
+        <h3 class="relevant-tab-title">BÀI VIẾT LIÊN QUAN</h3>
+    </div>
+    <div class="relevant-article-list">
+        @foreach (var item in Model)
+        {
+            <a href="@Url.RouteUrl("ViewDetail",new { @id = item.MaTin })" class="relevant-article-item-link">
+                <div class="relevant-article-item-image">
+                    <img src="@item.HinhAnh" alt="@item.TieuDeTin">
+                </div>
+                <p class="relevant-article-title">@item.DoanTrich</p>
+            </a>
+        }
+    </div>
+</div>

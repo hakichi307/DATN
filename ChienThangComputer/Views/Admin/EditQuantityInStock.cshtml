@@ -1,0 +1,66 @@
+﻿@model ChienThangComputer.SanPham
+
+@{
+    ViewBag.Title = "EditQuantityInStock";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<div class="ibox">
+    <div class="ibox-head">
+        <div class="ibox-title">Nhập hàng</div>
+        <div class="ibox-tools">
+            <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+        </div>
+    </div>
+    @using (Html.BeginForm("EditQuantityInStock", "Admin", FormMethod.Post, new { @id = "form-sample-1", @class = "form-horizontal" }))
+    {
+        @Html.Hidden("MaSP", Model.MaSP)
+        <div class="ibox-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <img class="img-fluid" src="@Url.Content("/Images/" + Model.Pic1)" />
+                </div>
+                <div class="col-md-9">
+                    <div class="d-block">
+                        <ul class="sub-info-product-edit-quantity">
+                            <li><span class="d-inline-block w-25 font-weight-bold">Mã sản phẩm:</span> @Model.MaSP</li>
+                            <li><span class="d-inline-block w-25 font-weight-bold">Tên sản phẩm:</span> @Model.TenSP</li>
+                            @if (Model.MaGiamGia != null && Model.GiamGia.NgayBatDau < DateTime.Now && DateTime.Now < Model.GiamGia.NgayKetThuc)
+                            {
+                                <li><span class="d-inline-block w-25 font-weight-bold">Giá khuyến mãi:</span> @String.Format("{0:0,0}", Model.GiamGia.GiaKhuyenMai) VNĐ</li>
+                            }
+                            else
+                            {
+                                <li><span class="d-inline-block w-25 font-weight-bold">Giá niêm yết:</span> @String.Format("{0:0,0}", Model.GiaNiemYet) VNĐ</li>
+                            }
+                            <li><span class="d-inline-block w-25 font-weight-bold">Số lượng tồn:</span> @Model.SoLuongTon</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Số lượng nhập</label>
+                <div class="col-sm-9">
+                    @Html.TextBox("SoLuongNhap", "", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Đơn giá nhập</label>
+                <div class="col-sm-9">
+                    @Html.TextBox("DonGiaNhap", "", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Tên NCC</label>
+                <div class="col-sm-9">
+                    @Html.DropDownList("MaNCC", null, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-9 ml-sm-auto">
+                    <button class="btn btn-info px-4" type="submit" style="cursor:pointer">Nhập hàng</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,410 @@
+﻿@model ChienThangComputer.ThanhVien
+
+@{
+    ViewBag.Title = "Information";
+    Layout = "~/Views/Layout/_LayoutPage.cshtml";
+}
+
+<div class="grid wide">
+    <div class="auth-wrap">
+        <div class="sidebar">
+            <div class="sidebar-info-user">
+                <div class="sidebar-info-user-avatar">
+                    <img src="@Url.Content("/Images/" + Session["Avatar"].ToString())" alt="">
+                </div>
+                <div class="sidebar-info-user-name">
+                    <div class="sidebar-info-user-name-text">@Session["Username"].ToString()</div>
+                    <div class="sidebar-info-user-profile">
+                        <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"
+                             style="margin-right: 4px;">
+                            <path d="M8.54 0L6.987 1.56l3.46 3.48L12 3.48M0 8.52l.073 3.428L3.46 12l6.21-6.18-3.46-3.48"
+                                  fill="#9B9B9B" fill-rule="evenodd"></path>
+                        </svg>
+                        Sửa hồ sơ
+                    </div>
+                </div>
+            </div>
+            <div class="tabs-sidebar">
+                <div class="tab-item-sidebar active">
+                    <img src="~/Images/user_order.png" alt="">
+                    Đơn mua
+                </div>
+                <div class="tab-item-sidebar">
+                    <img src="~/Images/user_info.png" alt="">
+                    Thông tin cá nhân
+                </div>
+                <div class="tab-item-sidebar">
+                    <img src="~/Images/lock.png" alt="">
+                    Đổi mật khẩu
+                </div>
+                <div class="line-sidebar"></div>
+            </div>
+        </div>
+        <div class="tab-content-sidebar">
+            <div class="tab-pane-sidebar active">
+                <div class="tabs-horizontal">
+                    <div class="tab-item-horizontal active"></div>
+                    <div class="tab-item-horizontal"></div>
+                    <div class="tab-item-horizontal"></div>
+                    <div class="tab-item-horizontal"></div>
+                    <div class="tab-item-horizontal"></div>
+                    <div class="tab-item-horizontal"></div>
+                    <div class="line-horizontal"></div>
+                </div>
+                <div class="tab-content-horizontal">
+                    <div class="tab-pane-horizontal active">
+                        @Html.Action("AllOrderPartialView", "Auth")
+                    </div>
+                    <div class="tab-pane-horizontal">
+                        @Html.Action("WaitForConfirmationOrderPartialView", "Auth")
+                    </div>
+                    <div class="tab-pane-horizontal">
+                        @Html.Action("WaitForGetGoodsOrderPartialView", "Auth")
+                    </div>
+                    <div class="tab-pane-horizontal">
+                        @Html.Action("DeliveringOrderPartialView", "Auth")
+                    </div>
+                    <div class="tab-pane-horizontal">
+                        @Html.Action("DeliveredOrderPartialView", "Auth")
+                    </div>
+                    <div class="tab-pane-horizontal">
+                        @Html.Action("CanceledOrderPartialView", "Auth")
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane-sidebar">
+                <div class="profile-info-wrapper">
+                    <div class="profile-info-inner">
+                        <div class="profile-heading">
+                            <h3>Hồ sơ của tôi</h3>
+                            <span>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
+                        </div>
+                        <div class="profile-content">
+                            @using (Html.BeginForm("Information", "Auth", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "form-authencation" }))
+                            {
+                                <div class="profile-info">
+                                    @Html.HiddenFor(model => model.MaTV)
+                                    <div class="profile-formfield">
+                                        <div class="profile-form-control">
+                                            <div class="label-profile-wrapper">
+                                                <label>Họ và tên</label>
+                                            </div>
+                                            <div class="input-profile-wrapper">
+                                                @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control profile-auth profile-full-name", @placeholder = "Họ và tên", autocomplete = "off" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-formfield">
+                                        <div class="profile-form-control">
+                                            <div class="label-profile-wrapper">
+                                                <label>Tên hiển thị</label>
+                                            </div>
+                                            <div class="input-profile-wrapper">
+                                                @Html.TextBoxFor(model => model.TaiKhoan, new { @class = "form-control profile-auth profile-display-name", @placeholder = "Tên hiển thị", autocomplete = "off" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-formfield">
+                                        <div class="profile-form-control">
+                                            <div class="label-profile-wrapper">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="input-profile-wrapper">
+                                                <div class="profile-auth profile-email">@Session["Email"].ToString()</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-formfield">
+                                        <div class="profile-form-control">
+                                            <div class="label-profile-wrapper">
+                                                <label>Số điện thoại</label>
+                                            </div>
+                                            <div class="input-profile-wrapper">
+                                                @Html.TextBoxFor(model => model.SoDienThoai, new { @class = "form-control profile-auth profile-phone", @placeholder = "Phone", autocomplete = "off" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-formfield">
+                                        <div class="profile-form-control">
+                                            <div class="label-profile-wrapper">
+                                                <label>Địa chỉ</label>
+                                            </div>
+                                            <div class="input-profile-wrapper">
+                                                @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control profile-auth profile-address", @placeholder = "Địa chỉ", autocomplete = "off" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-formfield profile-formfield-btn">
+                                        <div class="profile-form-control">
+                                            <div class="profile-auth profile-btn-update">
+                                                <button type="submit"
+                                                        class="btn-update-info-user">
+                                                    Lưu
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-avatar-wrapper">
+                                    <div class="profile-avatar">
+                                        <img id="avatar-changed" src="@Url.Content("/Images/" + Session["Avatar"].ToString())" alt="">
+                                    </div>
+                                    <div class="profile-avatar-btn">
+                                        <input id="inp-fileUpload" type="file" name="fUpload" accept=".jpg,.jpeg,.png">
+                                        <button class="btn-uploadAvatar" type="button">Chọn ảnh</button>
+                                        <div class="profile-avatar-desc">
+                                            <span>Định dạng:.JPEG, .PNG, .JPG</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane-sidebar">
+                <div class="profile-info-wrapper">
+                    <div class="profile-info-inner">
+                        <div class="profile-heading">
+                            <h3>Đổi mật khẩu</h3>
+                            <span>Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</span>
+                        </div>
+                        <form id="form-change-password">
+                            <div class="profile-content-forgot-password">
+                                <div class="profile-formfield">
+                                    <div class="profile-form-control profile-form-control-forgot-password">
+                                        <div class="label-profile-wrapper">
+                                            <label for="">Mật khẩu hiện tại</label>
+                                        </div>
+                                        <div class="input-profile-wrapper">
+                                            <input name="curPassword" id="curPassword" type="password" class="form-control profile-auth" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-formfield">
+                                    <div class="profile-form-control profile-form-control-forgot-password">
+                                        <div class="label-profile-wrapper">
+                                            <label for="">Mật khẩu mới</label>
+                                        </div>
+                                        <div class="input-profile-wrapper">
+                                            <input name="newPassword" id="newPassword" type="password" class="form-control profile-auth" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-formfield">
+                                    <div class="profile-form-control profile-form-control-forgot-password">
+                                        <div class="label-profile-wrapper">
+                                            <label for="">Xác nhận mật khẩu</label>
+                                        </div>
+                                        <div class="input-profile-wrapper">
+                                            <input name="reTypeNewPassword" id="reTypeNewPassword" type="password" class="form-control profile-auth" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-formfield profile-formfield-btn">
+                                    <div class="profile-form-control">
+                                        <button class="btn-update-password">Xác nhận</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section jsFooter{
+    <script src="~/Content/js/sweetalert2@10.js"></script>
+    <script src="~/Content/js/handleTabs.js"></script>
+    <script>
+        $("#inp-fileUpload").change(function (e) {
+            var val = $(this).val();
+            switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()) {
+                case 'gif': case 'jpg': case 'png': case 'jpeg':
+                    break;
+                default:
+
+                    Swal.fire({
+                        text: e.target.files[0].name + ' không phải là hình ảnh. Vui lòng thử lại!',
+                        icon: 'error'
+                    })
+                    $(this).val('');
+                    break;
+            }
+
+            if (window.FormData !== undefined) {
+                var fileUpload = $(this).get(0);
+                var files = fileUpload.files;
+                var formData = new FormData();
+                formData.append("fileUpload", files[0]);
+                $.ajax({
+                    type: "POST",
+                    url: '/Auth/ProcessImage',
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (res) {
+                        if (res.statusCode === 200) {
+                            $("#avatar-changed").attr("src", res.data);
+                        } else {
+                            console.log(res.message);
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR.statusText);
+                        console.log(errorThrown);
+                    }
+                })
+            }
+        })
+
+        const btnUpload = $(".btn-uploadAvatar");
+        const inpFileUpload = $("#inp-fileUpload");
+        btnUpload.click(function () {
+            inpFileUpload.trigger("click");
+        })
+
+        $.validator.addMethod(
+            "checkPhoneNumber",
+            function (value, element) {
+                var flag = false;
+                var phone = value;
+                phone = phone.replace('(+84)', '0');
+                phone = phone.replace('+84', '0');
+                phone = phone.replace('0084', '0');
+                phone = phone.replace(/ /g, '');
+                if (phone != '') {
+                    var firstNumber = phone.substring(0, 2);
+                    if ((firstNumber == '09' || firstNumber == '08' || firstNumber == '07' || firstNumber == '06' || firstNumber == '05' || firstNumber == '04' || firstNumber == '03') && phone.length == 10) {
+                        if (phone.match(/^\d{10}/)) {
+                            flag = true;
+                        }
+                    } else if (firstNumber == '01' || firstNumber == '02' && phone.length == 11) {
+                        if (phone.match(/^\d{11}/)) {
+                            flag = true;
+                        }
+                    }
+                }
+                return flag;
+            },
+            "Số điện thoại không hợp lệ"
+        );
+
+        $.validator.addMethod(
+            "authenticatepassword",
+            function (value, element) {
+                var regexPassword = new RegExp("^.*(?=.{8,})(?=.*[\\d])(?=.*[A-Z]).*$");
+                if ((!regexPassword.test(value))) {
+                    return false;
+                }
+                return true;
+            },
+            "Mật khẩu phải có ít nhất 8 kí tự trong đó có ít nhất 1 chữ hoa và 1 số từ 0-9"
+        );
+
+        $.validator.addMethod(
+            "checkcurrentpassword",
+            function (value, element) {
+                //var password = $("#MatKhau").val();
+                //if (value !== password) {
+                //    return false;
+                //}
+                var response;
+                $.ajax({
+                    type: "POST",
+                    url: "/Auth/CheckCurrentPassword",
+                    data: { curPassword: value },
+                    async: false,
+                    success: function (res) {
+                        if (res.message === "Ok") {
+                            response = res.message;
+                        } else {
+                            response = res.message;
+                        }
+                    },
+                })
+                if (response === "Ok") {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            "Mật khẩu hiện tại chưa chính xác"
+        );
+        $("#form-change-password").validate({
+            rules: {
+                curPassword: {
+                    required: !0,
+                    checkcurrentpassword: true
+                },
+                newPassword: {
+                    required: !0,
+                    authenticatepassword: true
+                },
+                reTypeNewPassword: {
+                    required: !0,
+                    equalTo: "#newPassword"
+                },
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Auth/ChangePassword",
+                    data: $(form).serialize(),
+                    success: function (res) {
+                        if (res.statusCode === 200) {
+                            Swal.fire({
+                                text: res.message,
+                                icon: "success"
+                            }).then(function () {
+                                window.location.href = res.redirectUrl;
+                            })
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR.responseText);
+                        console.log(errorThrown);
+                    }
+                })
+                return false;
+            },
+            errorClass: "help-block error",
+            highlight: function (e) {
+                $(e).closest(".profile-form-control").addClass("has-error")
+            },
+            unhighlight: function (e) {
+                $(e).closest(".profile-form-control").removeClass("has-error")
+            },
+        });
+
+
+        $("#form-authencation").validate({
+            rules: {
+                HoTen: {
+                    required: !0
+                },
+                TaiKhoan: {
+                    required: !0,
+                },
+                SoDienThoai: {
+                    required: !0,
+                    number: !0,
+                    checkPhoneNumber: true
+                },
+                DiaChi: {
+                    required: !0,
+                },
+            },
+            errorClass: "help-block error",
+            highlight: function (e) {
+                $(e).closest(".profile-form-control").addClass("has-error")
+            },
+            unhighlight: function (e) {
+                $(e).closest(".profile-form-control").removeClass("has-error")
+            },
+        });
+    </script>
+}
+

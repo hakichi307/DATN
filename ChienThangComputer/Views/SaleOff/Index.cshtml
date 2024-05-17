@@ -1,0 +1,367 @@
+﻿@model IEnumerable<ChienThangComputer.GiamGia>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+@section cssPlugin{
+    <link href="~/Content/AdminLayout/assets/vendors/Daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/Content/AdminLayout/assets/vendors/chosen_v1.8.7/chosen.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLayout/assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
+}
+
+@{
+    IEnumerable<SanPham> lstProduct = ViewBag.MaSP as IEnumerable<SanPham>;
+}
+
+<div class="ibox">
+    <div class="ibox-head">
+        <div class="ibox-title">Danh sách voucher giảm giá trực tiếp sản phẩm</div>
+    </div>
+    <div class="ibox-body">
+        <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Giá khuyến mãi</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Trạng thái</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>STT</th>
+                    <th>Giá khuyến mãi</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Trạng thái</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaGiamGia</td>
+                        <td>@String.Format("{0:0,0}", item.GiaKhuyenMai) đ</td>
+                        <td>@Html.FormatValue(item.NgayBatDau, "{0:HH:mm dd/MM/yyyy}")</td>
+                        <td>@Html.FormatValue(item.NgayKetThuc, "{0:HH:mm dd/MM/yyyy}")</td>
+                        <td>
+                            @if (item.NgayBatDau < DateTime.Now && DateTime.Now < item.NgayKetThuc)
+                            {
+                                <span class="badge badge-success">Còn hiệu lực</span>
+                            }
+                            else if (item.NgayBatDau > DateTime.Now && item.NgayKetThuc > DateTime.Now)
+                            {
+                                <span class="badge badge-success">Hiệu lực trong tương lai</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-warning">Hết hạn</span>
+                            }
+                        </td>
+                        <td>
+                            <button class="btn btn-default btn-xs m-r-5 btn-view-lst-product-apply-voucher-sale-price" data-id="@item.MaGiamGia" data-toggle="tooltip" data-placement="top" title="Sản phẩm áp dụng">
+                                <i class="fa fa-eye font-14" aria-hidden="true" style="cursor:pointer"></i>
+                            </button>
+                            <button class="btn btn-default btn-xs m-r-5 btn-edit-price-sale" data-toggle="tooltip" data-id="@item.MaGiamGia" data-placement="top" title="Edit"><i class="fa fa-pencil font-14" style="cursor:pointer"></i></button>
+                            <button class="btn btn-default btn-xs btn-delete-price-sale" data-toggle="tooltip" data-placement="top" data-id="@item.MaGiamGia" title="Delete">
+                                <i class="fa fa-trash font-14" style="cursor:pointer"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="ibox">
+    <div class="ibox-head">
+        <div class="ibox-title">Thêm giá khuyến mãi cho các sản phẩm</div>
+    </div>
+    <div class="ibox-body">
+        <table class="table table-striped table-bordered table-hover" id="example-table1" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá niêm yết</th>
+                    <th>Giá khuyến mãi</th>
+                    <th>Trạng thái</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá niêm yết</th>
+                    <th>Giá khuyến mãi</th>
+                    <th>Trạng thái</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in lstProduct)
+                {
+                    <tr>
+                        <td>@item.MaSP</td>
+                        <td><img src="@Url.Content("/Images/" +item.Pic1)" width="60" /></td>
+                        <td>@item.TenSP</td>
+                        @if (item.MaGiamGia != null && item.GiamGia.NgayBatDau < DateTime.Now && item.GiamGia.NgayKetThuc > DateTime.Now)
+                        {
+                            <td>@String.Format("{0:0,0}", item.GiaNiemYet) đ</td>
+                            <td>@String.Format("{0:0,0}", item.GiamGia.GiaKhuyenMai) đ</td>
+                        }
+                        else
+                        {
+                            <td>@String.Format("{0:0,0}", item.GiaNiemYet)</td>
+                            <td>0</td>
+                        }
+                        <td>
+                            @if (item.MaGiamGia != null && item.GiamGia.NgayBatDau < DateTime.Now && item.GiamGia.NgayKetThuc > DateTime.Now)
+                            {
+                                <span class="badge badge-success">Đang được giảm giá</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-default">Chưa được giảm giá</span>
+                            }
+                        </td>
+                        <td>
+                            <button class="btn btn-success btn-view-single-product" data-toggle="tooltip" data-placement="top" data-id="@item.MaSP" title="View">Chi tiết</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="md-voucher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog mw-md" role="document">
+        <div class="modal-content w-md">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="result">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section jsFooter{
+    <script src="~/Content/js/moment.min.js"></script>
+    <script src="~/Content/AdminLayout/assets/vendors/Daterangepicker/daterangepicker.min.js"></script>
+    <script src="~/Content/AdminLayout/assets/vendors/select2/dist/js/select2.min.js"></script>
+    <script>
+        var now = new Date();
+        var mdOverlay = $('.md-overlay');
+        var mdContent = $(".md-content");
+        let configModal = (...resParam) => {
+            if (resParam.length === 2) {
+                switch (resParam[0]) {
+                    case "Add": {
+                        $(".modal-dialog").addClass("mw-md");
+                        $(".modal-content").addClass("w-md");
+                        break;
+                    };
+                    case "Remove": {
+                        $(".modal-dialog").removeClass("mw-md");
+                        $(".modal-content").removeClass("w-md");
+                        break;
+                    }
+                }
+                $(".modal-title").text(resParam[1]);
+            } else {
+                console.log("Modal chưa có title! Vui lòng truyền tham số thứ 2 là tên modal");
+            }
+        }
+
+        $(".btn-view-lst-product-apply-voucher-sale-price").click(function () {
+            configModal("Add", "Danh sách sản phẩm áp dụng");
+            var getID = $(this).data("id");
+            $.ajax({
+                type: 'POST',
+                url: '/SaleOff/ViewLstProductApplied',
+                data: { id: getID },
+                beforeSend: function () {
+                    $("#loading-full-screen-get-data-from-ajax, #loading-wrap-config").css({
+                        opacity: '1',
+                        visibility: 'visible'
+                    })
+                },
+                success: function (res) {
+                    setTimeout(() => {
+                        closeModal();
+                        if (res.statusCode === 404) {
+                            Swal.fire({
+                                text: res.message,
+                                icon: 'error'
+                            })
+                            console.log(res.message);
+                        } else {
+                            $("#result").html(res);
+                        }
+                        openModalBS();
+                    }, 700);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.status);
+                    console.log(errorThrown);
+                }
+            })
+        });
+
+        $(".btn-edit-price-sale").click(function () {
+            configModal("Remove", "Thông tin giảm giá");
+            var getID = $(this).data("id");
+            $.ajax({
+                type: 'GET',
+                url: '/SaleOff/EditVoucherSalePrice',
+                data: { id: getID },
+                beforeSend: function () {
+                    $("#loading-full-screen-get-data-from-ajax, #loading-wrap-config").css({
+                        opacity: '1',
+                        visibility: 'visible'
+                    })
+                },
+                success: function (res) {
+                    setTimeout(() => {
+                        closeModal();
+                        if (res.statusCode === 404) {
+                            Swal.fire({
+                                text: res.message,
+                                icon: 'error'
+                            })
+                            console.log(res.message);
+                        } else {
+                            $("#result").html(res);
+                        }
+                        openModalBS();
+                    }, 700);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.responseText);
+                    console.log(errorThrown);
+                }
+            })
+        })
+
+        $(".btn-delete-price-sale").click(function () {
+            var getID = $(this).data("id");
+            Swal.fire({
+                title: "Question",
+                text: "Bạn có chắc chắn muốn xoá không?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Confirm",
+            }).then(function (res) {
+                if (res.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/SaleOff/DeletePriceSale',
+                        data: { id: getID },
+                        success: function (res) {
+                            if (res.statusCode === 200) {
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: res.message,
+                                    icon: 'success'
+                                }).then(function () {
+                                    location.reload();
+                                })
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Có điều gì đó không ôn! Hãy thử lại',
+                                icon: 'error',
+                            })
+                            console.log(jqXHR.statusText);
+                            console.log(errorThrown);
+                        }
+                    })
+                }
+            })
+        })
+
+        $(".btn-view-single-product").click(function () {
+            var getID = $(this).data("id");
+            $.ajax({
+                type: 'POST',
+                url: '/SaleOff/SaleOffPricePartial',
+                data: { id: getID },
+                beforeSend: function () {
+                    $("#loading-full-screen-get-data-from-ajax, #loading-wrap-config").css({
+                        opacity: '1',
+                        visibility: 'visible'
+                    })
+                },
+                success: function (res) {
+                    if (res.statusCode === 404) {
+                        Swal.fire({
+                            text: res.message,
+                            icon: 'error'
+                        })
+                        console.log(res.message);
+                    } else {
+                        setTimeout(() => {
+                            closeModal();
+                            mdContent.html(res);
+                            openModalCustomize();
+                        }, 700);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.responseText);
+                    console.log(errorThrown);
+                }
+            })
+        })
+
+        $("#loading-wrap-config").click(function () {
+            closeModal();
+        })
+
+        function closeModal() {
+            $("#loading-full-screen-get-data-from-ajax, #loading-wrap-config").css({
+                opacity: '0',
+                visibility: 'hidden'
+            });
+            mdContent.removeClass("md-show");
+            mdOverlay.removeClass("md-show");
+        }
+
+        function openModalBS() {
+            $("#md-voucher").modal('show');
+
+        }
+
+        function openModalCustomize() {
+            mdContent.addClass("md-show");
+            mdOverlay.addClass("md-show");
+        }
+
+        mdOverlay.click(function () {
+            closeModal();
+        })
+
+
+        $(document).keydown(function (e) {
+            if (e.which === 27) {
+                closeModal();
+            }
+        })
+    </script>
+}

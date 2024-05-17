@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ChienThangComputer.SanPham>
+
+<h3 class="title-revelant">Sản phẩm thường được xem cùng</h3>
+<div class="flickity-no-gutter flickity-main-carousel">
+    @foreach (var item in Model)
+    {
+        <div class="col-20-percent product ct-pd distance-p-mobile-tablet">
+            <div class="product__Item">
+                <div class="product__Item__OverlayEffect">
+                    <a href="@Url.RouteUrl("ProductDetail", new { @id = item.MaSP, @name = item.TenSP.Replace(" ", "-") })" class="product__Item__Image">
+                        <img class="product-img" src="@Url.Content("/Images/" + item.Pic1)" />
+                    </a>
+                </div>
+                <div class="product__Item__Name">
+                    <h2>@item.TenSP</h2>
+                </div>
+                <div class="product__Item__Info">
+                    @if (item.MaGiamGia != null && item.GiamGia.NgayBatDau < DateTime.Now && item.GiamGia.NgayKetThuc > DateTime.Now)
+                    {
+                        <del>@String.Format("{0:0,0}", item.GiaNiemYet) đ</del><br />
+                        <span class="product__Item__Sale">@String.Format("{0:0,0}", item.GiamGia.GiaKhuyenMai) đ</span>
+                    }
+                    else
+                    {
+                        <br />
+                        <span class="product__Item__Sale">@String.Format("{0:0,0}", item.GiaNiemYet) đ</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

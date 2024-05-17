@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ChienThangComputer.DonDatHang>
+
+@{
+    ViewBag.Title = "OrderShipped";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+
+<div class="ibox">
+    <div class="ibox-head">
+        <div class="ibox-title">Đơn hàng đã giao</div>
+    </div>
+    <div class="ibox-body">
+        <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tỉnh thành</th>
+                    <th>Quận huyện</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tỉnh thành</th>
+                    <th>Quận huyện</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaDDH</td>
+                        <td>@Html.FormatValue(item.NgayDat, "{0:dd/MM/yyyy}")</td>
+                        <td>@item.KhachHang.HoTen</td>
+                        <td>@item.TinhThanh</td>
+                        <td>@item.QuanHuyen</td>
+                        <td><span class="badge badge-success">Đã giao</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

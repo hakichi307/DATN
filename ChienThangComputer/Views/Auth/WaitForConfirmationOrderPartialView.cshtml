@@ -1,0 +1,77 @@
+﻿
+@using ChienThangComputer.Models.StatusOrderViewModel;
+
+@{
+    List<Order> lstOrder = ViewBag.WaitForConfirmationOrder as List<Order>;
+}
+
+
+<div class="tab-pane-list-cart">
+    @if (lstOrder.Count != 0)
+    {
+        foreach (var item in lstOrder)
+        {
+            <div class="tab-pane-item-cart">
+                <div class="tab-pane-item-cart-heading">
+                    @if (item.Delivered == true)
+                    {
+                        <span>Giao hàng thành công</span>
+                    }
+                    @if (item.isEvaluated)
+                    {
+                        <span>Đã đánh giá</span>
+                    }
+                    else
+                    {
+                        <span>Chưa đánh giá</span>
+                    }
+                </div>
+                <div class="tab-pane-item-cart-body">
+                    <div class="tab-pane-item-cart-info-wrapper">
+                        <a href="#" class="tab-pane-item-cart-info-link">
+                            <div class="tab-pane-item-cart-info">
+                                <div>
+                                    <img class="tab-pane-item-cart-img"
+                                         src="@Url.Content("/Images/" + item.product_thumb)" alt="Hình sản phẩm">
+                                </div>
+                                <div>
+                                    <div class="tab-pane-item-cart-name">
+                                        @item.product_name
+                                    </div>
+                                    <div class="tab-pane-item-cart-qty">
+                                        x <span>@item.product_quantity</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="tab-pane-item-cart-price">@String.Format("{0:0,0}", item.product_price) VNĐ</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="tab-pane-item-cart-footer">
+                    <div class="tab-pane-item-cart-totalpayment">
+                        <div class="totalpayment-text">
+                            Tổng số tiền: <span>@String.Format("{0:0,0}", item.total_Amount) VNĐ</span>
+                        </div>
+                    </div>
+                    <div class="tab-pane-item-cart-btns">
+                        <a href="@Url.RouteUrl("ProductDetail", new { @id = item.product_id, @name = item.product_name.Replace(" ", "-") })" class="btn-action-item-cart btn-repurchase" target="_blank">Mua lại</a>
+                        <a href="@Url.RouteUrl("ProductDetail", new { @id = item.product_id, @name = item.product_name.Replace(" ", "-") })" class="btn-action-item-cart btn-see-review">
+                            Xem đánh
+                            giá
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="empty-list">
+            <img src="~/Images/emptyCart.png" />
+            <div>Chưa có đơn hàng</div>
+        </div>
+    }
+</div>
+

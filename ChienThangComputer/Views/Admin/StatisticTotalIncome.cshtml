@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ChienThangComputer.ChiTietDonDatHang>
+
+@{
+    ViewBag.Title = "StatisticTotalIncome";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+
+<div class="ibox">
+    <div class="ibox-head">
+        <div class="ibox-title">Danh sách đơn hàng đã giao</div>
+    </div>
+    <div class="ibox-body">
+        <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Trạng thái</th>
+                </tr>
+                <tr>
+                    <td colspan="7" class="text-right font-17">Tổng doanh thu:<span class="text-danger font-weight-bold"> @String.Format("{0:0,0}", ViewBag.Total_Income) VNĐ</span></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.DonDatHang.DaGiao == true)
+                    {
+                        <tr>
+                            <td>@item.MaDDH</td>
+                            <td>@Html.FormatValue(item.DonDatHang.NgayDat, "{0:HH:mm dd-MM-yyyy}")</td>
+                            <td>@item.DonDatHang.KhachHang.HoTen</td>
+                            <td>@item.SanPham.TenSP</td>
+                            <td>@item.SoLuong</td>
+                            <td>@String.Format("{0:0,0}", item.DonGia)</td>
+                            <td><span class="badge badge-success">Đã giao</span></td>
+                        </tr>
+                    }
+                }
+                @if (Model.Count() == 0)
+                {
+                    <tr class="text-center">
+                        <td colspan="7"><img src="~/Images/disappointed.png" height="310" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

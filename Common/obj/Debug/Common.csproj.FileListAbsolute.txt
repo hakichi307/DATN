@@ -1,0 +1,41 @@
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\Common\bin\Debug\Common.dll
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\Common\bin\Debug\Common.pdb
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\Common\obj\Debug\Common.dll
+C:\Users\Admin\Desktop\GVN Clone\GVNClone\Common\obj\Debug\Common.pdb
+E:\1.TriTueViet\03012022\9.GiaoHang\233\WebsiteThuongMaiDienTuKNN\GVN Clone\GVNClone\Common\bin\Debug\Common.dll
+E:\1.TriTueViet\03012022\9.GiaoHang\233\WebsiteThuongMaiDienTuKNN\GVN Clone\GVNClone\Common\bin\Debug\Common.pdb
+E:\1.TriTueViet\03012022\9.GiaoHang\233\WebsiteThuongMaiDienTuKNN\GVN Clone\GVNClone\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+E:\1.TriTueViet\03012022\9.GiaoHang\233\WebsiteThuongMaiDienTuKNN\GVN Clone\GVNClone\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+E:\1.TriTueViet\03012022\9.GiaoHang\233\WebsiteThuongMaiDienTuKNN\GVN Clone\GVNClone\Common\obj\Debug\Common.dll
+E:\1.TriTueViet\03012022\9.GiaoHang\233\WebsiteThuongMaiDienTuKNN\GVN Clone\GVNClone\Common\obj\Debug\Common.pdb
+C:\Users\HP\OneDrive\one drive\OneDrive\Máy tính\New folder\WEBTHIETBIDIENTU_KNN\GVNClone\Common\bin\Debug\Common.dll
+C:\Users\HP\OneDrive\one drive\OneDrive\Máy tính\New folder\WEBTHIETBIDIENTU_KNN\GVNClone\Common\bin\Debug\Common.pdb
+C:\Users\HP\OneDrive\one drive\OneDrive\Máy tính\New folder\WEBTHIETBIDIENTU_KNN\GVNClone\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\HP\OneDrive\one drive\OneDrive\Máy tính\New folder\WEBTHIETBIDIENTU_KNN\GVNClone\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\HP\OneDrive\one drive\OneDrive\Máy tính\New folder\WEBTHIETBIDIENTU_KNN\GVNClone\Common\obj\Debug\Common.dll
+C:\Users\HP\OneDrive\one drive\OneDrive\Máy tính\New folder\WEBTHIETBIDIENTU_KNN\GVNClone\Common\obj\Debug\Common.pdb
+D:\ASP_PROJECT\DATN_WebBanHangDienTu-master\WEBTHIETBIDIENTU_KNN\GVNClone\Common\bin\Debug\Common.dll
+D:\ASP_PROJECT\DATN_WebBanHangDienTu-master\WEBTHIETBIDIENTU_KNN\GVNClone\Common\bin\Debug\Common.pdb
+D:\ASP_PROJECT\DATN_WebBanHangDienTu-master\WEBTHIETBIDIENTU_KNN\GVNClone\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+D:\ASP_PROJECT\DATN_WebBanHangDienTu-master\WEBTHIETBIDIENTU_KNN\GVNClone\Common\obj\Debug\Common.dll
+D:\ASP_PROJECT\DATN_WebBanHangDienTu-master\WEBTHIETBIDIENTU_KNN\GVNClone\Common\obj\Debug\Common.pdb
+F:\ASP_PROJECT\CODE59_15\CODE59_15\ProjectASP\Common\bin\Debug\Common.dll
+F:\ASP_PROJECT\CODE59_15\CODE59_15\ProjectASP\Common\bin\Debug\Common.pdb
+F:\ASP_PROJECT\CODE59_15\CODE59_15\ProjectASP\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+F:\ASP_PROJECT\CODE59_15\CODE59_15\ProjectASP\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+F:\ASP_PROJECT\CODE59_15\CODE59_15\ProjectASP\Common\obj\Debug\Common.dll
+F:\ASP_PROJECT\CODE59_15\CODE59_15\ProjectASP\Common\obj\Debug\Common.pdb
+E:\Hoctap\DoAnTotNghiep\ProjectASP\Common\bin\Debug\Common.dll
+E:\Hoctap\DoAnTotNghiep\ProjectASP\Common\bin\Debug\Common.pdb
+E:\Hoctap\DoAnTotNghiep\ProjectASP\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+E:\Hoctap\DoAnTotNghiep\ProjectASP\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+E:\Hoctap\DoAnTotNghiep\ProjectASP\Common\obj\Debug\Common.dll
+E:\Hoctap\DoAnTotNghiep\ProjectASP\Common\obj\Debug\Common.pdb
+E:\Hoctap\DoAnTotNghiep\ChienThang Computer\Common\bin\Debug\Common.dll
+E:\Hoctap\DoAnTotNghiep\ChienThang Computer\Common\bin\Debug\Common.pdb
+E:\Hoctap\DoAnTotNghiep\ChienThang Computer\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+E:\Hoctap\DoAnTotNghiep\ChienThang Computer\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+E:\Hoctap\DoAnTotNghiep\ChienThang Computer\Common\obj\Debug\Common.dll
+E:\Hoctap\DoAnTotNghiep\ChienThang Computer\Common\obj\Debug\Common.pdb

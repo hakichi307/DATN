@@ -1,0 +1,162 @@
+﻿@model IEnumerable<ChienThangComputer.DonDatHang>
+
+@{
+    ViewBag.Title = "ConfirmOrder";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+@section cssPlugin{
+
+    <link href="~/Content/AdminLayout/assets/vendors/select2/dist/css/select2.css" rel="stylesheet" />
+}
+
+
+<div class="ibox">
+    <div class="ibox-head">
+        <div class="ibox-title">Danh sách đơn hàng</div>
+    </div>
+    <div class="ibox-body" id="tbl-filter-status-order">
+        <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tỉnh thành</th>
+                    <th>Quận huyện</th>
+                    <th>Trạng thái</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>ID Order</th>
+                    <th>Ngày đặt hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tỉnh thành</th>
+                    <th>Quận huyện</th>
+                    <th>Trạng thái</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaDDH</td>
+                        <td>@Html.FormatValue(item.NgayDat, "{0:HH:mm dd-MM-yyyy}")</td>
+                        <td>@item.KhachHang.HoTen</td>
+                        <td>@item.TinhThanh</td>
+                        <td>@item.QuanHuyen</td>
+                        <td>
+                            @if (item.ChoXacNhan == true && item.ChoLayHang == false && item.DangGiao == false && item.DaGiao == false && item.DaHuy == false)
+                            {
+                                <span class="status-text">Chờ xác nhận</span>
+                            }
+                            else if (item.ChoXacNhan == false && item.ChoLayHang == true && item.DangGiao == false && item.DaGiao == false && item.DaHuy == false)
+                            {
+                                <span class="status-text">Chờ lấy hàng</span>
+                            }
+                            else if (item.ChoXacNhan == false && item.ChoLayHang == false && item.DangGiao == true && item.DaGiao == false && item.DaHuy == false)
+                            {
+                                <span class="status-text">Đang giao</span>
+                            }
+                            else if (item.ChoXacNhan == false && item.ChoLayHang == false && item.DangGiao == false && item.DaGiao == true && item.DaHuy == false)
+                            {
+                                <span class="status-text">Hoàn thành</span>
+                            }
+                            else if (item.ChoXacNhan == false && item.ChoLayHang == false && item.DangGiao == false && item.DaGiao == false && item.DaHuy == true)
+                            {
+                                <span class="status-text">Đã huỷ</span>
+                            }
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-show-detail-order" data-toggle="tooltip" data-placement="top" title="Detail" data-id="@item.MaDDH" style="cursor:pointer">Chi tiết</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section jsFooter{
+    <script>
+        var btnDetail = $(".btn-show-detail-order");
+        var statusText = $(".status-text");
+        btnDetail.off("click").on("click", function () {
+            $('#tbl-detail-order').DataTable();
+
+            var id = $(this).data("id");
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/DetailOrder',
+                data: { id: id },
+                beforeSend: function () {
+                    $("#loading-full-screen-get-data-from-ajax, #loading-wrap-config").css({
+                        opacity: '1',
+                        visibility: 'visible'
+                    });
+                    $(".md-content").empty();
+                },
+                success: function (res) {
+                    setTimeout(() => {
+                        closeModal();
+                        if (res.statusCode === 404) {
+                            console.log(res.message);
+                        } else {
+                            $(".md-content").html(res);
+                            if ($(".md-content").find(".inp-status").val() === "Chờ xác nhận") {
+                                $(".md-content").find("#btn-switch-status-order").text("Lấy hàng");
+                            }
+                            if ($(".md-content").find(".inp-status").val() === "Chờ lấy hàng") {
+                                $(".md-content").find("#btn-switch-status-order").text("Xác nhận giao hàng");
+                            }
+                            if ($(".md-content").find(".inp-status").val() === "Đang giao") {
+                                $(".md-content").find("#btn-switch-status-order").text("Hoàn thành đơn hàng");
+                            }
+                            if ($(".md-content").find(".inp-status").val() === "Hoàn thành" || $(".md-content").find(".inp-status").val() === "Đã huỷ") {
+                                $(".md-content").find("#btn-switch-status-order").remove();
+                                $(".md-content").find("#btn-cancel-order").remove();
+                            }
+                        }
+                        openModal();
+                    }, 700);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            })
+        })
+
+        $(".md-overlay").click(function () {
+            closeModal();
+        })
+
+        $(".md-content").click(function (e) {
+            e.stopPropagation();
+        })
+
+        function openModal() {
+            $('.md-content').addClass("md-show");
+            $('.md-overlay').addClass("md-show");
+        }
+
+        function closeModal() {
+            $("#loading-full-screen-get-data-from-ajax, #loading-wrap-config").css({
+                opacity: '0',
+                visibility: 'hidden'
+            })
+            $('.md-content').removeClass("md-show");
+            $('.md-overlay').removeClass("md-show");
+        }
+
+        $(document).keydown(function (e) {
+            if (e.which === 27) {
+                closeModal();
+            }
+        })
+    </script>
+}

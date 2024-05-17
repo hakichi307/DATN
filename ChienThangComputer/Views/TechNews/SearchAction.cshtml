@@ -1,0 +1,88 @@
+﻿@model PagedList.IPagedList<ChienThangComputer.TinTuc>
+
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "SearchAction";
+    Layout = "~/Views/TechNews/_LayoutTechNews.cshtml";
+}
+
+<div class="page-breadcrumb-list">
+    <div class="page-breadcrumb-item">
+        <a href="/pages/tin-cong-nghe" class="page-breadcrumb-item-link">
+            Trang chủ
+        </a>
+    </div>
+    <div class="page-breadcrumb-item">
+        <a href="javascript:;" class="page-breadcrumb-item-link">
+            Tìm kiếm
+        </a>
+    </div>
+</div>
+<div class="page-content">
+    @if (ViewBag.ResultSearch != 0 || ViewBag.KeywordSearch == "")
+    {
+        <div class="page-content-search">
+            <div class="page-content-left">
+                <h3 class="search-title">
+                    @ViewBag.KeywordSearch
+                    <span> - kết quả tìm kiếm</span>
+                </h3>
+                @using (Html.BeginForm("SearchAction", "TechNews", FormMethod.Post, new { @class = "form-search form-result-search" }))
+                {
+                    <input type="text" name="keyword" value="@ViewBag.KeywordSearch" class="form-input-search">
+                    <button type="submit" class="btn-search">Tìm kiếm</button>
+                }
+                <p class="search-subtitle">Vui lòng tìm lại nếu chưa hài lòng</p>
+                <div class="pch-page-list-news">
+                    @foreach (var item in Model)
+                    {
+                        <div class="pch-page-item-news">
+                            <div class="pch-page-item-img">
+                                <a href="@Url.RouteUrl("ViewDetail", new { @id = item.MaTin })"><img src="@item.HinhAnh" alt="@item.TieuDeTin"></a>
+                            </div>
+                            <div class="pch-page-item-info">
+                                <h3 class="pch-page-item-info-name">
+                                    <a href="@Url.RouteUrl("ViewDetail", new { @id = item.MaTin })">
+                                        @item.TieuDeTin
+                                    </a>
+                                </h3>
+                                <p class="pch-page-item-date-update">@Html.FormatValue(item.NgayDang, "{0:dd/MM/yyyy}")</p>
+                                <p class="pch-page-item-excerpt">
+                                    @item.DoanTrich
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="page-content-right hide-on-mobile">
+                <div class="pct-label">Top game</div>
+            </div>
+        </div>
+        <div class="pagelist pagelist-search">
+            @Html.PagedListPager(Model, page => Url.Action("SearchAction", new { @keyword = ViewBag.KeywordSearch, page = page }))
+        </div>
+    }
+    else
+    {
+        <div class="page-content-search">
+            <div class="page-content-left">
+                <h3 class="search-title">
+                    @ViewBag.KeywordSearch
+                    <span> - kết quả tìm kiếm</span>
+                </h3>
+                @using (Html.BeginForm("SearchAction", "TechNews", FormMethod.Post, new { @class = "form-search form-result-search" }))
+                {
+                    <input type="text" name="keyword" value="@ViewBag.KeywordSearch" class="form-input-search">
+                    <button type="submit" class="btn-search">Tìm kiếm</button>
+                }
+                <p class="search-subtitle">Vui lòng tìm lại nếu chưa hài lòng</p>
+            </div>
+            <div class="page-content-right hide-on-mobile">
+                <div class="pct-label">Top game</div>
+            </div>
+        </div>
+        <h3 class="empty-result-text">Không có kết quả cho tìm kiếm của bạn</h3>
+    }
+</div>

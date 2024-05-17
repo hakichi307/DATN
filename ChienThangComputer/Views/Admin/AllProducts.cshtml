@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ChienThangComputer.SanPham>
+
+@{
+    ViewBag.Title = "AllProducts";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+
+<div class="ibox">
+    <div class="ibox-head">
+        <div class="ibox-title">Danh sách sản phẩm</div>
+    </div>
+    <div class="ibox-body">
+        <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá niêm yết</th>
+                    <th>Giá khuyến mãi</th>
+                    <th>Số lần mua</th>
+                    <th>Số lượng tồn</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá niêm yết</th>
+                    <th>Giá khuyến mãi</th>
+                    <th>Số lần mua</th>
+                    <th>Số lượng tồn</th>
+                    <th>Hành động</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaSP</td>
+                        <td><img src="@Url.Content("/Images/" +item.Pic1)" width="60" /></td>
+                        <td>@item.TenSP</td>
+                        @if (item.MaGiamGia != null && item.GiamGia.NgayBatDau < DateTime.Now && item.GiamGia.NgayKetThuc > DateTime.Now)
+                        {
+                            <td>@String.Format("{0:0,0}", item.GiaNiemYet) đ</td>
+                            <td>@String.Format("{0:0,0}", item.GiamGia.GiaKhuyenMai) đ</td>
+                        }
+                        else
+                        {
+                            <td>@String.Format("{0:0,0}", item.GiaNiemYet)</td>
+                            <td>0</td>
+                        }
+                        <td>@item.SoLanMua</td>
+                        <td>@item.SoLuongTon</td>
+                        <td>
+                            <a href="@Url.Action("EditProduct", "Admin", new { @IdProduct = item.MaSP})" class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil font-14" style="cursor:pointer"></i></a>
+                            <button class="btn btn-default btn-xs btn-delete" data-toggle="tooltip" data-placement="top" data-id="@item.MaSP" title="Delete"><i class="fa fa-trash font-14" style="cursor:pointer"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,235 @@
+﻿@model IEnumerable<ChienThangComputer.ChiTietDonDatHang>
+
+@{
+    DonDatHang order = ViewBag.Order as DonDatHang;
+}
+
+<div class="box-e">
+    <div class="box-e__header">
+        <h3 class="box-e__heading">Thông tin đơn hàng</h3>
+        <i class="fa fa-times box-e__icon--close" aria-hidden="true" onclick="closeModal();"></i>
+    </div>
+    <div class="box-e__body">
+        <div class="detail-order-heading">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="detail-order-column">
+                        <p>Mã đơn hàng</p>
+                        <input type="text" disabled value="@order.MaDDH" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="detail-order-column">
+                        <p>Ngày đặt hàng</p>
+                        <input type="text" disabled value="@Html.FormatValue(order.NgayDat,"{0:HH:mm dd-MM-yyyy}")" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="detail-order-column">
+                        <p>Trạng thái đơn hàng</p>
+                        @if (order.ChoXacNhan == true && order.ChoLayHang == false && order.DangGiao == false && order.DaGiao == false && order.DaHuy == false)
+                        {
+                            <input class="inp-status" type="text" disabled value="Chờ xác nhận" />
+                        }
+                        else if (order.ChoXacNhan == false && order.ChoLayHang == true && order.DangGiao == false && order.DaGiao == false && order.DaHuy == false)
+                        {
+                            <input class="inp-status" type="text" disabled value="Chờ lấy hàng" />
+                        }
+                        else if (order.ChoXacNhan == false && order.ChoLayHang == false && order.DangGiao == true && order.DaGiao == false && order.DaHuy == false)
+                        {
+                            <input class="inp-status" type="text" disabled value="Đang giao" />
+                        }
+                        else if (order.ChoXacNhan == false && order.ChoLayHang == false && order.DangGiao == false && order.DaGiao == true && order.DaHuy == false)
+                        {
+                            <input class="inp-status" type="text" disabled value="Hoàn thành" />
+                        }
+                        else if (order.ChoXacNhan == false && order.ChoLayHang == false && order.DangGiao == false && order.DaGiao == false && order.DaHuy == true)
+                        {
+                            <input class="inp-status" type="text" disabled value="Đã huỷ" />
+                        }
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="detail-order-column">
+                        <p>Ghi chú</p>
+                        @if (order.GhiChu == "")
+                        {
+                            <textarea cols="5" rows="3" disabled style="resize:none">Nothing</textarea>
+                        }
+                        else
+                        {
+                            <textarea cols="5" rows="3" disabled style="resize:none">@order.GhiChu</textarea>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="detail-order-column">
+                        <p>Địa chỉ</p>
+                        <textarea cols="5" rows="3" disabled style="resize:none">@order.DiaChi</textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="detail-order-column">
+                        <p>Voucher</p>
+                        <div class="cps-order-voucher-wrap"><i class="sidebar-item-icon fa fa-tags"></i> Giảm @String.Format("{0:0,0}", order.UuDai)đ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="detail-order-title-text">Chi tiết đơn hàng</h3>
+        
+        
+
+        <div class="d-flex justify-content-between">
+            <p><span class="font-weight-bold">Mua hàng tại:</span> Chiến Thắng Computer</p>
+            <p><span class="font-weight-bold">Địa chỉ:</span>Hà Nội</p>
+        </div>
+        <table class="table table-striped table-bordered table-hover" id="tbl-detail-order" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-send-email">
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>@item.MaSP</td>
+                        <td>@item.TenSP</td>
+                        <td>@item.SoLuong</td>
+                        <td>@String.Format("{0:0,0}", item.DonGia)</td>
+                        <td>@String.Format("{0:0,0}", item.DonGia * item.SoLuong) VNĐ</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr class="text-right">
+                    <td colspan="5" class="text-right">Voucher giảm giá: <span class="text-danger font-weight-bold"> -@String.Format("{0:0,0}", order.UuDai) VNĐ</span></td>
+                </tr>
+                <tr class="text-right">
+                    <td colspan="5" class="text-right">Tổng tiền cần thanh toán: <span class="text-danger font-weight-bold"> @String.Format("{0:0,0}", ViewBag.TotalPayment) VNĐ</span></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="detail-order-submit">
+            <button class="btn btn-dark" id="btnPrint">In đơn hàng</button>
+            <button class="btn btn-danger" id="btn-cancel-order">Huỷ đơn hàng</button>
+            <button class="btn btn-success" id="btn-switch-status-order"></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#tbl-detail-order').DataTable();
+    $("#btnPrint").click(function () {
+        var content = "<table border='1'>" + $("#tbl-detail-order").html() + "</table>";
+        printOrder(content);
+    })
+
+    function printOrder(content) {
+        var printWindow = window.open('', '', 'height=400', 'width=800');
+        printWindow.document.write('<html><head><title>Thông tin đơn hàng</title>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(content);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+
+    var btnChangeStatus = $("#btn-switch-status-order");
+    var btnCancelOrder = $("#btn-cancel-order");
+    btnChangeStatus.click(function () {
+        var statusOrder = $(".inp-status");
+        var id = @order.MaDDH;
+        $.ajax({
+            type: 'POST',
+            url: '/Admin/ChangeStatusOrder',
+            data: {
+                id: id,
+                status: statusOrder.val(),
+            },
+            success: function (response) {
+                if (response.statusCode === 200) {
+                    if (!response.status1 && response.status2 && !response.status3 && !response.status4 && !response.status5) {
+                        btnChangeStatus.text('Xác nhận giao hàng');
+                        statusOrder.val('Chờ lấy hàng');
+                        Swal.fire({
+                            title: 'Thông báo',
+                            text: response.message,
+                            icon: 'success'
+                        })
+                    } else if (!response.status1 && !response.status2 && response.status3 && !response.status4 && !response.status5) {
+                        btnChangeStatus.text('Hoàn thành đơn hàng');
+                        statusOrder.val('Đang giao');
+                        Swal.fire({
+                            title: 'Thông báo',
+                            text: response.message,
+                            icon: 'success'
+                        })
+                    } else if (!response.status1 && !response.status2 && !response.status3 && response.status4 && !response.status5) {
+                        btnChangeStatus.text('Hoàn thành đơn hàng');
+                        statusOrder.val('Đã giao');
+                        Swal.fire({
+                            title: 'Thông báo',
+                            text: response.message,
+                            icon: 'success'
+                        }).then(function () {
+                            window.location.reload();
+                        })
+                    }
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError)
+            }
+        })
+    })
+
+    var res = {
+        loader: $("<div>", {
+            class: 'loader'
+        })
+    };
+
+    var isCallingAjaxCancelOrder = false;
+
+    btnCancelOrder.click(function () {
+        if (isCallingAjaxCancelOrder) return;
+        isCallingAjaxCancelOrder = true;
+        var id = @order.MaDDH;
+        var content = $("#tbody-send-email").html();
+        $.ajax({
+            type: 'POST',
+            url: '/Admin/ChangeStatusOrder',
+            data: {
+                id: id,
+                status: "cancel",
+                content: content,
+            },
+            beforeSend: function () {
+                btnCancelOrder.text('');
+                btnCancelOrder.append(res.loader);
+            },
+            success: function (response) {
+                if (response.statusCode === 200) {
+                    isCallingAjaxCancelOrder = false;
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: response.message,
+                        icon: 'success'
+                    }).then(function () {
+                        window.location.reload();
+                    })
+                }
+            }
+        })
+    })
+</script>
+
+
