@@ -153,7 +153,6 @@ window.onload = () => {
 
 
 
-
 $("#btnUseDiscountCode").click(function () {
     var dcCode = $("#txtDiscountCode");
     if (isFetchingActivateDiscountCode) return;
@@ -172,19 +171,32 @@ $("#btnUseDiscountCode").click(function () {
                 $(".loader").remove();
                 $("#btnUseDiscountCode").html('Sử dụng');
                 //Not found discount code
-                if (response.status === 404 && response.message !== "") {
-                    handleEventInput(response.message);
-                }
-                // Not Acceptable
-                if (response.status === 406) {
-                    handleEventInput(response.message);
-                }
-                // OK
+                //if (response.status === 404 && response.message !== "") {
+                //    handleEventInput(response.message);
+                //}
+                //// Not Acceptable
+                //if (response.status === 406) {
+                //    handleEventInput(response.message);
+                //}
+                //// OK
+                //if (response.status === 200) {
+
+                //    $(".js-total-payment").html(response.totalFinal.toLocaleString() + "đ");
+                //    localStorage.setItem("discountPrice", response.discount);
+                //    localStorage.setItem("totalPayment", response.totalFinal);
+                //    localStorage.setItem("discountCode", dcCode.val().trim());
+                //    alert(response.message);
+                //}
                 if (response.status === 200) {
                     $(".js-total-payment").html(response.totalFinal.toLocaleString() + "đ");
                     localStorage.setItem("discountPrice", response.discount);
                     localStorage.setItem("totalPayment", response.totalFinal);
                     localStorage.setItem("discountCode", dcCode.val().trim());
+
+                    // Hiển thị thông báo thành công
+                    showNotification(response.message, 'success');
+                } else {
+                    handleEventInput(response.message);
                 }
             }, delay);
         },
@@ -192,7 +204,9 @@ $("#btnUseDiscountCode").click(function () {
             console.log(request);
         }
     })
+    // Function to handle success message
 
+    // Error message
     let handleEventInput = (message) => {
         $("#js-error-disc-code").html(message);
         $("#js-error-disc-code").css("color", "red");
@@ -204,5 +218,15 @@ $("#btnUseDiscountCode").click(function () {
             }
         })
     }
+    function showNotification(message, type) {
+        // Tạo thông báo tùy theo loại (success hoặc error)
+        var notification = $("<div>").addClass("notification " + type).text(message);
+        $("body").append(notification);
+        // Tự động ẩn thông báo sau 3 giây
+        setTimeout(function () {
+            notification.fadeOut(500, function () {
+                $(this).remove();
+            });
+        }, 3000);
+    }
 })
-

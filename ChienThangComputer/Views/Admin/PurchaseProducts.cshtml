@@ -31,7 +31,7 @@
                         <div class="title-box">
                             Thanh toán
                         </div>
-                        
+
                     </div>
                     <div class="d-flex justify-content-between">
                         <div>
@@ -248,42 +248,46 @@
             let arrElementInputQuantity = $(".txtQuantity");
             let arrElementInputPrice = $(".txtPrice");
             let flag = true;
+
+            // Kiểm tra số lượng nhập
             for (let i = 0; i < arrElementInputQuantity.length; i++) {
                 var itemQuantity = arrElementInputQuantity[i];
                 if (itemQuantity.value.trim() === "") {
                     Swal.fire({
                         text: 'Vui lòng nhập số lượng nhập cho sản phẩm thứ ' + parseInt(i + 1),
                         icon: 'error'
-                    })
+                    });
                     flag = false;
-                }
-                if (isNaN(itemQuantity.value.trim())) {
+                } else if (parseFloat(itemQuantity.value.trim()) <= 0 || isNaN(parseFloat(itemQuantity.value.trim()))) {
                     Swal.fire({
-                        text: 'Thông tin số lượng nhập cho sản phẩm thứ ' + parseInt(i + 1) + " không hợp lệ",
+                        text: 'Số lượng nhập cho sản phẩm thứ ' + parseInt(i + 1) + ' phải lớn hơn 0 và là một số hợp lệ',
                         icon: 'error'
-                    })
+                    });
                     flag = false;
                 }
             }
+
+            // Kiểm tra đơn giá nhập
             for (let j = 0; j < arrElementInputPrice.length; j++) {
                 var itemPrice = arrElementInputPrice[j];
                 if (itemPrice.value.trim() === "") {
                     Swal.fire({
                         text: 'Vui lòng nhập đơn giá nhập cho sản phẩm thứ ' + parseInt(j + 1),
                         icon: 'error'
-                    })
+                    });
                     flag = false;
-                }
-                if (isNaN(itemPrice.value.trim())) {
+                } else if (parseFloat(itemPrice.value.trim()) <= 0 || isNaN(parseFloat(itemPrice.value.trim()))) {
                     Swal.fire({
-                        text: 'Thông tin đơn giá nhập cho sản phẩm thứ ' + parseInt(j + 1) + " không hợp lệ",
+                        text: 'Đơn giá nhập cho sản phẩm thứ ' + parseInt(j + 1) + ' phải lớn hơn 0 và là một số hợp lệ',
                         icon: 'error'
-                    })
+                    });
                     flag = false;
                 }
             }
+
             return flag;
         }
+
 
         radioList.change(function () {
             Calculate();

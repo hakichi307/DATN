@@ -41,7 +41,7 @@
                 {
                     <tr>
                         <td>@item.MaSP</td>
-                        <td><img src="@Url.Content("/Images/" +item.Pic1)" width="60" /></td>
+                        <td><img src="@Url.Content("~/Images/" +item.Pic1)" width="60" /></td>
                         <td>@item.TenSP</td>
                         @if (item.MaGiamGia != null && item.GiamGia.NgayBatDau < DateTime.Now && item.GiamGia.NgayKetThuc > DateTime.Now)
                         {

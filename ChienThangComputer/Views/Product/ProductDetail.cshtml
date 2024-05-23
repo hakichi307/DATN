@@ -89,16 +89,18 @@
                             <span class="product__Info__SaleOff__price-text">Giá:</span>
                             <span class="product__Info__SaleOff__product-price-sale">@String.Format("{0:0,0}", Model.GiaNiemYet) ₫</span><br />
                         }
-                        <div class="product__Info__SaleOff__Add-To-Cart">
-                            @if (Model.SoLuongTon == 0)
-                            {
-                                <button type="button" class="btnOutOfStock">Hết hàng</button>
-                            }
-                            else
-                            {
-                                <button class="btn-add-to-cart" data-id="@Model.MaSP">Đặt hàng</button>
-                            }
-                        </div>
+                    <div class="product__Info__SaleOff__Add-To-Cart">
+                        @if (Model.SoLuongTon == 0)
+                        {
+                            <button type="button" class="btnOutOfStock">Hết hàng</button>
+                        }
+                        else
+                        {
+                            <span class="product__Info__SaleOff__Add-To-Cart_Quantity-text">Số lượng:</span>
+                            <span class="product__Info__SaleOff__Add-To-Cart">@Model.SoLuongTon</span><br />
+                            <button class="btn-add-to-cart" data-id="@Model.MaSP">Đặt hàng</button>
+                        }
+                    </div>
                     </div>
                 </div>
             </div>

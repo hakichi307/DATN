@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [QL_THIETBIDIENTU]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Database [QL_THIETBIDIENTU]    Script Date: 17/05/2024 13:35:29 ******/
 CREATE DATABASE [QL_THIETBIDIENTU]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,7 +82,7 @@ ALTER DATABASE [QL_THIETBIDIENTU] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, 
 GO
 USE [QL_THIETBIDIENTU]
 GO
-/****** Object:  Table [dbo].[ChiTietDonDatHang]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[ChiTietDonDatHang]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -100,7 +100,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ChiTietPhieuNhap]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[ChiTietPhieuNhap]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +117,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DanhGia]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[DanhGia]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -135,7 +135,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DanhMuc]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[DanhMuc]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -149,7 +149,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DanhMucTin]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[DanhMucTin]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -163,7 +163,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DonDatHang]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[DonDatHang]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -189,7 +189,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[GiamGia]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[GiamGia]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -205,7 +205,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[KhachHang]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[KhachHang]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -225,7 +225,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[KhachHangTraining]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[KhachHangTraining]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -241,7 +241,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LoaiDanhMuc]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[LoaiDanhMuc]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -255,7 +255,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LoaiMauEmail]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[LoaiMauEmail]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -269,7 +269,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LoaiSanPham]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[LoaiSanPham]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -284,7 +284,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LoaiThanhVien]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[LoaiThanhVien]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -299,7 +299,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LoaiThanhVien_Quyen]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[LoaiThanhVien_Quyen]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -314,7 +314,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LoaiTinTuc]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[LoaiTinTuc]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -328,7 +328,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MauEmail]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[MauEmail]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -344,7 +344,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NhaCungCap]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[NhaCungCap]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -360,7 +360,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PhanLopKhachHang]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[PhanLopKhachHang]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -376,7 +376,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PhieuNhap]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[PhieuNhap]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -395,7 +395,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[QuaTang]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[QuaTang]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -411,7 +411,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Quyen]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[Quyen]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -425,7 +425,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SanPham]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[SanPham]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -459,7 +459,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SuKienKhuyenMai]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[SuKienKhuyenMai]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -481,7 +481,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_ThongKe]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[TB_ThongKe]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -496,7 +496,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ThanhVien]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[ThanhVien]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -517,7 +517,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TinTuc]    Script Date: 11/05/2024 20:45:20 ******/
+/****** Object:  Table [dbo].[TinTuc]    Script Date: 17/05/2024 13:35:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -553,10 +553,6 @@ INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoL
 GO
 INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoLuong], [DonGia]) VALUES (6, 2, 29, N'Laptop Dell Inspiron 15 3501 N3501C', 1, CAST(10990000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoLuong], [DonGia]) VALUES (7, 3, 10, N'Laptop Gaming MSI GF63 Thin 10SCSR 830VN', 1, CAST(22990000 AS Decimal(18, 0)))
-GO
-INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoLuong], [DonGia]) VALUES (8, 3, 41, N'GVN Titan 10 M', 1, CAST(11990000 AS Decimal(18, 0)))
-GO
 INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoLuong], [DonGia]) VALUES (9, 4, 20, N'Laptop Acer Aspire 5 A515 56 54PK', 1, CAST(16590000 AS Decimal(18, 0)))
 GO
 INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoLuong], [DonGia]) VALUES (10, 4, 46, N'GVN Yuumi M', 1, CAST(21990000 AS Decimal(18, 0)))
@@ -575,7 +571,9 @@ INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoL
 GO
 INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoLuong], [DonGia]) VALUES (17, 8, 47, N'GVN Minion M', 5, CAST(21990000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoLuong], [DonGia]) VALUES (18, 9, 43, N'GVN Assassin M', 1, CAST(11590000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoLuong], [DonGia]) VALUES (19, 10, 52, N'GVN Phantom S', 2, CAST(36990000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[ChiTietDonDatHang] ([MaChiTietDDH], [MaDDH], [MaSP], [TenSP], [SoLuong], [DonGia]) VALUES (23, 14, 7, N'Laptop ASUS ROG Zephyrus M15 GU502LU AZ123T', 1, CAST(39585000 AS Decimal(18, 0)))
 GO
 SET IDENTITY_INSERT [dbo].[ChiTietDonDatHang] OFF
 GO
@@ -591,25 +589,17 @@ SET IDENTITY_INSERT [dbo].[ChiTietPhieuNhap] OFF
 GO
 SET IDENTITY_INSERT [dbo].[DanhGia] ON 
 GO
-INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (1, 3, 2, N'Laptop chạy cực bền. Sẽ ủng hộ shop lần sau', 5, CAST(N'2024-04-04T20:35:27.323' AS DateTime))
-GO
 INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (2, 3, 3, N'Laptop mua về dễ bị chai pin quá', 4, CAST(N'2024-04-04T18:23:54.323' AS DateTime))
 GO
 INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (3, 3, 4, N'Nói chung là cũng tạm ổn. Chế độ bảo hành tốt', 4, CAST(N'2024-04-04T06:23:54.323' AS DateTime))
-GO
-INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (4, 41, 2, N'Đúng là của rẻ là của ôi mà. PC chơi game hơi giật FPS quá', 2, CAST(N'2024-04-04T18:23:54.323' AS DateTime))
 GO
 INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (5, 41, 3, N'PC chơi được có 1 năm mà muốn hư cmnr, mặc dù có bảo hành. Sản phẩm chưa được ưng ý lắm', 3, CAST(N'2024-04-04T18:23:54.323' AS DateTime))
 GO
 INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (6, 41, 4, N'PC chơi game lâu card nó hơi nóng. Đúng là của rẻ là của ôi !', 2, CAST(N'2024-04-04T18:23:54.323' AS DateTime))
 GO
-INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (7, 60, 2, N'Màn hình vừa tầm giá cho game thủ. Nói chung tạm ổn', 5, CAST(N'2024-04-04T18:23:54.323' AS DateTime))
-GO
 INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (8, 60, 3, N'Màn hình xem ban đêm không bị đau mắt. Sẽ ủng hộ shop lần sau', 5, CAST(N'2024-04-04T18:23:54.323' AS DateTime))
 GO
 INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (9, 60, 4, N'Rất tốt', 5, CAST(N'2024-04-04T18:23:54.323' AS DateTime))
-GO
-INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (10, 72, 2, N'Tai nghe nghe nhạc bao chiu', 5, CAST(N'2024-04-04T18:23:54.323' AS DateTime))
 GO
 INSERT [dbo].[DanhGia] ([MaBL], [MaSP], [MaTV], [NoiDungBL], [Rating], [CommentedOn]) VALUES (11, 72, 3, N'Rẻ nhưng chất lượng, giao hàng nhanh gọn lẹ', 5, CAST(N'2024-04-04T18:23:54.323' AS DateTime))
 GO
@@ -719,9 +709,7 @@ SET IDENTITY_INSERT [dbo].[DonDatHang] ON
 GO
 INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (1, CAST(N'2024-03-04T20:35:27.323' AS DateTime), 0, 1, 0, 0, 0, 0, N'Giao hàng nhanh trước ngày 12/12/2021 nha shop', N'Quận Tân Phú TPHCM', N'Thành phố Hồ Chí Minh', N'Quận Tân Phú', 3, CAST(0 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (2, CAST(N'2024-04-04T20:37:10.800' AS DateTime), 1, 0, 0, 0, 0, 0, N'Vui lòng giao hàng cẩn thận. K gây vỡ hoặc trầy', N'Quận 9 TPHCM', N'Thành phố Hồ Chí Minh', N'Quận Tân Phú', 4, CAST(0 AS Decimal(18, 0)))
-GO
-INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (3, CAST(N'2024-04-04T14:10:49.560' AS DateTime), 0, 0, 0, 0, 1, 0, N'Giao hàng nhanh cho tui', N'Quận Tân Phú TPHCM', N'Thành phố Hồ Chí Minh', N'Quận Tân Phú', 1, CAST(1000000 AS Decimal(18, 0)))
+INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (2, CAST(N'2024-04-04T20:37:10.800' AS DateTime), 0, 0, 1, 0, 0, 0, N'Vui lòng giao hàng cẩn thận. K gây vỡ hoặc trầy', N'Quận 9 TPHCM', N'Thành phố Hồ Chí Minh', N'Quận Tân Phú', 4, CAST(0 AS Decimal(18, 0)))
 GO
 INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (4, CAST(N'2024-04-04T22:35:30.520' AS DateTime), 0, 0, 0, 1, 0, 1, N'Giao hàng cẩn thận. Vỡ bắt đền', N'Quận Tân Phú TPHCM', N'Thành phố Hồ Chí Minh', N'Quận Tân Phú', 2, CAST(0 AS Decimal(18, 0)))
 GO
@@ -729,11 +717,13 @@ INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [Dang
 GO
 INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (6, CAST(N'2024-05-08T14:58:36.530' AS DateTime), 0, 0, 0, 1, 0, 1, N'Giao', N'Thái Bình', N'Thái Bình', N'Thành phố Thái Bình', 6, CAST(500000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (7, CAST(N'2024-05-08T16:11:50.383' AS DateTime), 1, 0, 0, 0, 0, 0, N'Giao hàng vào chủ nhật hộ mình nhé shop', N'Số 1 hẻm 2 tổ 3', N'Bình Dương', N'Thị xã Bến Cát', 7, CAST(500000 AS Decimal(18, 0)))
+INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (7, CAST(N'2024-05-08T16:11:50.383' AS DateTime), 0, 1, 0, 0, 0, 0, N'Giao hàng vào chủ nhật hộ mình nhé shop', N'Số 1 hẻm 2 tổ 3', N'Bình Dương', N'Thị xã Bến Cát', 7, CAST(500000 AS Decimal(18, 0)))
 GO
 INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (8, CAST(N'2024-05-08T22:13:50.327' AS DateTime), 0, 0, 0, 1, 0, 1, N'', N'Thái Bình', N'Bà Rịa - Vũng Tàu', N'Thành phố Vũng Tàu', 8, CAST(0 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (9, CAST(N'2024-05-09T14:44:46.703' AS DateTime), 0, 0, 0, 0, 1, 0, N'', N'a', N'Bạc Liêu', N'Huyện Hồng Dân', 9, CAST(0 AS Decimal(18, 0)))
+INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (10, CAST(N'2024-05-11T21:56:59.853' AS DateTime), 0, 0, 0, 1, 0, 1, N'Ship nhanh nhé shop', N'bbb', N'Bạc Liêu', N'Huyện Giá Rai', 10, CAST(500000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDat], [ChoXacNhan], [ChoLayHang], [DangGiao], [DaGiao], [DaHuy], [DaThanhToan], [GhiChu], [DiaChi], [TinhThanh], [QuanHuyen], [MaKH], [UuDai]) VALUES (14, CAST(N'2024-05-17T12:39:47.323' AS DateTime), 1, 0, 0, 0, 0, 0, N'', N'Phủ Lí Hà Nam', N'Điện Biên', N'Thị xã Mường Lay', 12, CAST(0 AS Decimal(18, 0)))
 GO
 SET IDENTITY_INSERT [dbo].[DonDatHang] OFF
 GO
@@ -1295,8 +1285,6 @@ SET IDENTITY_INSERT [dbo].[GiamGia] OFF
 GO
 SET IDENTITY_INSERT [dbo].[KhachHang] ON 
 GO
-INSERT [dbo].[KhachHang] ([MaKH], [HoTen], [Email], [SoDienThoai], [DiaChi], [TinhThanh], [QuanHuyen], [MaThanhVien]) VALUES (1, N'Nguyễn Thanh Minh Sơn', N'ttv123@gmail.com', N'111111111', N'Quận Tân Phú TPHCM', N'Thành phố Hồ Chí Minh', N'Quận Tân Phú', 2)
-GO
 INSERT [dbo].[KhachHang] ([MaKH], [HoTen], [Email], [SoDienThoai], [DiaChi], [TinhThanh], [QuanHuyen], [MaThanhVien]) VALUES (2, N'Nguyễn Thành Tín', N'ttv123@gmail.com', N'111111111', N'Quận 9 TPHCM', N'Thành phố Hồ Chí Minh', N'Quận 9', 3)
 GO
 INSERT [dbo].[KhachHang] ([MaKH], [HoTen], [Email], [SoDienThoai], [DiaChi], [TinhThanh], [QuanHuyen], [MaThanhVien]) VALUES (3, N'Trần Hồ Thiên Phú', N'ttv123@gmail.com', N'111111111', N'Quận Tân Phú TPHCM', N'Thành phố Hồ Chí Minh', N'Quận Tân Phú', 4)
@@ -1312,6 +1300,12 @@ GO
 INSERT [dbo].[KhachHang] ([MaKH], [HoTen], [Email], [SoDienThoai], [DiaChi], [TinhThanh], [QuanHuyen], [MaThanhVien]) VALUES (8, N'PH Van Cong', N'congvuong2.pro@gmail.com', N'0353123456', N'Thái Bình', N'Bà Rịa - Vũng Tàu', N'Thành phố Vũng Tàu', 8)
 GO
 INSERT [dbo].[KhachHang] ([MaKH], [HoTen], [Email], [SoDienThoai], [DiaChi], [TinhThanh], [QuanHuyen], [MaThanhVien]) VALUES (9, N'a', N'a@gmail.com', N'0353209231', N'a', N'Bạc Liêu', N'Huyện Hồng Dân', NULL)
+GO
+INSERT [dbo].[KhachHang] ([MaKH], [HoTen], [Email], [SoDienThoai], [DiaChi], [TinhThanh], [QuanHuyen], [MaThanhVien]) VALUES (10, N'ABC', N'v@gmail.com', N'0353209231', N'bbb', N'Bạc Liêu', N'Huyện Giá Rai', NULL)
+GO
+INSERT [dbo].[KhachHang] ([MaKH], [HoTen], [Email], [SoDienThoai], [DiaChi], [TinhThanh], [QuanHuyen], [MaThanhVien]) VALUES (11, N'Phạm Thanh Mai', N'sieucodon02.pro@gmail.com', N'0906147943', N'Phủ Lí Hà Nam', N'Hà Nam', N'Thành phố Phủ Lý', 9)
+GO
+INSERT [dbo].[KhachHang] ([MaKH], [HoTen], [Email], [SoDienThoai], [DiaChi], [TinhThanh], [QuanHuyen], [MaThanhVien]) VALUES (12, N'Phạm Thanh Mai', N'sieucodon02.pro@gmail.com', N'0906147943', N'Phủ Lí Hà Nam', N'Điện Biên', N'Thị xã Mường Lay', 9)
 GO
 SET IDENTITY_INSERT [dbo].[KhachHang] OFF
 GO
@@ -2388,7 +2382,7 @@ INSERT [dbo].[MauEmail] ([MaMauEmail], [SubjectEmail], [ContentEmail], [MaLoai])
                                 <tr>
                                     <td style="margin: 0px;">
                                         <h2 style="margin-top: 0px; margin-bottom: 10px; font-size: 24px;">Cám ơn quý
-                                            khách đã mua hàng tại MarkLeo.</h2>
+                                            khách đã mua hàng tại Chiến Thắng Computer.</h2>
                                         <p style="margin-bottom: 0px; color: rgb(119, 119, 119); line-height: 24px; font-size: 16px;">
                                             Xin chào {{CUSTOMER}}, MarkLeo rất vui đã nhận được đơn đặt hàng của quý
                                             khách. Chúng tôi sẽ liên hệ lại ngay để xác nhận đơn hàng.</p>
@@ -4052,7 +4046,7 @@ INSERT [dbo].[SanPham] ([MaSP], [TenSP], [GiaNiemYet], [NgayCapNhat], [ThongSoKy
                                                 xử lý cao cấp kết hợp với âm thanh vòm kênh 7.1 ảo, để làm sâu sắc hơn
                                                 cho chơi game và giải trí. Khuếch đại thông minh nâng cao loa. Thưởng
                                                 thức âm lượng to hơn chân thực hơn, cộng thêm âm trầm và treble cho âm
-                                                thanh thực sự vượt trội.</p>', N'16.png', N'53.png', N'106.png', N'121.png', 100, 17, N'Mới', 1, 2, 1, 1, 0, NULL, 7, 4)
+                                                thanh thực sự vượt trội.</p>', N'16.png', N'53.png', N'106.png', N'121.png', 99, 18, N'Mới', 1, 2, 1, 1, 0, NULL, 7, 4)
 GO
 INSERT [dbo].[SanPham] ([MaSP], [TenSP], [GiaNiemYet], [NgayCapNhat], [ThongSoKyThuat], [BaoHanh], [MoTa], [Pic1], [Pic2], [Pic3], [Pic4], [SoLuongTon], [SoLanMua], [TinhTrang], [MaNCC], [MaLoaiDM], [MaLoaiSP], [IDDM], [DaXoa], [MaKM], [MaGiamGia], [MaPL]) VALUES (8, N'Laptop ASUS ROG Strix G15 G512 IAL011T', CAST(28990000 AS Decimal(18, 0)), CAST(N'2024-05-09T00:00:00.000' AS DateTime), N'<h3 class="title">Thông số kỹ thuật:</h3><table class="table table-bordered">
                                         <tbody>
@@ -9215,7 +9209,7 @@ INSERT [dbo].[SanPham] ([MaSP], [TenSP], [GiaNiemYet], [NgayCapNhat], [ThongSoKy
                                     <p class="desc-text">
                                         Để được tư vấn thêm cấu hình nào phù hợp với bạn nhất, hãy nhấc máy và liên hệ
                                         ngay cho chúng tôi qua HOTLINE: 1800 6975
-                                    </p>', N'372.jpg', N'373.jpg', N'3.jpg', N'4.jpg', 100, 17, N'Mới', 1, 22, 2, 5, 0, NULL, 52, 7)
+                                    </p>', N'372.jpg', N'373.jpg', N'3.jpg', N'4.jpg', 98, 19, N'Mới', 1, 22, 2, 5, 0, NULL, 52, 7)
 GO
 INSERT [dbo].[SanPham] ([MaSP], [TenSP], [GiaNiemYet], [NgayCapNhat], [ThongSoKyThuat], [BaoHanh], [MoTa], [Pic1], [Pic2], [Pic3], [Pic4], [SoLuongTon], [SoLanMua], [TinhTrang], [MaNCC], [MaLoaiDM], [MaLoaiSP], [IDDM], [DaXoa], [MaKM], [MaGiamGia], [MaPL]) VALUES (53, N'GVN Volibear S', CAST(31590000 AS Decimal(18, 0)), CAST(N'2024-05-09T00:00:00.000' AS DateTime), N'
         <table class="table table-bordered">
@@ -17231,27 +17225,29 @@ INSERT [dbo].[SanPham] ([MaSP], [TenSP], [GiaNiemYet], [NgayCapNhat], [ThongSoKy
 GO
 SET IDENTITY_INSERT [dbo].[SanPham] OFF
 GO
-INSERT [dbo].[SuKienKhuyenMai] ([MaKM], [TenKM], [Anh], [NgayBatDau], [NgayKetThuc], [GiaTriKM], [GiaTriDonHang], [SoLanSuDung], [SoLuongConLai], [PhamViApDung]) VALUES (N'CHIENTHANG          ', N'Giảm ngay 500k cho đơn hàng từ 10 triệu', NULL, CAST(N'2024-05-08T00:00:00.000' AS DateTime), CAST(N'2024-09-05T22:00:00.000' AS DateTime), CAST(500000 AS Decimal(18, 0)), CAST(10000000 AS Decimal(18, 0)), 1000, 998, N'Tất cả')
+INSERT [dbo].[SuKienKhuyenMai] ([MaKM], [TenKM], [Anh], [NgayBatDau], [NgayKetThuc], [GiaTriKM], [GiaTriDonHang], [SoLanSuDung], [SoLuongConLai], [PhamViApDung]) VALUES (N'CHIENTHANG          ', N'Giảm ngay 500k cho đơn hàng từ 10 triệu', N'icon_Logo.png', CAST(N'2024-05-08T00:00:00.000' AS DateTime), CAST(N'2024-09-05T22:00:00.000' AS DateTime), CAST(500000 AS Decimal(18, 0)), CAST(10000000 AS Decimal(18, 0)), 1000, 996, N'Tất cả')
 GO
-INSERT [dbo].[SuKienKhuyenMai] ([MaKM], [TenKM], [Anh], [NgayBatDau], [NgayKetThuc], [GiaTriKM], [GiaTriDonHang], [SoLanSuDung], [SoLuongConLai], [PhamViApDung]) VALUES (N'SINHVIEN            ', N'Giảm ngay 200k cho đơn hàng từ 0đ', N'', CAST(N'2024-05-08T00:00:00.000' AS DateTime), CAST(N'2024-09-05T22:00:00.000' AS DateTime), CAST(1000000 AS Decimal(18, 0)), CAST(10000000 AS Decimal(18, 0)), 1000, 5, N'Tất cả')
+INSERT [dbo].[SuKienKhuyenMai] ([MaKM], [TenKM], [Anh], [NgayBatDau], [NgayKetThuc], [GiaTriKM], [GiaTriDonHang], [SoLanSuDung], [SoLuongConLai], [PhamViApDung]) VALUES (N'SINHVIEN            ', N'TEST2', N'z5251996942321_628797a53b5e522f02a8b6fa8284cca0.jpg', CAST(N'2024-05-08T00:00:00.000' AS DateTime), CAST(N'2024-09-05T22:00:00.000' AS DateTime), CAST(20000 AS Decimal(18, 0)), CAST(100000 AS Decimal(18, 0)), 15, 15, N'Tất cả')
+GO
+INSERT [dbo].[SuKienKhuyenMai] ([MaKM], [TenKM], [Anh], [NgayBatDau], [NgayKetThuc], [GiaTriKM], [GiaTriDonHang], [SoLanSuDung], [SoLuongConLai], [PhamViApDung]) VALUES (N'TEST                ', N'TEST', N'Untitled Diagram.drawio.png', CAST(N'2024-05-08T00:00:00.000' AS DateTime), CAST(N'2024-09-05T22:00:00.000' AS DateTime), CAST(300000 AS Decimal(18, 0)), CAST(3000000 AS Decimal(18, 0)), 11, 10, N'Người mới')
 GO
 SET IDENTITY_INSERT [dbo].[ThanhVien] ON 
 GO
-INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (1, N'ChienThang', N'123456', N'Phùng Chiến Thắng', N'Thái Bình', N'admin@gmail.com', N'0353209231', N'admin_avatar.jpg', 1)
+INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (1, N'ChienThang', N'9167cb7d474203a635ffd728fa51f4ff825727fc93e80bd54e34e74c5e2099cd', N'Phùng Chiến Thắng', N'Thái Bình', N'admin@gmail.com', N'0353209231', N'admin_avatar.jpg', 1)
 GO
-INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (2, N'SamNguyen', N'123456', N'Nguyễn Thanh Minh Sơn', N'Quận Tân Phú TPHCM', N'ttv1@gmail.com', N'111111111', N'samnguyen.jpg', 2)
+INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (3, N'TinNguyen', N'cb6f3ba16a6ddc7ae4f79f410abcd4187de72f269908baad3b3849e415271cd2', N'Nguyễn Thành Tín', N'Nam Định', N'ttv2@gmail.com', N'111111111', N'anonymousUser.png', 2)
 GO
-INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (3, N'TinNguyen', N'123456', N'Nguyễn Thành Tín', N'Quận 9 TPHCM', N'ttv2@gmail.com', N'111111111', N'anonymousUser.png', 2)
+INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (4, N'PhuTran', N'cb6f3ba16a6ddc7ae4f79f410abcd4187de72f269908baad3b3849e415271cd2', N'Trần Văn Phú', N'Bắc Từ Liêm, Hà Nội', N'ttv3@gmail.com', N'111111111', N'anonymousUser.png', 2)
 GO
-INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (4, N'PhuTran', N'123456', N'Trần Hồ Thiên Phú', N'Quận Tân Phú TPHCM', N'ttv3@gmail.com', N'111111111', N'anonymousUser.png', 2)
+INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (6, N'DucManh', N'6d73f2e7f7bf30168137d89de50c128fde8688390ed6a73c560a626786c24112', N'Nguyễn Đức Mạnh', N'Bắc Từ Liêm, Hà Nội', N'ttv5@gmail.com', N'111111111', N'anonymousUser.png', 2)
 GO
-INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (5, N'LeKhoi', N'123456', N'Lê Huỳnh Phước Khôi', N'Quận Tân Phú TPHCM', N'ttv4@gmail.com', N'111111111', N'anonymousUser.png', 2)
+INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (7, N'ThanhTam', N'cb6f3ba16a6ddc7ae4f79f410abcd4187de72f269908baad3b3849e415271cd2', N'Nguyễn Thị Tâm', N'Ba Đình, Hà Nội', N'ttv6@gmail.com', N'0987654999', N'doi-kangaroo-kg855i-600x600.jpg', 2)
 GO
-INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (6, N'Songoku', N'123456', N'Nguyễn Bá Thắng', N'Quận Tân Phú TPHCM', N'ttv5@gmail.com', N'111111111', N'anonymousUser.png', 2)
+INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (8, N'Văn Công', N'cb6f3ba16a6ddc7ae4f79f410abcd4187de72f269908baad3b3849e415271cd2', N'PH Van Cong', N'Nam Định', N'congvuong2.pro@gmail.com', N'0353123456', N'4606f149bc7ee48c4f08434b83fd4fdb.png', 2)
 GO
-INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (7, N'ThanhTam', N'1234567890A', N'Nguyễn Thành Tâm', N'TP Hồ Chí Minh', N'0306181326@caothang.edu.vn', N'0987654999', N'doi-kangaroo-kg855i-600x600.jpg', 2)
+INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (9, N'Thanh Mai', N'2cb31f015e7984339c68e851c00ae79a00871882332cb18c1d71981f6108c7d0', N'Phạm Thanh Mai', N'Phủ Lí Hà Nam', N'sieucodon02.pro@gmail.com', N'0906147943', N'z5251996942321_628797a53b5e522f02a8b6fa8284cca0.jpg', 2)
 GO
-INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (8, N'Văn Công', N'12345678A', N'PH Van Cong', N'Thái Bình', N'congvuong2.pro@gmail.com', N'0353123456', N'4606f149bc7ee48c4f08434b83fd4fdb.png', 2)
+INSERT [dbo].[ThanhVien] ([MaTV], [TaiKhoan], [MatKhau], [HoTen], [DiaChi], [Email], [SoDienThoai], [Avatar], [MaLoaiTV]) VALUES (19, N'Nhân Viên', N'9167cb7d474203a635ffd728fa51f4ff825727fc93e80bd54e34e74c5e2099cd', N'Nhân Viên Test', N'Nam Định', N'admin2@gmail.com', N'0353209233', N'admin_avatar.jpg', 1)
 GO
 SET IDENTITY_INSERT [dbo].[ThanhVien] OFF
 GO
@@ -17641,51 +17637,29 @@ INSERT [dbo].[TinTuc] ([MaTin], [TieuDeTin], [DoanTrich], [NoiDung], [NgayDang],
                     <p class="page-content-text-italic">Cảm ơn các bạn đã quan tâm theo dõi!</p>
                 </article>', CAST(N'2024-05-08T00:00:00.000' AS DateTime), N'/Images/technews_27.jpg', 11, 0, 1, 1)
 GO
-INSERT [dbo].[TinTuc] ([MaTin], [TieuDeTin], [DoanTrich], [NoiDung], [NgayDang], [HinhAnh], [LuotXem], [DaXoa], [MaLoaiTin], [MaDanhMucTin]) VALUES (7, N'Icon cười chảy nước… mắt là icon hot nhất 2021, còn icon :) thậm chí không lọt top 20', N'Không phải icon 🙂 gây ám ảnh, icon cười chảy nước mắt mới chính
+INSERT [dbo].[TinTuc] ([MaTin], [TieuDeTin], [DoanTrich], [NoiDung], [NgayDang], [HinhAnh], [LuotXem], [DaXoa], [MaLoaiTin], [MaDanhMucTin]) VALUES (7, N'Icon cười chảy nước… mắt là icon hot nhất 2024, còn icon :) thậm chí không lọt top 20', N'Không phải icon 🙂 gây ám ảnh, icon cười chảy nước mắt mới chính
                         là icon được dùng nhiều nhất 2021.', N'<article class="page-content-detail">
-                    <p class="page-content-text-italic">Không phải icon 🙂 gây ám ảnh, icon cười chảy nước mắt mới chính
-                        là icon được dùng nhiều nhất 2021.</p>
-                    <img src="/Images/technews_29.jpg" alt="" class="page-content-img">
-                    <p class="page-content-text">Icon mặt cười 🙂 gây ám ảnh là icon thường xuất hiện nhất trong các
-                        cuộc cãi vã, chọc ghẹo hoặc nói khích ai đó, hoặc đôi khi nó cũng được sử dụng đúng với mục đích
-                        ban đầu mà nó được tạo ra, đó là… cười. Dù chỉ là một icon mà có tới 2 công dụng như vậy thì
-                        đáng lý ra nó phải được sử dụng nhiều nhất, ấy thế mà icon 🙂 thậm chí còn không lọt nổi top 20,
-                        mà phải đắng lòng đứng ở vị trí phổ biến thứ 28 (dựa theo số liệu của Unicode Consortium).</p>
-                    <img src="/Images/technews_30.jpg" alt="" class="page-content-img">
-                    <p class="page-content-text">
-                        Vị trí top 1 danh sách icon được ưa chuộng sử dụng nhất 2021 chính là icon cười chảy cả nước…
-                        mắt. Được biết, icon cười ra nước mắt này đã đứng đầu danh sách ít nhất là từ năm 2017, và vào
-                        năm 2021 nó đã chiếm hơn 5% biểu tượng cảm xúc được người dùng sử dụng.
-                    </p>
-                    <img src="/Images/technews_31.jpg" alt="" class="page-content-img">
-                    <p class="page-content-text">
-                        Theo như Unicode Consortium cho biết, danh sách top 10 các icon được yêu thích nhất chỉ có một
-                        sự thay đổi duy nhất trong suốt 2 năm qua. Đó sự thay đổi vị trí giữa icon 2 trái tim và icon
-                        mặt cười 3 trái tim. Ngoài ra, các icon khác cũng đang có sự tiến triển vượt bậc trong việc
-                        tranh giành thứ hạng của nhau. Ví dụ như icon bánh sinh nhật đã vượt lên vị trí 25 từ vị trí 113
-                        trước đó, hay là icon bong bóng nhảy từ vị trí 139 lên thẳng vị trí thứ 48. Dành cho những bạn
-                        nào đang thắc mắc thì có tổng cộng 3663 icon cả thảy.
-                    </p>
-                    <img src="/Images/technews_32.jpg" alt="" class="page-content-img">
-                    <p class="page-content-text">
-                        Được biết, việc tổng hợp các dữ liệu này là để nhằm giúp cho Unicode Consortium biết nên tạo
-                        thêm icon mới nào tiếp theo.
-                    </p>
-                    <b class="page-content-text">Tóm tắt:</b>
-                    <ul class="page-content-list">
-                        <li class="page-content-item"><span>Vị trí top 1 danh sách icon được ưa chuộng sử dụng nhất 2021
-                                chính là icon cười chảy cả nước… mắt</span></li>
-                        <li class="page-content-item"><span>Icon cười ra nước mắt đã đứng đầu danh sách ít nhất từ 2017,
-                                và vào 2021 nó chiếm hơn 5% icon được người dùng sử dụng</span></li>
-                        <li class="page-content-item"><span>Icon 🙂 thậm chí còn không lọt nổi top 20, mà phải đắng lòng
-                                đứng ở vị trí phổ biến thứ 28</span>
-                        </li>
-                        <li class="page-content-item"><span>Việc tổng hợp các dữ liệu này là để nhằm giúp cho Unicode
-                                Consortium biết được nên tạo thêm icon mới nào tiếp theo</span>
-                        </li>
-                    </ul>
-                    <p class="page-content-text-italic">Cảm ơn các bạn đã quan tâm theo dõi!</p>
-                </article>', CAST(N'2024-05-08T00:00:00.000' AS DateTime), N'/Images/technews_28.jpg', 1254, 0, 1, 1)
+<p class="page-content-text-italic">Kh&ocirc;ng phải icon 🙂 g&acirc;y &aacute;m ảnh, icon cười chảy nước mắt mới ch&iacute;nh l&agrave; icon được d&ugrave;ng nhiều nhất 2024.</p>
+<img alt="" class="page-content-img" src="/Images/technews_29.jpg" />
+<p class="page-content-text">Icon mặt cười 🙂 g&acirc;y &aacute;m ảnh l&agrave; icon thường xuất hiện nhất trong c&aacute;c cuộc c&atilde;i v&atilde;, chọc ghẹo hoặc n&oacute;i kh&iacute;ch ai đ&oacute;, hoặc đ&ocirc;i khi n&oacute; cũng được sử dụng đ&uacute;ng với mục đ&iacute;ch ban đầu m&agrave; n&oacute; được tạo ra, đ&oacute; l&agrave;&hellip; cười. D&ugrave; chỉ l&agrave; một icon m&agrave; c&oacute; tới 2 c&ocirc;ng dụng như vậy th&igrave; đ&aacute;ng l&yacute; ra n&oacute; phải được sử dụng nhiều nhất, ấy thế m&agrave; icon 🙂 thậm ch&iacute; c&ograve;n kh&ocirc;ng lọt nổi top 20, m&agrave; phải đắng l&ograve;ng đứng ở vị tr&iacute; phổ biến thứ 28 (dựa theo số liệu của Unicode Consortium).</p>
+<img alt="" class="page-content-img" src="/Images/technews_30.jpg" />
+<p class="page-content-text">Vị tr&iacute; top 1 danh s&aacute;ch icon được ưa chuộng sử dụng nhất 2021 ch&iacute;nh l&agrave; icon cười chảy cả nước&hellip; mắt. Được biết, icon cười ra nước mắt n&agrave;y đ&atilde; đứng đầu danh s&aacute;ch &iacute;t nhất l&agrave; từ năm 2017, v&agrave; v&agrave;o năm 2021 n&oacute; đ&atilde; chiếm hơn 5% biểu tượng cảm x&uacute;c được người d&ugrave;ng sử dụng.</p>
+<img alt="" class="page-content-img" src="/Images/technews_31.jpg" />
+<p class="page-content-text">Theo như Unicode Consortium cho biết, danh s&aacute;ch top 10 c&aacute;c icon được y&ecirc;u th&iacute;ch nhất chỉ c&oacute; một sự thay đổi duy nhất trong suốt 2 năm qua. Đ&oacute; sự thay đổi vị tr&iacute; giữa icon 2 tr&aacute;i tim v&agrave; icon mặt cười 3 tr&aacute;i tim. Ngo&agrave;i ra, c&aacute;c icon kh&aacute;c cũng đang c&oacute; sự tiến triển vượt bậc trong việc tranh gi&agrave;nh thứ hạng của nhau. V&iacute; dụ như icon b&aacute;nh sinh nhật đ&atilde; vượt l&ecirc;n vị tr&iacute; 25 từ vị tr&iacute; 113 trước đ&oacute;, hay l&agrave; icon bong b&oacute;ng nhảy từ vị tr&iacute; 139 l&ecirc;n thẳng vị tr&iacute; thứ 48. D&agrave;nh cho những bạn n&agrave;o đang thắc mắc th&igrave; c&oacute; tổng cộng 3663 icon cả thảy.</p>
+<img alt="" class="page-content-img" src="/Images/technews_32.jpg" />
+<p class="page-content-text">Được biết, việc tổng hợp c&aacute;c dữ liệu n&agrave;y l&agrave; để nhằm gi&uacute;p cho Unicode Consortium biết n&ecirc;n tạo th&ecirc;m icon mới n&agrave;o tiếp theo.</p>
+<b class="page-content-text">T&oacute;m tắt:</b>
+
+<ul class="page-content-list">
+	<li class="page-content-item"><span>Vị tr&iacute; top 1 danh s&aacute;ch icon được ưa chuộng sử dụng nhất 2021 ch&iacute;nh l&agrave; icon cười chảy cả nước&hellip; mắt</span></li>
+	<li class="page-content-item"><span>Icon cười ra nước mắt đ&atilde; đứng đầu danh s&aacute;ch &iacute;t nhất từ 2017, v&agrave; v&agrave;o 2021 n&oacute; chiếm hơn 5% icon được người d&ugrave;ng sử dụng</span></li>
+	<li class="page-content-item"><span>Icon 🙂 thậm ch&iacute; c&ograve;n kh&ocirc;ng lọt nổi top 20, m&agrave; phải đắng l&ograve;ng đứng ở vị tr&iacute; phổ biến thứ 28</span></li>
+	<li class="page-content-item"><span>Việc tổng hợp c&aacute;c dữ liệu n&agrave;y l&agrave; để nhằm gi&uacute;p cho Unicode Consortium biết được n&ecirc;n tạo th&ecirc;m icon mới n&agrave;o tiếp theo</span></li>
+</ul>
+
+<p class="page-content-text-italic">Cảm ơn c&aacute;c bạn đ&atilde; quan t&acirc;m theo d&otilde;i!</p>
+</article>
+', CAST(N'2024-05-08T00:00:00.000' AS DateTime), N'/Images/technews_28.jpg', 1254, 0, 1, 1)
 GO
 INSERT [dbo].[TinTuc] ([MaTin], [TieuDeTin], [DoanTrich], [NoiDung], [NgayDang], [HinhAnh], [LuotXem], [DaXoa], [MaLoaiTin], [MaDanhMucTin]) VALUES (8, N'Top 10 tựa game chiến thuật miễn phí hay nhất trên Steam', N'Chiến thuật là một trong những thể loại game xuất hiện từ rất lâu. Kể
                         từ lúc những huyền thoại Warcraft, Starcraft, Red Alert ra mắt đến nay, làng game đã có thêm
@@ -18076,7 +18050,7 @@ INSERT [dbo].[TinTuc] ([MaTin], [TieuDeTin], [DoanTrich], [NoiDung], [NgayDang],
                         của GVN 360. Bài viết chỉ đơn giản là sưu tập và chia sẻ hình nền. Nếu các bạn biết được tên tác
                         giả thì hãy đóng góp với ad để cập nhật vào bài nhé. Cảm ơn các bạn!</p>
                     <p class="page-content-text-italic">Cảm ơn các bạn đã quan tâm theo dõi!</p>
-                </article>', CAST(N'2024-05-08T00:00:00.000' AS DateTime), N'/Images/technews_61.jpg', 33, 0, 3, 2)
+                </article>', CAST(N'2024-05-08T00:00:00.000' AS DateTime), N'/Images/technews_61.jpg', 34, 0, 3, 2)
 GO
 INSERT [dbo].[TinTuc] ([MaTin], [TieuDeTin], [DoanTrich], [NoiDung], [NgayDang], [HinhAnh], [LuotXem], [DaXoa], [MaLoaiTin], [MaDanhMucTin]) VALUES (14, N'Vì ai cũng cần desktop ấn tượng, mời anh em tải bộ hình
                                     nền Devil May Cry 5', N'Sau đây là bộ sưu tập hình nền Devil May Cry 5 dành cho desktop,
@@ -18190,12 +18164,6 @@ REFERENCES [dbo].[PhanLopKhachHang] ([MaPL])
 GO
 ALTER TABLE [dbo].[LoaiThanhVien_Quyen]  WITH CHECK ADD FOREIGN KEY([MaLoaiTV])
 REFERENCES [dbo].[LoaiThanhVien] ([MaLoaiTV])
-GO
-ALTER TABLE [dbo].[LoaiThanhVien_Quyen]  WITH CHECK ADD FOREIGN KEY([MaLoaiTV])
-REFERENCES [dbo].[LoaiThanhVien] ([MaLoaiTV])
-GO
-ALTER TABLE [dbo].[LoaiThanhVien_Quyen]  WITH CHECK ADD FOREIGN KEY([MaQuyen])
-REFERENCES [dbo].[Quyen] ([MaQuyen])
 GO
 ALTER TABLE [dbo].[LoaiThanhVien_Quyen]  WITH CHECK ADD FOREIGN KEY([MaQuyen])
 REFERENCES [dbo].[Quyen] ([MaQuyen])

@@ -104,22 +104,6 @@ namespace ChienThangComputer.Controllers
             return View();
         }
 
-        //create a string MD5
-        //public static string GetMD5(string str)
-        //{
-        //    using (MD5 md5 = MD5.Create())
-        //    {
-        //        byte[] fromData = Encoding.UTF8.GetBytes(str);
-        //        byte[] targetData = md5.ComputeHash(fromData);
-
-        //        StringBuilder byte2String = new StringBuilder();
-        //        for (int i = 0; i < targetData.Length; i++)
-        //        {
-        //            byte2String.Append(targetData[i].ToString("x2"));
-        //        }
-        //        return byte2String.ToString();
-        //    }
-        //}
 
         // Tạo một string hash với SHA-256
         public static string GetSHA256(string str)

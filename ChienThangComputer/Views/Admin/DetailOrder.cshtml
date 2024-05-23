@@ -132,11 +132,24 @@
     })
 
     function printOrder(content) {
-        var printWindow = window.open('', '', 'height=400', 'width=800');
+        var currentDate = new Date().toLocaleString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        var printWindow = window.open('', '', 'height=600,width=800');
         printWindow.document.write('<html><head><title>Thông tin đơn hàng</title>');
+        printWindow.document.write('<style>');
+        printWindow.document.write('.center-text { text-align: center; color: red; font-size: 24px; margin-bottom: 20px; }');
+        printWindow.document.write('</style>');
         printWindow.document.write('</head><body>');
+        printWindow.document.write('<div class="center-text">Chiến Thắng Computer</div>');
         printWindow.document.write(content);
-        printWindow.document.write('</body></html>');
+        printWindow.document.write('<div>Chiến Thắng Computer</div>');
+        printWindow.document.write('<style>');
+        printWindow.document.write('.thanks-text { text-align: center; color: blue; font-size: 22px; margin-bottom: 20px; }');
+        printWindow.document.write('</style>');
+        printWindow.document.write('<div class="thanks-text">Cảm ơn bạn đã mua hàng</div>');
+        printWindow.document.write('<div><span>Hàng điện tử, hãy cẩn thận và chú ý!</span></div>');
+        printWindow.document.write('<div><span>Nếu hài lòng về sản phẩm hãy đánh giá 5* cho cửa hàng nha!</span></div>');
+        printWindow.document.write('<div><h3>Liên hệ: 18009981 để được hỗ trợ</h3></div>');
+        printWindow.document.write('<div class="print-date">Đơn hàng in lúc: ' + currentDate + '</div>');
         printWindow.document.close();
         printWindow.print();
     }

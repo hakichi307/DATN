@@ -1,7 +1,7 @@
 ﻿<div class="nav-wrapper">
     <div class="fix-header-container">
         <div class="advertise hide-on-mobile-tablet">
-            <img src="~/Images/253.jpg" />
+            <img id="advertiseImg" class="advertise-img" src="~/Images/other/HeadPic (2).png" />
         </div>
         <header>
             <div class="header__content">
@@ -36,7 +36,7 @@
                                                 <img src="~/Images/dangky.png" />
                                                 @Session["UserName"]
                                             </a>
-                                            }
+                                        }
                                     </div>
                                     <div class="header__Navbar__Option__Login__Icon header__Navbar__Option__Item hide-on-mobile-tablet">
                                         @if (Session["Account"] != null)
@@ -101,7 +101,7 @@
                             <img src="~/Images/icon_menu_4.png" />
                             Chính sách bảo hành
                         </a>
-                        <a class="categories-and-Policy__item" href="@Url.Action("Transport","HardCode")" >
+                        <a class="categories-and-Policy__item" href="@Url.Action("Transport","HardCode")">
                             <img src="~/Images/icon_menu_3.png" />
                             Chính sách vận chuyển
                         </a>
@@ -112,4 +112,54 @@
             <div class="overlay-mega-menu"></div>
         </header>
     </div>
+    <style>
+        .advertise-img {
+            transition: opacity 1s ease-in-out;
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+
+        .advertise {
+            position: relative;
+        }
+    </style>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const imageArray = [
+                '@Url.Content("~/Images/other/HeadPic (1).png")',
+                '@Url.Content("~/Images/other/HeadPic (2).png")'
+            ];
+
+            let currentIndex = 0;
+            const imageElement = document.getElementById('advertiseImg');
+
+            // Function to change the image
+            function changeImage() {
+                // Start fade out transition
+                imageElement.style.opacity = 0;
+
+                // Wait for the fade out to complete
+                setTimeout(function() {
+                    // Change the image source
+                    currentIndex = (currentIndex + 1) % imageArray.length;
+                    imageElement.src = imageArray[currentIndex];
+
+                    // Start fade in transition
+                    setTimeout(function() {
+                        imageElement.style.opacity = 1;
+                    }, 50); // Small delay to ensure the src change has been applied
+                }, 1000); // Time must match the CSS transition duration
+            }
+
+            // Change image every 3 seconds
+            setInterval(changeImage, 3000);
+
+            // Initial image load with fade in effect
+            imageElement.style.opacity = 1;
+        });
+    </script>
+}

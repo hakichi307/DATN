@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Dynamic;
 using Common;
+using System.Web.Services.Description;
 
 namespace ChienThangComputer.Controllers {
     public class CartController : Controller {
@@ -83,29 +84,54 @@ namespace ChienThangComputer.Controllers {
             return PartialView();
         }
 
-        public ActionResult UpdateCart(int iProduct_ID, FormCollection f) {
-            if (Session["Cart"] == null) {
-                return RedirectToAction("Home", "Home");
+        public ActionResult UpdateCart(int iProduct_ID, FormCollection f)
+        {
+            if (Session["Cart"] == null)
+            {
+                TempData["ErrorMessage"] = "Giỏ hàng rỗng.";
+                return RedirectToAction("GoToCart"); // Chuyển hướng đến trang giỏ hàng
             }
+
             SanPham product = db.SanPhams.SingleOrDefault(pd => pd.MaSP.Equals(iProduct_ID));
-            if (product == null) {
-                Response.StatusCode = 404;
-                return null;
+            if (product == null)
+            {
+                TempData["ErrorMessage"] = "Sản phẩm không tồn tại.";
+                return RedirectToAction("GoToCart"); // Chuyển hướng đến trang giỏ hàng
             }
+
             List<Cart> listCart = getCart();
-            Cart item = listCart.Single(it => it.product_ID.Equals(iProduct_ID));
-            if (!item.Equals(null)) {
-                item.product_Quantity = int.Parse(f["txtQuantity"].ToString());
-                if (product.SoLuongTon < item.product_Quantity) {
-                    item.product_Quantity -= 1;
-                    TempData["msg"] = string.Format("Sản phẩm {0} chỉ còn {1} sản phẩm", item.product_Name.ToString(), product.SoLuongTon.ToString());
+            Cart item = listCart.SingleOrDefault(it => it.product_ID.Equals(iProduct_ID));
+
+            if (item != null)
+            {
+                int newQuantity;
+                if (int.TryParse(f["txtQuantity"].ToString(), out newQuantity))
+                {
+                    if (product.SoLuongTon < newQuantity)
+                    {
+                        var errorMessage = string.Format("Sản phẩm {0} chỉ còn {1} sản phẩm", item.product_Name.ToString(), product.SoLuongTon.ToString());
+                        TempData["ErrorMessage"] = errorMessage;
+                        return RedirectToAction("GoToCart"); // Chuyển hướng đến trang giỏ hàng
+                    }
+
+                    item.product_Quantity = newQuantity;
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Số lượng không hợp lệ.";
+                    return RedirectToAction("GoToCart"); // Chuyển hướng đến trang giỏ hàng
                 }
             }
-            else {
-                return RedirectToAction("Home", "Home");
+            else
+            {
+                TempData["ErrorMessage"] = "Sản phẩm không tồn tại trong giỏ hàng.";
+                return RedirectToAction("GoToCart"); // Chuyển hướng đến trang giỏ hàng
             }
-            return RedirectToAction("GoToCart", "Cart");
+
+            return RedirectToAction("GoToCart"); // Chuyển hướng đến trang giỏ hàng sau khi cập nhật thành công
         }
+
+
 
 
         public ActionResult ItemCartRemove(int iProduct_ID) {
@@ -178,8 +204,7 @@ namespace ChienThangComputer.Controllers {
                 if (promo.PhamViApDung == "Tất cả")
                 {
                     totalPayment = (decimal)(totalPayment - promo.GiaTriKM);
-
-                    return Json(new { status = 200, totalFinal = totalPayment, discount = promo.GiaTriKM });
+                    return Json(new { status = 200, totalFinal = totalPayment, discount = promo.GiaTriKM, message = "Áp dụng mã khuyến mãi thành công" });
                 }
                 else if (promo.PhamViApDung == "Người mới")
                 {
@@ -192,10 +217,12 @@ namespace ChienThangComputer.Controllers {
                         return Json(new { status = 406, message = "Rất tiếc! Voucher này chỉ dành cho người mới" });
                     }
                     totalPayment = (decimal)(totalPayment - promo.GiaTriKM);
-                    return Json(new { status = 200, totalFinal = totalPayment, discount = promo.GiaTriKM });
+                    
+                    return Json(new { status = 200, totalFinal = totalPayment, discount = promo.GiaTriKM, message = "Áp dụng mã khuyến mãi thành công" });
+                   
                 }
             }
-            return Json(new { status = false, message = ""});
+            return Json(new { status = false, message = "Chưa nhập mã"});
         }
 
         public ActionResult ConfirmCheckout()

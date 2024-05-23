@@ -331,8 +331,6 @@ namespace ChienThangComputer.Controllers
             ViewBag.MaSP = db.SanPhams.Where(n => n.DaXoa == false);
             return View();
         }
-
-
         [HttpPost]
         public ActionResult PurchaseProducts(PhieuNhap irv, IEnumerable<ChiTietPhieuNhap> lstModel)
         {
@@ -472,7 +470,7 @@ namespace ChienThangComputer.Controllers
             return RedirectToAction("OrderExpired", "Admin");
         }
 
-        public ActionResult OrderShipped()
+        public ActionResult OrderShipped() //Đơn hàng dã giao
         {
             GetData();
             return View(db.DonDatHangs.Where(n => n.DaGiao == true).ToList());
